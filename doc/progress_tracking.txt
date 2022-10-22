@@ -1,0 +1,81 @@
+Milestone
+Tugas							Pembagian
+1. Command Parser					(1) Athif
+2. Inisiasi
+	Splash Screen
+	Command START
+	Command EXIT
+(main sebelum masuk simulator)
+(Command parser & inisiasi disatuin)
+
+3. Simulator						(3) Awe, Farizki, Chris
+	ADT Simulator
+(ini buat dipanggil di main)
+4. Makanan
+	Membaca makanan dari file
+	ADT Makanan
+	Command CATALOG
+(Termasuk pengolahan, resep)
+(Simulator & makanan disatuin)
+
+5. Peta							(1) Vieri
+	Membaca peta dari file
+	Command MOVE NORTH/EAST/SOUTH/WEST
+
+6. Mekanisme Waktu					(1) Abyan
+	ADT Waktu
+	Waktu bertambah seiring command yg valid
+
+7. Laporan (50%)					Bareng
+
+----------
+Keperluan yang lebih detail
+
+-ADT (termasuk driver)
+	1. Point
+	2. Waktu
+	3. Makanan
+	4. Simulator
+	5. List Statik
+	6. Matriks
+	7. Mesin Karakter
+	8. Mesin Kata
+	9. Prioqueue dinamik
+	10. Stack
+	11. Tree
+-File Config
+	1. Map
+	2. Makanan
+	3. Resep
+-Command Parser
+-Inisiasi
+	1. Splash Screen
+	2. Command Start
+	3. Command Exit
+-Simulator
+-Makanan
+	1. Baca dari config
+	2. Command CATALOG
+-Resep
+-Inventory
+-Delivery
+-Peta
+	1. Baca dari config
+	2. Command MOVE NORTH/EAST/SOUTH/WEST
+-Pengolahan Makanan
+	1. Mix
+	2. Chop
+	3. Fry
+	4. Boil
+-Mekanisme waktu
+	1. Mekanisme penambahan waktu
+
+----------
+Bonus
+-Kulkas
+-Waktu pengolahan makanan
+-Rekomendasi makanan
+-Auto-BNMO
+
+----------
+-Laporan

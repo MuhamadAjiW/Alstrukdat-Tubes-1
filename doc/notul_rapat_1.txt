@@ -1,0 +1,4 @@
+22/10/2022 jam 20.00
+-Bikin github
+-Dekomposisi spek
+-Pembagian tugas (ada di file progress tracking)
