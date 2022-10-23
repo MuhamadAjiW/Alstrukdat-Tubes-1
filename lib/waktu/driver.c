@@ -1,4 +1,4 @@
-#include "mesin_kata.c"
+#include "waktu.c"
 #include <stdio.h>
 
 int main(){

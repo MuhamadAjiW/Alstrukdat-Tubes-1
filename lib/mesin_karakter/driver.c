@@ -1,9 +1,3 @@
-//NIM               : 13521095
-//Nama              : Muhamad Aji Wibisono
-//Tanggal           : 28 September 2022
-//Topik praktikum   : ADT Mesin Kata
-//Deskripsi         : Driver untuk mengetes program sewaktu praktikum
-
 #include "mesin_karakter.c"
 #include <stdio.h>
 

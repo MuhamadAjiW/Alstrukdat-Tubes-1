@@ -1,4 +1,3 @@
-#include "mesin_kata.c"
 #include <stdio.h>
 
 int main(){
