@@ -4,6 +4,31 @@
 boolean endWord;
 Word currentWord;
 
+void printCurrentKata(){
+    for(int i = 0; i < currentWord.Length; i++){
+        printf("%c", currentWord.TabWord[i]);
+    }
+}
+
+boolean kataSama(Word target, Word asal){
+    boolean sama = true;
+
+    if (target.Length != asal.Length){
+        sama = false;
+    }
+    else{
+        int i = 0;
+        while (i < target.Length && sama){
+            if (target.TabWord[i] != asal.TabWord[i]){
+                sama = false;
+            }
+            i++;
+        }
+    }
+
+    return sama;
+}
+
 void IgnoreBlanks()
 {
     /* Mengabaikan satu atau beberapa BLANK
@@ -15,13 +40,21 @@ void IgnoreBlanks()
     }
 }
 
-void STARTWORD()
+void SkipLines()
+{
+    while (currentChar == ENTER)
+    {
+        ADV();
+    }
+}
+
+void STARTWORD(char* location)
 {
     /* I.S. : currentChar sembarang
        F.S. : endWord = true, dan currentChar = MARK;
               atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
               currentChar karakter pertama sesudah karakter terakhir kata */
-    START();
+    START(location);
     IgnoreBlanks();
     if (currentChar == MARK)
     {
@@ -62,7 +95,7 @@ void CopyWord()
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
     currentWord.Length = 0;
-    while (currentChar != BLANK && currentChar != MARK)
+    while (currentChar != BLANK && currentChar != MARK && currentChar != ENTER)
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong

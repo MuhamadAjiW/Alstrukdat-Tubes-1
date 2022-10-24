@@ -13,10 +13,10 @@
 /* kapasitas maksimum resep */
 #define PANJANGNAMA 25
 /* kapasitas maksimum nama */
-#define PANJANGACTIONANDLOCATION 20
+#define PANJANGACTION 5
 /* kapasitas maksimum kata aksi */
 #define NIL -1
-
+/* Nil */
 
 /* Definisi elemen dan koleksi objek */
 typedef struct{
@@ -25,10 +25,11 @@ typedef struct{
 
 typedef struct{
    int id;
-   char *nama;
+   char nama[PANJANGNAMA];
    waktu expireTime;
    waktu deliverTime;
-   char *actionAndLocation;
+   char action[PANJANGACTION];
+   char location;
    recipe resep;
 } makanan;  /* type elemen List */
 
@@ -39,7 +40,8 @@ typedef struct{
 #define nama(tipedata) (tipedata).nama
 #define expireTime(tipedata) (tipedata).expireTime
 #define deliverTime(tipedata) (tipedata).deliverTime
-#define action(tipedata) (tipedata).actionAndLocation
+#define action(tipedata) (tipedata).action
+#define location(tipedata) (tipedata).location
 #define resep(tipedata) (tipedata).resep
 
 void createmakanan(makanan *a);

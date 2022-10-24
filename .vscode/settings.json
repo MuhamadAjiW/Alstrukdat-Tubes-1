@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "list_statik.h": "c",
+        "boolean.h": "c"
+    }
+}

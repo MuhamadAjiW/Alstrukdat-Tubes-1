@@ -9,6 +9,7 @@
 
 #define NMax 50
 #define BLANK ' '
+#define ENTER '\n'
 
 typedef struct
 {
@@ -19,6 +20,10 @@ typedef struct
 /* State Mesin Word */
 extern boolean endWord;
 extern Word currentWord;
+
+void printCurrentKata();
+
+boolean kataSama(Word target, Word asal);
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
@@ -45,7 +50,6 @@ void CopyWord();
           CC = BLANK atau CC = MARK;
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
-
 
 
 #endif

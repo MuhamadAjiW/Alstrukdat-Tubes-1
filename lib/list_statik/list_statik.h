@@ -16,14 +16,6 @@
 /* Indeks minimum list */
 #define IDX_UNDEF -1
 /* Indeks tak terdefinisi*/
-#define PANJANGRESEP 10
-/* kapasitas maksimum resep */
-#define PANJANGNAMA 25
-/* kapasitas maksimum nama */
-#define PANJANGACTIONANDLOCATION 20
-/* kapasitas maksimum kata aksi */
-#define NIL -1
-/* Nil */
 
 
 /* Definisi elemen dan koleksi objek */
@@ -39,24 +31,18 @@ typedef struct {
    nama = ""
    expireTime = 0 0 0
    deliverTime = 0 0 0
-   actionAndLocation = ""
+   action = ""
+   location = ""
    resep = 0 0 0 0 0 0 0 0 0 0
 
 /* ********** SELEKTOR ********** */
-//Selektor tipe data
-#define id(tipedata) (tipedata).id
-#define nama(tipedata) (tipedata).nama
-#define expireTime(tipedata) (tipedata).expireTime
-#define deliverTime(tipedata) (tipedata).deliverTime
-#define action(tipedata) (tipedata).actionAndLocation
-#define resep(tipedata) (tipedata).resep
-
 //Selektor list
 #define ELMT(l, i) (l).contents[(i)]
 #define idELMT(l, i) id(ELMT(l, i))
 #define namaELMT(l, i) nama(ELMT(l, i))
 #define expireTimeELMT(l, i) expireTime(ELMT(l, i))
 #define deliverTimeELMT(l, i) deliverTime(ELMT(l, i))
+#define locationELMT(l, i) location(ELMT(l, i))
 #define actionELMT(l, i) action(ELMT(l, i))
 #define resepELMT(l, i) resep(ELMT(l, i))
 
@@ -71,9 +57,6 @@ void load_list_statik(list_statik *l);
 /* I.S. l sembarang */
 /* F.S. Membuat list berisikan data makanan*/
 /* Proses: Membaca file configmakanan*/
-
-void deallocateList(list_statik *l);
-//free malloc di tiap list
 
 
 //fungsi yang bisa dipake//

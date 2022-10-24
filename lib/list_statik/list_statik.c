@@ -15,44 +15,188 @@ void create_list_statik(list_statik *l){
 /* Proses: Mengisi semua elemen list dengan definisi list kosong*/
 
 void load_list_statik(list_statik *l){
-   /*
-   FILE* makananconf;
-   FILE* resepconf;
-   char stringParser[PANJANGNAMA];
-   char tempReader;
-   int makananLength;
-   int resepLength;
-   int id;
+   char* location;
+   int N;
+   int cache;
+   int mul;
+   int counter;
 
-   char contentmakanan[1500];
+   Word Mix;
+   Mix.Length = 3;
+   Mix.TabWord[0] = 'M';
+   Mix.TabWord[1] = 'i';
+   Mix.TabWord[2] = 'x';
+   
 
-   makananconf = fopen("../../config/makananconf.txt", "r");
-   makananLength = (int)(fgets(contentmakanan, 1500, makananconf));
-   for(int i = 0; i < makananLength; i++){
-      fgets(contentmakanan, 1500, makananconf)
-      while 
+   Word Chop;
+   Chop.Length = 4;
+   Chop.TabWord[0] = 'C';
+   Chop.TabWord[1] = 'h';
+   Chop.TabWord[2] = 'o';
+   Chop.TabWord[3] = 'p';
+   
+   
+   Word Fry;
+   Fry.Length = 3;
+   Fry.TabWord[0] = 'F';
+   Fry.TabWord[1] = 'r';
+   Fry.TabWord[2] = 'y';
+
+   Word Boil;
+   Boil.Length = 4;
+   Boil.TabWord[0] = 'B';
+   Boil.TabWord[1] = 'o';
+   Boil.TabWord[2] = 'i';
+   Boil.TabWord[3] = 'l';
+
+   Word Buy;
+   Buy.Length = 3;
+   Buy.TabWord[0] = 'B';
+   Buy.TabWord[1] = 'u';
+   Buy.TabWord[2] = 'y';
+
+
+   location = (char*) malloc (CAPACITY* sizeof(char));
+   location = "../../config/makananconf.txt";
+
+   STARTWORD(location);
+   N = (int) (currentWord.TabWord[0]) - 48;
+   SkipLines();
+
+   for (int i = 0; i < N; i++){
+      counter = 0;
+      
+
+      //id
+      ADVWORD();
+      cache = 0;
+      mul = 1;
+      for(int j = currentWord.Length-1; j >= 0; j--){
+         cache += mul*( ((int) (currentWord.TabWord[j])) - 48);
+         mul *= 10;
+      }
+      idELMT(*l, i) = cache;
+
+      SkipLines();
+
+      //nama
+      ADVWORD();
+      counter = 0;
+      while (currentChar != ENTER){
+         for(int j = 0; j < currentWord.Length; j++){
+            namaELMT(*l, i)[counter] = currentWord.TabWord[j];
+            counter += 1;
+         }
+         if (currentChar != ENTER){
+            namaELMT(*l, i)[counter] = BLANK;
+            counter += 1;
+            ADVWORD();
+         }
+      }
+      for(int j = 0; j < currentWord.Length; j++){
+         namaELMT(*l, i)[counter] = currentWord.TabWord[j];
+         counter += 1;
+      }
+      namaELMT(*l, i)[counter] = '\0';
+
+      SkipLines();
+
+      //expiretime
+      ADVWORD();
+      cache = 0;
+      mul = 1;
+      for(int j = currentWord.Length-1; j >= 0; j--){
+         cache += mul*( (int) (currentWord.TabWord[j]) - 48);
+         mul *= 10;
+      }
+      Hari(expireTimeELMT(*l, i)) = cache;
+
+      ADVWORD();
+      cache = 0;
+      mul = 1;
+      for(int j = currentWord.Length-1; j >= 0; j--){
+         cache += mul*( (int) (currentWord.TabWord[j]) - 48);
+         mul *= 10;
+      }
+      Jam(expireTimeELMT(*l, i)) = cache;
+
+      ADVWORD();
+      cache = 0;
+      mul = 1;
+      for(int j = currentWord.Length-1; j >= 0; j--){
+         cache += mul*( (int) (currentWord.TabWord[j]) - 48);
+         mul *= 10;
+      }
+      Menit(expireTimeELMT(*l, i)) = cache;
+
+      SkipLines();
+
+      //delivertime
+      ADVWORD();
+      cache = 0;
+      mul = 1;
+      for(int j = currentWord.Length-1; j >= 0; j--){
+         cache += mul*( (int) (currentWord.TabWord[j]) - 48);
+         mul *= 10;
+      }
+      Hari(deliverTimeELMT(*l, i)) = cache;
+
+      ADVWORD();
+      cache = 0;
+      mul = 1;
+      for(int j = currentWord.Length-1; j >= 0; j--){
+         cache += mul*( (int) (currentWord.TabWord[j]) - 48);
+         mul *= 10;
+      }
+      Jam(deliverTimeELMT(*l, i)) = cache;
+
+      ADVWORD();
+      cache = 0;
+      mul = 1;
+      for(int j = currentWord.Length-1; j >= 0; j--){
+         cache += mul*( (int) (currentWord.TabWord[j]) - 48);
+         mul *= 10;
+      }
+      Menit(deliverTimeELMT(*l, i)) = cache;
+
+      SkipLines();
+
+      //aksi
+      
+      ADVWORD();
+      for(int j = 0; j < currentWord.Length; j++){
+         actionELMT(*l, i)[j] = currentWord.TabWord[j];
+      }
+
+      //lokasi
+      if (kataSama(currentWord, Mix)){
+         locationELMT(*l, i) = 'M';
+      }
+      else if (kataSama(currentWord, Chop)){
+         locationELMT(*l, i) = 'C';
+      }
+      else if (kataSama(currentWord, Fry)){
+         locationELMT(*l, i) = 'F';
+      }
+      else if (kataSama(currentWord, Boil)){
+         locationELMT(*l, i) = 'B';
+      }
+      else if (kataSama(currentWord, Buy)){
+         locationELMT(*l, i) = 'T';
+      }
+
+      actionELMT(*l, i)[currentWord.Length] = '\0';
+
+      SkipLines();
    }
 
-   char contentresep[1500];
-   resepconf = fopen("../../config/resepconf.txt", "r");
-   fgets(contentresep, 1500, resepconf);
-
-
-   fclose(makananconf);
-   fclose(resepconf);
-   */
+   //baca resep belom
+   
+   free(location);
 }
-/* I.S. l terinisialisasi */
+/* I.S. l terinisialisasi, file config tidak kosong */
 /* F.S. Membuat list berisikan data makanan*/
 /* Proses: Membaca file configmakanan*/
-
-void deallocateList(list_statik *l){
-   for (int i = 0; i < CAPACITY; i++){
-      free(namaELMT(*l, i));
-      free(actionELMT(*l, i));
-   }
-}
-//free malloc di tiap list
 
 boolean isEmpty(list_statik l) {
    return idELMT(l, 0) == NIL;
@@ -111,7 +255,7 @@ int indexOf(list_statik l, int idval) {
 
 void printList(list_statik l) {
    for(int i =0; i < listLength(l); i++){
-      printf("----------------------------------\n");
+      printf("---------------------------------------\n");
       printmakanan(ELMT(l, i));
       printf("\n");
    }

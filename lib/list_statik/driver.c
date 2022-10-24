@@ -4,15 +4,16 @@
 
 int main(){
     int confirmDone = 0;
-    list_statik testlist;
     //header program
-
-    //tulis program di tengah sini
+    
+    list_statik testlist;
     create_list_statik(&testlist);
-    printList(testlist);
-    printf("compile success!\n");
 
-    deallocateList(&testlist);
+    load_list_statik(&testlist);
+    printList(testlist);
+
+    printf("\ncompile success!\n");
+
     //akhir program
     printf("Done!");    
     scanf("%d", &confirmDone);

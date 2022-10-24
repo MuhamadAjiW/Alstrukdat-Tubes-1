@@ -6,12 +6,11 @@
 
 void createmakanan(makanan *a){
    id(*a) = NIL;
-   nama(*a) = (char*) malloc (PANJANGNAMA* sizeof(char));
-   nama(*a) = "";
+   nama(*a)[0] = '\0';
    createTime(&expireTime(*a));
    createTime(&deliverTime(*a));
-   action(*a) = (char*) malloc (PANJANGACTIONANDLOCATION* sizeof(char));
-   action(*a) = "";
+   action(*a)[0] = '\0';
+   location(*a) = '\0';
    createResep(&resep(*a));
 }
 //membuat ADT makanan
@@ -32,7 +31,7 @@ void printmakanan(makanan a){
    printf("waktu pengantaran = ");
    printTime(deliverTime(a));
    printf("\n");
-   printf("aksi untuk mendapatkan = %s\n", action(a));
+   printf("aksi untuk mendapatkan = %s (lokasi: %c)\n", action(a), location(a));
    printf("data resep = ");
    printResep(resep(a));
 }
