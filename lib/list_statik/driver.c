@@ -8,13 +8,17 @@ int main(){
     
     list_statik testlist;
     create_list_statik(&testlist);
-
+ 
     load_list_statik(&testlist);
+    //printList(testlist);
+
+
+    printf("%d\n", indexOf(testlist, 21));
     printList(testlist);
 
-    printf("\ncompile success!\n");
-
+    unload_list_statik(&testlist);
     //akhir program
+    printf("\ncompile success!\n");
     printf("Done!");    
     scanf("%d", &confirmDone);
     return 0;

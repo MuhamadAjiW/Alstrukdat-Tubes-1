@@ -190,13 +190,109 @@ void load_list_statik(list_statik *l){
       SkipLines();
    }
 
+   //baca resep
+   location = "../../config/resepconf.txt";
+   STARTWORD(location);
+   N = (int) (currentWord.TabWord[0]) - 48;
+   SkipLines();
+
+   int currentidx = 0;
+   boolean ada = false;
+   address p;
+   for (int i = 0; i < N; i++){
+      currentidx = 0;
+
+
+      ADVWORD();
+      cache = 0;
+      mul = 1;
+      for(int j = currentWord.Length-1; j >= 0; j--){
+         cache += mul*( ((int) (currentWord.TabWord[j])) - 48);
+         mul *= 10;
+      }
+      currentidx = indexOf(*l, cache);
+      setTreeElmt(&resepELMT(*l, currentidx), cache);
+
+      ADVWORD();
+      while (currentChar != ENTER){
+         
+         ADVWORD();
+
+         if (currentChar != ENTER){
+            cache = 0;
+            mul = 1;
+            for(int j = currentWord.Length-1; j >= 0; j--){
+               cache += mul*( ((int) (currentWord.TabWord[j])) - 48);
+               mul *= 10;
+            }
+
+            counter = 0;
+            ada = false;
+            while ( !ada && counter < listLength(*l)){
+               if (treeVal(resepELMT(*l, counter)) == cache){
+                  ada = true;
+               }
+               else{
+                  counter += 1;
+               }
+            }
+
+            if (ada){
+               AssignBranch(&resepELMT(*l, currentidx), &resepELMT(*l, counter));
+            }
+            else{
+               p = CreateNode(cache);
+               AssignBranch(&resepELMT(*l, currentidx), &p);
+            }
+         }
+      }
+
+
+      cache = 0;
+      mul = 1;
+      for(int j = currentWord.Length-1; j >= 0; j--){
+         cache += mul*( ((int) (currentWord.TabWord[j])) - 48);
+         mul *= 10;
+      }
+
+      counter = 0;
+      ada = false;
+      while ( !ada && counter < listLength(*l)){
+         if (treeVal(resepELMT(*l, counter)) == cache){
+            ada = true;
+         }
+         else{
+            counter += 1;
+         }
+      }
+
+      if (ada){
+         AssignBranch(&resepELMT(*l, currentidx), &resepELMT(*l, counter));
+      }
+      else{
+         p = CreateNode(cache);
+         AssignBranch(&resepELMT(*l, currentidx), &p);
+      }
+      
+
+      SkipLines();
+   }
+
    //baca resep belom
-   
    free(location);
 }
 /* I.S. l terinisialisasi, file config tidak kosong */
 /* F.S. Membuat list berisikan data makanan*/
 /* Proses: Membaca file configmakanan*/
+
+void unload_list_statik(list_statik *l){
+   
+   for (int i = 0; i < CAPACITY; i++){
+      DeleteNode(&(resepELMT(*l, i)));
+   }
+
+}
+
 
 boolean isEmpty(list_statik l) {
    return idELMT(l, 0) == NIL;
@@ -241,9 +337,10 @@ int indexOf(list_statik l, int idval) {
    while ( (indeks < listLength(l)) && (!ada) ) {
       if (idELMT(l, indeks) == idval) {
          ada = true;
-         indeks -= 1;
       }
-      indeks += 1;
+      else{
+         indeks += 1;
+      }
    }
    if (!ada){
       indeks = IDX_UNDEF;

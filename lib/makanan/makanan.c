@@ -15,13 +15,6 @@ void createmakanan(makanan *a){
 }
 //membuat ADT makanan
 
-void createResep(recipe *r){
-   for (int i = 0; i < PANJANGRESEP; i++){
-      ELMT(*r, i) = 0;
-   }
-}
-//membuat ADT recipe
-
 void printmakanan(makanan a){
    printf("id = %d\n", id(a));
    printf("nama = %s\n", nama(a));
@@ -33,17 +26,37 @@ void printmakanan(makanan a){
    printf("\n");
    printf("aksi untuk mendapatkan = %s (lokasi: %c)\n", action(a), location(a));
    printf("data resep = ");
-   printResep(resep(a));
+   if (treeVal(resep(a)) == -1){
+      printf("Tidak memiliki resep\n");
+   }
+   else{
+      printResep(resep(a));
+   }
 }
 //print makanan
 
+void createResep(recipe *r){
+   *r = (address) malloc (sizeof(Node));
+   if (*r != NULL){
+      treeVal(*r) = -1;
+      parent(*r) = NULL;
+      subMaxIdx(*r) = -1;
+   }
+   else{
+       printf("alokasi gagal.\n");
+   }
+}
+//membuat ADT resep
+
+
 void printResep(recipe r){
-   for (int i = 0; i < PANJANGRESEP; i++){
-      printf("%d", ELMT(r, i));
-      if (i != PANJANGRESEP - 1){
-         printf(" ");
+   for (int i = 0; i <= subMaxIdx(r); i++){
+      printf("%d", treeVal(treeSub(r, i)) );
+      if (i != subMaxIdx(r)){
+         printf(", ");
       }
    }
+   printf("\n");
 }
 //print makanan
 

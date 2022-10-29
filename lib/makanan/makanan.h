@@ -7,10 +7,9 @@
 
 #include "../etc/boolean.h"
 #include "../waktu/waktu.c"
+#include "../tree/tree.c"
 
 /*  Kamus Umum */
-#define PANJANGRESEP 10
-/* kapasitas maksimum resep */
 #define PANJANGNAMA 25
 /* kapasitas maksimum nama */
 #define PANJANGACTION 5
@@ -19,9 +18,7 @@
 /* Nil */
 
 /* Definisi elemen dan koleksi objek */
-typedef struct{
-   int contents[PANJANGRESEP];
-} recipe;
+typedef Tree recipe;
 
 typedef struct{
    int id;
