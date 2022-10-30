@@ -6,8 +6,8 @@
 #define _makanan_H
 
 #include "../etc/boolean.h"
-#include "../waktu/waktu.c"
-#include "../tree/tree.c"
+#include "../waktu/waktu.h"
+#include "../tree/tree.h"
 
 /*  Kamus Umum */
 #define PANJANGNAMA 25
@@ -52,5 +52,8 @@ void printmakanan(makanan a);
 
 void printResep(recipe r);
 //print makanan
+
+void editMakananTest(makanan *a, long exTime);
+//edit data makanan untuk testing
 
 #endif

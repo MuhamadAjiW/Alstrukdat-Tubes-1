@@ -60,3 +60,6 @@ void printResep(recipe r){
 }
 //print makanan
 
+void editMakananTest(makanan *a, long exTime) {
+   expireTime(*a) = MenitToTIME(exTime);
+}

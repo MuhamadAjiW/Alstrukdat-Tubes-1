@@ -5,7 +5,7 @@
 #define __MESINKATA_H__
 
 #include "../etc/boolean.h"
-#include "../mesin_karakter/mesin_karakter.c"
+#include "../mesin_karakter/mesin_karakter.h"
 
 #define NMax 50
 #define BLANK ' '
@@ -30,7 +30,7 @@ void IgnoreBlanks();
    I.S. : CC sembarang
    F.S. : CC ≠ BLANK atau CC = MARK */
 
-void STARTWORD();
+void STARTWORD(char* location);
 /* I.S. : CC sembarang
    F.S. : EndWord = true, dan CC = MARK;
           atau EndWord = false, CWord adalah kata yang sudah diakuisisi,
