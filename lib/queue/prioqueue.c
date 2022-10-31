@@ -43,6 +43,17 @@ void DeAlokasi(PrioQueue * Q) {
 void Enqueue (PrioQueue * Q, makanan X) {
     PrioQueue q;
 
+    if (IsFull(*Q)){
+        (*Q).T = (makanan *) realloc((*Q).T , (MaxEl(*Q)*2) * sizeof(makanan));
+        if ((*Q).T != NULL) {
+            MaxEl(*Q) = MaxEl(*Q)*2;
+        }
+        else {
+            MaxEl(*Q) = 0;
+        }
+    }
+
+
     if (IsEmpty(*Q)) {
         Head(*Q) = 0;
         Tail(*Q) = 0;
@@ -88,6 +99,17 @@ void Enqueue (PrioQueue * Q, makanan X) {
 }
 
 void Dequeue (PrioQueue * Q, makanan * X) {
+
+    if (MaxEl(*Q) >= 4 && NBElmt(*Q)-1 <= MaxEl(*Q)/4){
+        (*Q).T = (makanan *) realloc((*Q).T , (MaxEl(*Q)/2) * sizeof(makanan));
+        if ((*Q).T != NULL) {
+            MaxEl(*Q) = MaxEl(*Q)/2;
+        }
+        else {
+            MaxEl(*Q) = 0;
+        }
+    } 
+
     *X = InfoHead(*Q);
     if (NBElmt(*Q) == 1) {
         Head(*Q) = NIL;
@@ -110,6 +132,34 @@ void PrintPrioQueue (PrioQueue Q) {
     while (i < NBElmt(Q)) {
         printf("%s", Name(Q, j));
         printTime(Time(Q, j));
+        printf("\n");
+        if (j == MaxEl(Q)-1) {
+            j = 0;
+        }
+        else {
+            j += 1;
+        }
+        i += 1;
+    }
+}
+
+void PrintInventory (PrioQueue Q){
+    printf("List makanan di Inventory\n");
+    printf("(nama - waktu sisa kedaluwarsa)\n");
+    int i = 0;
+    int j = Head(Q);
+    while (i < NBElmt(Q)) {
+        printf("    %s - ", Name(Q, j));
+        if (Hari(Time(Q, j)) > 0){
+            printf("%d hari", Hari(Time(Q, j)));
+        }
+        else if (Jam(Time(Q, j)) > 0){
+            printf("%d jam", Jam(Time(Q, j)));
+        }
+        else if (Menit(Time(Q, j)) > 0){
+            printf("%d menit", Menit(Time(Q, j)));
+        }
+
         printf("\n");
         if (j == MaxEl(Q)-1) {
             j = 0;

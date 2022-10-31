@@ -1,58 +1,56 @@
 #include <stdio.h>
-#include "prioqueue.h"
-#include "../makanan/makanan.h"
+#include "prioqueue.c"
+#include "../list_statik/list_statik.c"
+#include "../tree/tree.c"
+#include "../mesin_kata/mesin_kata.c"
+#include "../mesin_karakter/mesin_karakter.c"
+#include "../makanan/makanan.c"
+#include "../waktu/waktu.c"
+
 
 int main(){
     int confirmDone = 0;
     PrioQueue q1;
-    makanan m1, m2, m3, m4, dump;
+    makanan dump;
+    list_statik testlist;
+    create_list_statik(&testlist);
+    load_list_statik(&testlist);
     //header program
-    MakeEmpty(&q1, 5);
+    
 
     //angka di parameter editMakananTest itu waktu, ganti aja kalo mau
     //buat dan nambah makanan ke queue
-    createmakanan(&m1);
-    editMakananTest(&m1, 15);
-    Enqueue(&q1, m1);
 
-    createmakanan(&m2);
-    editMakananTest(&m2, 20);
-    Enqueue(&q1, m2);
+    MakeEmpty(&q1, 1);
 
-    createmakanan(&m3);
-    editMakananTest(&m3, 17);
-    Enqueue(&q1, m3);
+    Enqueue(&q1, ELMT(testlist, 0));
 
-    //print isi queue sementara
-    PrintPrioQueue(q1);
+    Enqueue(&q1, ELMT(testlist, 1));
+
+    Enqueue(&q1, ELMT(testlist, 2));
+
+    //print isi queue sementara 
+    printf("max = %d\n", MaxEl(q1));
+
+    PrintInventory(q1);
     printf("\n");
 
-    createmakanan(&m4);
-    editMakananTest(&m4, 16);
-    Enqueue(&q1, m4);
+    Enqueue(&q1, ELMT(testlist, 3));
 
-    PrintPrioQueue(q1);
+    PrintInventory(q1);
     printf("\n");
-    
+
     //pop head dari queue
     Dequeue(&q1, &dump);
     Dequeue(&q1, &dump);
+    Dequeue(&q1, &dump);
 
-    PrintPrioQueue(q1);
+    printf("max = %d\n", MaxEl(q1));
+    PrintInventory(q1);
     printf("\n");
 
-    editMakananTest(&m1, 22);
-    Enqueue(&q1, m1);
-
-    PrintPrioQueue(q1);
-    printf("\n");
-
-    editMakananTest(&m1, 19);
-    Enqueue(&q1, m1);
-
-    PrintPrioQueue(q1);
-    printf("\n");
-
+    unload_list_statik(&testlist);
+    DeAlokasi(&q1);
     //akhir program
     printf("Done!");
     scanf("%d", &confirmDone);

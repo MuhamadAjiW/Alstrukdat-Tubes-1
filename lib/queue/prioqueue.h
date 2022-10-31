@@ -67,5 +67,7 @@ void Dequeue (PrioQueue * Q, makanan * X);
 void PrintPrioQueue (PrioQueue Q);
 /* Mencetak isi queue Q ke layar */
 
+void PrintInventory (PrioQueue Q);
+/*cetak dengan gaya inventory sesuai spek*/
 
 #endif

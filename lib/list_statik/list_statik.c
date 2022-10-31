@@ -298,7 +298,9 @@ void load_list_statik(list_statik *l){
 
 void unload_list_statik(list_statik *l){
    
-   for (int i = 0; i < CAPACITY; i++){
+   //Masih banyak leak, belom beres
+
+   for (int i = listLength(*l); i < CAPACITY; i++){
       DeleteNode(&(resepELMT(*l, i)));
    }
 

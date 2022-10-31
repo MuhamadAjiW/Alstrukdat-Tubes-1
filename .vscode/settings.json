@@ -2,6 +2,7 @@
     "files.associations": {
         "list_statik.h": "c",
         "boolean.h": "c",
-        "makanan.h": "c"
+        "makanan.h": "c",
+        "prioqueue.h": "c"
     }
 }
