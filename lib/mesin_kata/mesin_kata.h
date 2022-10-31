@@ -30,6 +30,9 @@ void IgnoreBlanks();
    I.S. : CC sembarang
    F.S. : CC ≠ BLANK atau CC = MARK */
 
+void SkipLines();
+/*proses enter*/
+
 void STARTWORD(char* location);
 /* I.S. : CC sembarang
    F.S. : EndWord = true, dan CC = MARK;

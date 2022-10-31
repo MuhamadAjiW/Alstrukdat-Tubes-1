@@ -1,4 +1,9 @@
 #include "list_statik.c"
+#include "../makanan/makanan.c"
+#include "../waktu/waktu.c"
+#include "../tree/tree.c"
+#include "../mesin_kata/mesin_kata.c"
+#include "../mesin_karakter/mesin_karakter.c"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,8 +17,6 @@ int main(){
     load_list_statik(&testlist);
     //printList(testlist);
 
-
-    printf("%d\n", indexOf(testlist, 21));
     printList(testlist);
 
     unload_list_statik(&testlist);

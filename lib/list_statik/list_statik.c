@@ -1,8 +1,19 @@
 //ADT List dari praktikum, list rapat kiri
 
+//header
 #include "list_statik.h"
+
+//dependent package
+/*HARUS MAKE INI
+#include "../makanan/makanan.c"
+#include "../waktu/waktu.c"
+#include "../tree/tree.c"
+#include "../mesin_kata/mesin_kata.c"
+#include "../mesin_karakter/mesin_karakter.c"
+*/
 #include <stdio.h>
 #include <stdlib.h>
+
 
 //loader
 void create_list_statik(list_statik *l){

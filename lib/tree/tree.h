@@ -27,6 +27,9 @@ typedef address Tree;
 address CreateNode(infotype X);
 /*inisiasi node untuk tree*/
 
+void setTreeElmt(Tree *P, infotype X);
+/*ganti val*/
+
 void AssignBranch(Tree *Main, Tree *Branch);
 /*nambahin branch*/
 

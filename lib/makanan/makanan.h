@@ -1,7 +1,3 @@
-/* MODUL LIST INTEGER STATIK DENGAN ELEMEN POSITIF */
-/* Penempatan elemen selalu rapat kiri */
-/* Banyaknya elemen didefinisikan secara implisit, memori list statik */
-
 #ifndef _makanan_H
 #define _makanan_H
 
