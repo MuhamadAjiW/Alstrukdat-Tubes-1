@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "prioqueue.h"
-#include "../makanan/makanan.h"
+#include "prioqueue.c"
 
 int main(){
     int confirmDone = 0;

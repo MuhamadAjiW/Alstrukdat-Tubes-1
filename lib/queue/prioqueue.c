@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "prioqueue.h"
-#include "../makanan/makanan.h"
+#include "../makanan/makanan.c"
+#include "../waktu/waktu.c"
 
 boolean IsEmpty (PrioQueue Q) {
     return (Head(Q) == NIL && Tail(Q) == NIL);

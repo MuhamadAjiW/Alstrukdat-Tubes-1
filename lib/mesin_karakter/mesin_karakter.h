@@ -10,6 +10,7 @@
 /* State Mesin */
 extern char currentChar;
 extern boolean EOP;
+#define ENTER '\n'
 
 void START(char* location);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
