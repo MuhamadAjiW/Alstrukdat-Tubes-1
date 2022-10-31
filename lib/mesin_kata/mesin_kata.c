@@ -107,3 +107,143 @@ void CopyWord()
     }
 }
 
+
+/***********/
+/***INPUT***/
+/***********/
+
+/*Untuk input, mark diganti enter*/
+
+
+
+void IgnoreBlanks_I()
+{
+    /*Ignore Blanks untuk input*/
+    /* Mengabaikan satu atau beberapa BLANK
+       I.S. : currentChar sembarang
+       F.S. : currentChar ≠ BLANK atau currentChar = ENTER */
+    while (currentChar == BLANK)
+    {
+        ADV_I();
+    }
+}
+
+
+void ignoreUntilEnter(){
+/*I.S.  currentChar Sembarang*/
+/*F.S.  Membaca seluruh input hingga '\n', kemudian mengembalikan pesan
+        "Input salah"*/
+    while(currentChar!=ENTER){
+        ADV_I();
+    }
+}
+
+void CopyWord_I(Word *w)
+{
+    /*CopyWord untuk input*/
+    /*Mengakuisisi kata, menyimpan dalam currentWord
+       I.S. : currentChar adalah karakter pertama dari kata
+       F.S. : currentWord berisi kata yang sudah diakuisisi;
+              currentChar = BLANK atau currentChar = ENTER;
+              currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+              Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
+    w->Length = 0;
+    while (currentChar != BLANK  && currentChar != ENTER)
+    {
+        if (w->Length < NMax)
+        { // jika lebih akan terpotong
+            w->TabWord[w->Length++] = currentChar;
+            ADV_I();
+        }
+        else{ //input overflow
+            ignoreUntilEnter();
+    }
+}
+}
+
+void LowerCase(Word *kata){
+/* I.S. kata terdefinisi sembarang tetapi tidak kosong */
+/* F.S. currentword menjadi lowercase di setiap karakternya */
+int i;
+i = 0;
+if(kata->Length>0){
+    while (i<kata->Length){
+        if((kata->TabWord[i]>=65)&& (kata->TabWord[i]<=90)){
+            kata->TabWord[i] += 32;
+        }
+    i+=1;
+}
+}
+}
+
+
+
+
+
+
+void input(Word *w){
+/* I.S.  w sembarang 
+   F.S.  w menyimpan kata pertama dari input;
+         Jika currentChara adalah ENTER, maka endWord = true;
+         
+
+   Catatan: 
+   - Iringkan dengan ignoreUntilEnter dan cek endword untuk validasi input
+   - fry halo akan dibaca fry,
+
+    */
+   /*ALGORITMA*/
+    START_I();
+    IgnoreBlanks();
+    if(currentChar!=ENTER){
+        CopyWord_I(w);
+        if(currentChar==ENTER){
+            endWord=true;
+        }else{
+            endWord = false;
+        }
+    }else{
+        w->Length =0; 
+    }
+}
+
+
+int TransformInt(Word w){
+/*  I.S. w terdefinisi
+    F.S. Word diubah menjadi int
+        Jika gagal, length diubah menjadi 0
+        Tidak bisa handle overflow
+        Tidak menerima bilangan negatif
+        Jika input tidak valid, mengembalikan -1*/
+/*KAMUS LOKAL*/
+int i, temp, retval;
+boolean valid = true;
+
+/*ALGORITMA*/
+retval =0;
+i=0;
+while(i<(w.Length) && valid){
+    if(w.TabWord[i]<=57 && w.TabWord[i]>=48){
+        temp = w.TabWord[i];
+        retval = (retval)*10 +(temp-48);
+        i++;
+    }else{
+        valid = false;
+        retval = -1;
+    }
+}
+return retval;
+}
+
+void displayWord(Word w){
+    /*KAMUS LOKAL*/
+    int i;
+    /*ALGORITMA*/
+    if(w.Length == 0){
+        printf("Input kosong");
+    }else{
+    for(i=0; i<w.Length; i++){
+        printf("%c", w.TabWord[i]);
+    }
+    }
+}

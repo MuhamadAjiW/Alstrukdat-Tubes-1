@@ -26,4 +26,16 @@ void ADV();
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
 
+
+void START_I();
+/* I.S. : sembarang
+   F.S. : currentChar adalah karakter pertama dari input*/
+
+void ADV_I();
+/* Command dimajukan satu karakter.
+   I.S. : Karakter pada jendela = currentChar, currentChar != ENTER
+   F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
+          currentChar mungkin = ENTER
+          Jika  currentChar = ENTER maka EOP akan menyala (true) */
+
 #endif
