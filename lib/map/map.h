@@ -3,9 +3,9 @@
 
 #include "../etc/boolean.h"
 #include "../point/point.c"
-#include "../matrix/matrix.c"
+#include "../matriks/matriks.c"
 // #include "../mesin_karakter/mesin_karakter.h"
-// #include "../mesin_kata/mesin_kata.c"
+#include "../mesin_kata/mesin_kata.c"
 
 /*  Kamus Umum */
 #define CAPACITY 100

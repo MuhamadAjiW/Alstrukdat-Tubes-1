@@ -1,5 +1,5 @@
-#ifndef MATRIX_H
-#define MATRIX_H
+#ifndef matriks_H
+#define matriks_H
 
 #include "../etc/boolean.h"
 // #include "../point/point.c"

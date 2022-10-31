@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include "matriks.h"
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk Matrix *** */
 void createMatrix(int nRows, int nCols, Matrix *m){
