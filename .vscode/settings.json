@@ -1,8 +1,11 @@
 {
     "files.associations": {
+        "*.ejs": "html",
         "list_statik.h": "c",
         "boolean.h": "c",
         "makanan.h": "c",
-        "prioqueue.h": "c"
+        "prioqueue.h": "c",
+        "map.h": "c",
+        "stdlib.h": "c"
     }
 }
