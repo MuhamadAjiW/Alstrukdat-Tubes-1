@@ -95,7 +95,7 @@ int main(){
 
     Map m;
     create_map(&m);
-    load_map(&m);
+    load_map(&m, "../../config/petaconf.txt");
 
     waktu curTime;
     createTime(&curTime);
@@ -118,15 +118,15 @@ int main(){
         printf("\n\n");
         printf("Enter Command: ");
         
-        input(&command);
-        if(kataSama(command,MOVE)){
-            ADVinput(&command);
-            move_map(&m,command);
+        input();
+        if(kataSama(currentWord,MOVE)){
+            ADVWORD_I();
+            move_map(&m,currentWord);
             nextMinute(&curTime);
             printf("\n\n");
         }
 
-        else if(kataSama(command,WAIT)){
+        else if(kataSama(currentWord,WAIT)){
             Word HR,MNT;
             ADVinput(&HR);
             ADVinput(&MNT);
@@ -137,7 +137,7 @@ int main(){
             printf("\n\n");
         }
 
-        else if(kataSama(command,BUY)){
+        else if(kataSama(currentWord,BUY)){
             if(isNear(m,'T')){
                 printf("======================\n");
                 printf("=        BUY         =\n");
@@ -148,8 +148,8 @@ int main(){
                 //
                 printf("Kirim 0 untuk exit.\n\n");
                 printf("Enter command: ");
-                input(&command);
-                if (TransformInt(command)!=0){
+                input();
+                if (TransformInt(currentWord)!=0){
                     //beli makanan
                 }
                 else printf("test\n");
@@ -161,7 +161,7 @@ int main(){
             printf("\n\n");
         }
 
-        else if(kataSama(command,BOIL)){
+        else if(kataSama(currentWord,BOIL)){
             if(isNear(m,'B')){
                 printf("======================\n");
                 printf("=        BOIL        =\n");
@@ -185,7 +185,7 @@ int main(){
             printf("\n\n");
         }
 
-        else if(kataSama(command,CHOP)){
+        else if(kataSama(currentWord,CHOP)){
             if(isNear(m,'C')){
                 printf("======================\n");
                 printf("=        CHOP        =\n");
@@ -209,7 +209,7 @@ int main(){
             printf("\n\n");
         }
 
-        else if(kataSama(command,FRY)){
+        else if(kataSama(currentWord,FRY)){
             if(isNear(m,'F')){
                 printf("======================\n");
                 printf("=        FRY         =\n");
@@ -233,7 +233,7 @@ int main(){
             printf("\n\n");
         }
 
-        else if(kataSama(command,MIX)){
+        else if(kataSama(currentWord,MIX)){
             if(isNear(m,'M')){
                 printf("======================\n");
                 printf("=        MIX         =\n");
@@ -258,7 +258,7 @@ int main(){
         }
 
 
-        else if(kataSama(command,CATALOG)){
+        else if(kataSama(currentWord,CATALOG)){
             printf("List Makanan\n");
             printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
             //Print list makanan disini
@@ -267,7 +267,7 @@ int main(){
             printf("\n\n");
         }
 
-        else if(kataSama(command,COOKBOOK)){
+        else if(kataSama(currentWord,COOKBOOK)){
             printf("List Resep\n");
             printf("(aksi yang diperlukan - bahan...)\n");
             //Print list resep disini
@@ -275,7 +275,7 @@ int main(){
             //
             printf("\n\n");
         }
-        else if(kataSama(command,INVENTORY)){
+        else if(kataSama(currentWord,INVENTORY)){
             printf("List Makanan di Inventory\n");
             printf("(nama - waktu sisa kedaluwarsa)\n");
             //Print list inventory disini
@@ -284,7 +284,7 @@ int main(){
             printf("\n\n");
         }
 
-        else if(kataSama(command,DELIVERY)){
+        else if(kataSama(currentWord,DELIVERY)){
             printf("List Makanan di Perjalanan\n");
             printf("(nama - waktu sisa delivery)\n");
             //Print list inventory disini
@@ -293,18 +293,18 @@ int main(){
             printf("\n\n");
         }
 
-        else if(kataSama(command,UNDO)){
+        else if(kataSama(currentWord,UNDO)){
             //undo algo disini
 
             //
         }
-        else if(kataSama(command,REDO)){
+        else if(kataSama(currentWord,REDO)){
             //redo algo disini
 
             //
         }
 
-        else if(kataSama(command,EXIT)){
+        else if(kataSama(currentWord,EXIT)){
             run=false;
         }
 

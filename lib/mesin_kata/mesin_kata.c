@@ -168,7 +168,7 @@ void ADVWORD_I()
               currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
               Jika currentChar = MARK, endWord = true.
        Proses : Akuisisi kata menggunakan procedure CopyWord */
-    IgnoreBlanks();
+    IgnoreBlanks_I();
     if (currentChar == MARK)
     {
         endWord = true;
