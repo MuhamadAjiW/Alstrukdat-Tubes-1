@@ -93,21 +93,32 @@ void printMap(Map map){
     }
 }
 boolean isNear(Map map,char ch){
-    if(ELMT_Map(map,Absis(S(map))-1,Ordinat(S(map)))==ch){
-        return true;
+
+    if (Absis(S(map)) != 0){
+        if(ELMT_Map(map,Absis(S(map))-1,Ordinat(S(map)))==ch){
+            return true;
+        }
     }
-    else if(ELMT_Map(map,Absis(S(map))+1,Ordinat(S(map)))==ch){
-        return true;
+    
+    if (Absis(S(map)) != ROW_Map(map)-1){
+        if(ELMT_Map(map,Absis(S(map))+1,Ordinat(S(map)))==ch){
+            return true;
+        }
+    };
+
+    if (Ordinat(S(map)) != 0){
+        if(ELMT_Map(map,Absis(S(map)),Ordinat(S(map))-1)==ch){
+            return true;
+        }
     }
-    else if(ELMT_Map(map,Absis(S(map)),Ordinat(S(map))-1)==ch){
-        return true;
-    }
-    else if(ELMT_Map(map,Absis(S(map)),Ordinat(S(map))+1)==ch){
-        return true;
-    }
-    else{
-        return false;
-    }
+
+    if (Ordinat(S(map)) != COL_Map(map)-1){
+        if(ELMT_Map(map,Absis(S(map)),Ordinat(S(map))+1)==ch){
+            return true;
+        }
+    }  
+    
+    return false;
 }
 
 void move_map(Map *map,Word arah){
@@ -170,3 +181,38 @@ void move_map(Map *map,Word arah){
 }
 /* I.S. map terdefinisi*/
 /* F.S. Posisi S pindah sesuai arah*/
+
+void moveDir(Map *map,char arah){
+    if(arah == 'w'){
+        if(ELMT_Map(*map,Absis(S(*map))-1,Ordinat(S(*map)))=='#'){
+            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
+            ELMT_Map(*map,Absis(S(*map))-1,Ordinat(S(*map)))='S';
+
+            Absis(S(*map))--;
+        }
+    }
+    else if(arah == 's'){
+        if(ELMT_Map(*map,Absis(S(*map))+1,Ordinat(S(*map)))=='#'){
+            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
+            ELMT_Map(*map,Absis(S(*map))+1,Ordinat(S(*map)))='S';
+
+            Absis(S(*map))++;
+        }
+    }
+    else if(arah == 'd'){
+        if(ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))+1)=='#'){
+            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
+            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))+1)='S';
+
+            Ordinat(S(*map))++;
+        }
+    }
+    else if(arah == 'a'){
+        if(ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))-1)=='#'){
+            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
+            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))-1)='S';
+            
+            Ordinat(S(*map))--;
+        }
+    }
+}

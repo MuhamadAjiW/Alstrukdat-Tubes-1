@@ -176,7 +176,7 @@ void ADVWORD_I()
     else
     {
         CopyWord_I();
-        ignoreUntilEnter();
+        IgnoreBlanks();
     }
 }
 
@@ -304,4 +304,151 @@ int initDetection(Word kata){
     }
     return signal;
 
+}
+
+int baseDetection(Word kata){
+    Word mix;
+    mix.Length = 3;
+    mix.TabWord[0] = 'm';
+    mix.TabWord[1] = 'i';
+    mix.TabWord[2] = 'x';
+    
+
+    Word chop;
+    chop.Length = 4;
+    chop.TabWord[0] = 'c';
+    chop.TabWord[1] = 'h';
+    chop.TabWord[2] = 'o';
+    chop.TabWord[3] = 'p';
+    
+    
+    Word fry;
+    fry.Length = 3;
+    fry.TabWord[0] = 'f';
+    fry.TabWord[1] = 'r';
+    fry.TabWord[2] = 'y';
+
+    Word boil;
+    boil.Length = 4;
+    boil.TabWord[0] = 'b';
+    boil.TabWord[1] = 'o';
+    boil.TabWord[2] = 'i';
+    boil.TabWord[3] = 'l';
+
+    Word buy;
+    buy.Length = 3;
+    buy.TabWord[0] = 'b';
+    buy.TabWord[1] = 'u';
+    buy.TabWord[2] = 'y';
+
+    Word move;
+    move.Length = 4;
+    move.TabWord[0] = 'm';
+    move.TabWord[1] = 'o';
+    move.TabWord[2] = 'v';
+    move.TabWord[3] = 'e';
+
+    Word exit;
+    exit.Length = 4;
+    exit.TabWord[0] = 'e';
+    exit.TabWord[1] = 'x';
+    exit.TabWord[2] = 'i';
+    exit.TabWord[3] = 't';
+
+    Word wait;
+    wait.Length = 4;
+    wait.TabWord[0] = 'w';
+    wait.TabWord[1] = 'a';
+    wait.TabWord[2] = 'i';
+    wait.TabWord[3] = 't';
+
+    Word catalog;
+    catalog.Length = 7;
+    catalog.TabWord[0] = 'c';
+    catalog.TabWord[1] = 'a';
+    catalog.TabWord[2] = 't';
+    catalog.TabWord[3] = 'a';
+    catalog.TabWord[4] = 'l';
+    catalog.TabWord[5] = 'o';
+    catalog.TabWord[6] = 'g';
+
+    
+    LowerCase(&currentWord);
+
+    int signal;
+    signal = 0;
+
+    printf("\n");
+    if (kataSama(currentWord, mix)){
+        signal = 1;
+    }
+    else if (kataSama(currentWord, chop)){
+        signal = 2;
+    }
+    else if (kataSama(currentWord, fry)){
+        signal = 3;
+    }
+    else if (kataSama(currentWord, boil)){
+        signal = 4;
+    }
+    else if (kataSama(currentWord, buy)){
+        signal = 5;
+    }
+    else if (kataSama(currentWord, move)){
+        signal = 6;
+    }
+    else if (kataSama(currentWord, wait)){
+        signal = 7;
+    }
+    else if (kataSama(currentWord, catalog)){
+        signal = 8;
+    }
+    else if (kataSama(currentWord, exit)){
+        signal = -1;
+    }
+
+    return signal;
+}
+
+int moveDetection(Word kata){
+    Word NORTH,SOUTH,EAST,WEST;
+    NORTH.Length=5;
+    NORTH.TabWord[0]='N';
+    NORTH.TabWord[1]='O';
+    NORTH.TabWord[2]='R';
+    NORTH.TabWord[3]='T';
+    NORTH.TabWord[4]='H';
+    SOUTH.Length=5;
+    SOUTH.TabWord[0]='S';
+    SOUTH.TabWord[1]='O';
+    SOUTH.TabWord[2]='U';
+    SOUTH.TabWord[3]='T';
+    SOUTH.TabWord[4]='H';
+    EAST.Length=4;
+    EAST.TabWord[0]='E';
+    EAST.TabWord[1]='A';
+    EAST.TabWord[2]='S';
+    EAST.TabWord[3]='T';
+    WEST.Length=4;
+    WEST.TabWord[0]='W';
+    WEST.TabWord[1]='E';
+    WEST.TabWord[2]='S';
+    WEST.TabWord[3]='T';
+
+    Uppercase(&kata);
+
+    int signal = 0;
+    if(kataSama(kata,NORTH)){
+        signal = 1;
+    }
+    else if(kataSama(kata,SOUTH)){
+        signal = 2;
+    }
+    else if(kataSama(kata,EAST)){
+        signal = 3;
+    }
+    else if(kataSama(kata,WEST)){
+        signal = 4;
+    }
+    return signal;
 }
