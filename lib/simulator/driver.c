@@ -148,7 +148,7 @@ int main(){
                 //
                 printf("Kirim 0 untuk exit.\n\n");
                 printf("Enter command: ");
-                input();
+                ADVWORD_I();
                 if (TransformInt(currentWord)!=0){
                     //beli makanan
                 }
@@ -172,8 +172,8 @@ int main(){
                 //
                 printf("Kirim 0 untuk exit.\n\n");
                 printf("Enter command: ");
-                input(&command);
-                if (TransformInt(command)!=0){
+                ADVWORD_I();
+                if (TransformInt(currentWord)!=0){
                     //olah makanan
                 }
                 else printf("test\n");
@@ -196,8 +196,8 @@ int main(){
                 //
                 printf("Kirim 0 untuk exit.\n\n");
                 printf("Enter command: ");
-                input(&command);
-                if (TransformInt(command)!=0){
+                ADVWORD_I();
+                if (TransformInt(currentWord)!=0){
                     //olah makanan
                 }
                 else printf("test\n");
@@ -220,8 +220,8 @@ int main(){
                 //
                 printf("Kirim 0 untuk exit.\n\n");
                 printf("Enter command: ");
-                input(&command);
-                if (TransformInt(command)!=0){
+                ADVWORD_I();
+                if (TransformInt(currentWord)!=0){
                     //olah makanan
                 }
                 else printf("test\n");
@@ -244,8 +244,8 @@ int main(){
                 //
                 printf("Kirim 0 untuk exit.\n\n");
                 printf("Enter command: ");
-                input(&command);
-                if (TransformInt(command)!=0){
+                ADVWORD_I();
+                if (TransformInt(currentWord)!=0){
                     //olah makanan
                 }
                 else printf("test\n");
