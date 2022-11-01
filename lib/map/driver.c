@@ -16,6 +16,8 @@ int main(){
     move_map(&m,w);
     move_map(&m,w);
     printMap(m);
+    move_map(&m,w);
+    printMap(m);
     return 0;
 
 }
