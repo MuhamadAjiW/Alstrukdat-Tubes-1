@@ -155,7 +155,7 @@ void move_map(Map *map,Word arah){
             ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
             ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))+1)='S';
 
-            Ordinat(S(*map))--;
+            Ordinat(S(*map))++;
         }
     }
     else if(kataSama(arah,WEST)){
@@ -163,7 +163,7 @@ void move_map(Map *map,Word arah){
             ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
             ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))-1)='S';
             
-            Ordinat(S(*map))++;
+            Ordinat(S(*map))--;
         }
     }
 }
