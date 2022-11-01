@@ -70,3 +70,13 @@ boolean TGT (waktu T1, waktu T2){
     }
 }
 
+void writeHHMM(waktu t){
+    printf("%d.", Jam(t));
+    printf("%d", Menit(t));
+}
+
+void nextMinute(waktu * T){
+    long menit=TIMEToMenit(*T);
+    *T=MenitToTIME(menit+1);
+}
+

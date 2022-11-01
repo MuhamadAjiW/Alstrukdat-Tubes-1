@@ -38,4 +38,10 @@ boolean TLT (waktu T1, waktu T2);
 boolean TGT (waktu T1, waktu T2);
 /* Mengirimkan true jika T1>T2, false jika tidak */
 
+void writeHHMM(waktu t);
+//Menuliskan waktu dalam format HH.MM
+
+void nextMinute(waktu * T);
+// mengubah T menjadi waktu setelah 1 menit
+
 #endif

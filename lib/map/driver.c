@@ -15,6 +15,8 @@ int main(){
     w.TabWord[3]='T';
     move_map(&m,w);
     printMap(m);
+    move_map(&m,w);
+    printMap(m);
     return 0;
 
 }

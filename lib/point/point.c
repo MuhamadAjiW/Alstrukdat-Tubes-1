@@ -34,7 +34,7 @@ void WritePOINT (POINT P){
 */
 /* I.S. P terdefinisi */
 /* F.S. P tertulis di layar dengan format "(X,Y)" */                
-    printf("(%d,%d)",Absis(P),Ordinat(P));
+    printf("(%d,%d)",Absis(P)-1,Ordinat(P)-1);
 }
 
 /* *** OPERASI TERHADAP TYPE *** */                           

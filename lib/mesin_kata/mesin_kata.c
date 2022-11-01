@@ -247,3 +247,54 @@ void displayWord(Word w){
     }
     }
 }
+
+void ADVinput(Word *w){
+   /*ALGORITMA*/
+    IgnoreBlanks_I();
+    if(currentChar!=ENTER){
+        CopyWord_I(w);
+        if(currentChar==ENTER){
+            endWord=true;
+        }else{
+            endWord = false;
+        }
+    }else{
+        endWord=true;
+        w->Length =0; 
+    }
+}
+
+/*** reference
+ * START_I();
+    IgnoreBlanks();
+    if(currentChar!=ENTER){
+        CopyWord_I(w);
+        if(currentChar==ENTER){
+            endWord=true;
+        }else{
+            endWord = false;
+        }
+    }else{
+        w->Length =0; 
+    }
+ * 
+ * 
+void ADVWORD()
+{
+     I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
+       F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
+              currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
+              Jika currentChar = MARK, endWord = true.
+       Proses : Akuisisi kata menggunakan procedure CopyWord 
+    IgnoreBlanks();
+    if (currentChar == MARK)
+    {
+        endWord = true;
+    }
+    else
+    {
+        CopyWord();
+        IgnoreBlanks();
+    }
+}
+***/
