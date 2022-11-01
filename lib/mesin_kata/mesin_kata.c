@@ -168,7 +168,7 @@ void ADVWORD_I()
               currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
               Jika currentChar = MARK, endWord = true.
        Proses : Akuisisi kata menggunakan procedure CopyWord */
-    IgnoreBlanks();
+    IgnoreBlanks_I();
     if (currentChar == MARK)
     {
         endWord = true;
@@ -274,6 +274,21 @@ void displayWord(Word w){
     }
 }
 
+void ADVinput(Word *w){
+   /*ALGORITMA*/
+    IgnoreBlanks_I();
+    if(currentChar!=ENTER){
+        CopyWord_I(w);
+        if(currentChar==ENTER){
+            endWord=true;
+        }else{
+            endWord = false;
+        }
+    }else{
+        endWord=true;
+        w->Length =0; 
+    }
+}
 void printASCII1(){
     printf("Ya welkam lah pokoknya.\n");
     printf("(START/EXIT)\n");
