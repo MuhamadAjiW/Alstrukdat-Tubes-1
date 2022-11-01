@@ -4,16 +4,16 @@
 #include "../makanan/makanan.c"
 #include "../waktu/waktu.c"
 
-boolean IsEmpty (PrioQueue Q) {
+boolean queueIsEmpty (PrioQueue Q) {
     return (Head(Q) == NIL && Tail(Q) == NIL);
 }
 
-boolean IsFull (PrioQueue Q) {
+boolean queueIsFull (PrioQueue Q) {
     return (NBElmt(Q) == MaxEl(Q));
 }
 
 int NBElmt (PrioQueue Q) {
-    if (IsEmpty(Q)) {
+    if (queueIsEmpty(Q)) {
         return 0;
     }
     else if  (Head(Q) <= Tail(Q)) {
@@ -66,12 +66,12 @@ void CopyQueue(PrioQueue * Q, PrioQueue * targetQ) {
 void Enqueue (PrioQueue * Q, makanan X) {
     PrioQueue q;
 
-    if (IsEmpty(*Q)) {
+    if (queueIsEmpty(*Q)) {
         Head(*Q) = 0;
         Tail(*Q) = 0;
     }
     else {
-        if (IsFull(*Q)) {
+        if (queueIsFull(*Q)) {
             MakeEmpty(&q, MaxEl(*Q)*2);
             CopyQueue(Q, &q);
             ExpandQueue(Q);
@@ -118,6 +118,7 @@ void Enqueue (PrioQueue * Q, makanan X) {
 }
 
 void Dequeue (PrioQueue * Q, makanan * X) {
+
     *X = InfoHead(*Q);
     if (NBElmt(*Q) == 1) {
         Head(*Q) = NIL;
@@ -132,7 +133,7 @@ void Dequeue (PrioQueue * Q, makanan * X) {
         }
     }
 
-    if ((NBElmt(*Q) < MaxEl(*Q)/4) && !IsEmpty(*Q)) {
+    if ((NBElmt(*Q) < MaxEl(*Q)/4) && !queueIsEmpty(*Q)) {
         PrioQueue q;
         MakeEmpty(&q, MaxEl(*Q)*2);
         CopyQueue(Q, &q);
@@ -149,6 +150,34 @@ void PrintPrioQueue (PrioQueue Q) {
     while (i < NBElmt(Q)) {
         printf("%s", Name(Q, j));
         printTime(Time(Q, j));
+        printf("\n");
+        if (j == MaxEl(Q)-1) {
+            j = 0;
+        }
+        else {
+            j += 1;
+        }
+        i += 1;
+    }
+}
+
+void PrintInventory (PrioQueue Q){
+    printf("List makanan di Inventory\n");
+    printf("(nama - waktu sisa kedaluwarsa)\n");
+    int i = 0;
+    int j = Head(Q);
+    while (i < NBElmt(Q)) {
+        printf("    %s - ", Name(Q, j));
+        if (Hari(Time(Q, j)) > 0){
+            printf("%d hari", Hari(Time(Q, j)));
+        }
+        else if (Jam(Time(Q, j)) > 0){
+            printf("%d jam", Jam(Time(Q, j)));
+        }
+        else if (Menit(Time(Q, j)) > 0){
+            printf("%d menit", Menit(Time(Q, j)));
+        }
+
         printf("\n");
         if (j == MaxEl(Q)-1) {
             j = 0;

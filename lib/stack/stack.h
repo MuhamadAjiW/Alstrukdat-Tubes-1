@@ -9,20 +9,20 @@
 #include "../mesin_kata/mesin_kata.h"
 
 #define Nil -1
-#define MaxEl 100
+#define MaxElStck 100
 /* Nil adalah stack dengan elemen kosong . */
 
 
-typedef int address;   /* indeks tabel */
+typedef int addressStck;   /* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct { 
-  Word T[MaxEl]; /* tabel penyimpan elemen */
-  address TOP;  /* alamat TOP: elemen puncak */
+  Word T[MaxElStck]; /* tabel penyimpan elemen */
+  addressStck TOP;  /* alamat TOP: elemen puncak */
 } Stack;
 /* Definisi stack S kosong : S.TOP = Nil */
-/* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxEl-1] */
+/* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxElStck-1] */
 /* Jika S adalah Stack maka akses elemen : */
    /* S.T[(S.TOP)] untuk mengakses elemen TOP */
    /* S.TOP adalah alamat elemen TOP */
@@ -35,14 +35,14 @@ typedef struct {
 /* *** Konstruktor/Kreator *** */
 void CreateEmpty(Stack *S);
 /* I.S. sembarang; */
-/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
-/* jadi indeksnya antara 0.. MaxEl */
+/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxElStck */
+/* jadi indeksnya antara 0.. MaxElStck */
 /* Ciri stack kosong : TOP bernilai Nil */
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean IsEmpty(Stack S);
+boolean stackIsEmpty(Stack S);
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
-boolean IsFull(Stack S);
+boolean stackIsFull(Stack S);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */

@@ -138,7 +138,7 @@ void ignoreUntilEnter(){
     }
 }
 
-void CopyWord_I(Word *w)
+void CopyWord_I()
 {
     /*CopyWord untuk input*/
     /*Mengakuisisi kata, menyimpan dalam currentWord
@@ -147,12 +147,12 @@ void CopyWord_I(Word *w)
               currentChar = BLANK atau currentChar = ENTER;
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
-    w->Length = 0;
+    currentWord.Length = 0;;
     while (currentChar != BLANK  && currentChar != ENTER)
     {
-        if (w->Length < NMax)
+        if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
-            w->TabWord[w->Length++] = currentChar;
+            currentWord.TabWord[currentWord.Length++] = currentChar;
             ADV_I();
         }
         else{ //input overflow
@@ -161,27 +161,57 @@ void CopyWord_I(Word *w)
 }
 }
 
+void ADVWORD_I()
+{
+    /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
+       F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
+              currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
+              Jika currentChar = MARK, endWord = true.
+       Proses : Akuisisi kata menggunakan procedure CopyWord */
+    IgnoreBlanks();
+    if (currentChar == MARK)
+    {
+        endWord = true;
+    }
+    else
+    {
+        CopyWord_I();
+        ignoreUntilEnter();
+    }
+}
+
 void LowerCase(Word *kata){
 /* I.S. kata terdefinisi sembarang tetapi tidak kosong */
 /* F.S. currentword menjadi lowercase di setiap karakternya */
-int i;
-i = 0;
-if(kata->Length>0){
-    while (i<kata->Length){
-        if((kata->TabWord[i]>=65)&& (kata->TabWord[i]<=90)){
-            kata->TabWord[i] += 32;
+    int i;
+    i = 0;
+    if(kata->Length>0){
+        while (i<kata->Length){
+            if((kata->TabWord[i]>=65)&& (kata->TabWord[i]<=90)){
+                kata->TabWord[i] += 32;
+            }
+        i+=1;
         }
-    i+=1;
-}
-}
+    }
 }
 
+void Uppercase(Word* kata){
+    int i;
+    i = 0;
+    if(kata->Length>0){
+        while (i<kata->Length){
+            if((kata->TabWord[i]>=97)&& (kata->TabWord[i]<=122)){
+                kata->TabWord[i] -= 32;
+            }
+        i+=1;
+        }
+    }
+}
 
 
 
 
-
-void input(Word *w){
+void input(){
 /* I.S.  w sembarang 
    F.S.  w menyimpan kata pertama dari input;
          Jika currentChara adalah ENTER, maka endWord = true;
@@ -195,15 +225,11 @@ void input(Word *w){
    /*ALGORITMA*/
     START_I();
     IgnoreBlanks();
-    if(currentChar!=ENTER){
-        CopyWord_I(w);
-        if(currentChar==ENTER){
-            endWord=true;
-        }else{
-            endWord = false;
-        }
+    if(currentChar==ENTER){
+        endWord=true;
     }else{
-        w->Length =0; 
+        CopyWord_I();
+        endWord = false;
     }
 }
 
@@ -262,4 +288,35 @@ void ADVinput(Word *w){
         endWord=true;
         w->Length =0; 
     }
+}
+void printASCII1(){
+    printf("Ya welkam lah pokoknya.\n");
+    printf("(START/EXIT)\n");
+}
+
+int initDetection(Word kata){
+    int signal = 0;
+    Word START,EXIT;
+    START.Length=5;
+    START.TabWord[0]='S';
+    START.TabWord[1]='T';
+    START.TabWord[2]='A';
+    START.TabWord[3]='R';
+    START.TabWord[4]='T';
+    EXIT.Length=4;
+    EXIT.TabWord[0]='E';
+    EXIT.TabWord[1]='X';
+    EXIT.TabWord[2]='I';
+    EXIT.TabWord[3]='T';
+
+    Uppercase(&kata);
+
+    if (kataSama(kata, START)){
+        signal = 1;
+    }
+    else if (kataSama(kata, EXIT)){
+        signal = -1;
+    }
+    return signal;
+
 }

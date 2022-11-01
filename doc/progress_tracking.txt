@@ -1,4 +1,3 @@
-Milestone
 Tugas							Pembagian
 1. Command Parser					(1) Athif
 2. Inisiasi

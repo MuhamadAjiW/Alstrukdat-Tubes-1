@@ -57,7 +57,7 @@ void create_list_statik(list_statik *l);
 /* F.S. Membuat list kosong*/
 /* Proses: Mengisi semua elemen list dengan definisi list kosong*/
 
-void load_list_statik(list_statik *l);
+void load_list_statik(list_statik *l, char* makananconf, char* resepconf);
 /* I.S. l sembarang */
 /* F.S. Membuat list berisikan data makanan*/
 /* Proses: Membaca file configmakanan*/

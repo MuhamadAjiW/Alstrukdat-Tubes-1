@@ -4,6 +4,7 @@
         "list_statik.h": "c",
         "boolean.h": "c",
         "makanan.h": "c",
+        "prioqueue.h": "c",
         "map.h": "c",
         "stdlib.h": "c",
         "stdio.h": "c"
