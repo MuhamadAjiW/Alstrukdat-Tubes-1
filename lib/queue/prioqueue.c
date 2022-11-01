@@ -66,17 +66,6 @@ void CopyQueue(PrioQueue * Q, PrioQueue * targetQ) {
 void Enqueue (PrioQueue * Q, makanan X) {
     PrioQueue q;
 
-    if (IsFull(*Q)){
-        (*Q).T = (makanan *) realloc((*Q).T , (MaxEl(*Q)*2) * sizeof(makanan));
-        if ((*Q).T != NULL) {
-            MaxEl(*Q) = MaxEl(*Q)*2;
-        }
-        else {
-            MaxEl(*Q) = 0;
-        }
-    }
-
-
     if (IsEmpty(*Q)) {
         Head(*Q) = 0;
         Tail(*Q) = 0;
@@ -129,16 +118,6 @@ void Enqueue (PrioQueue * Q, makanan X) {
 }
 
 void Dequeue (PrioQueue * Q, makanan * X) {
-
-    if (MaxEl(*Q) >= 4 && NBElmt(*Q)-1 <= MaxEl(*Q)/4){
-        (*Q).T = (makanan *) realloc((*Q).T , (MaxEl(*Q)/2) * sizeof(makanan));
-        if ((*Q).T != NULL) {
-            MaxEl(*Q) = MaxEl(*Q)/2;
-        }
-        else {
-            MaxEl(*Q) = 0;
-        }
-    } 
 
     *X = InfoHead(*Q);
     if (NBElmt(*Q) == 1) {
