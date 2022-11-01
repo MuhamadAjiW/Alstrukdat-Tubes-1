@@ -15,9 +15,9 @@ void create_map(Map *map){
     // POINT temp;
     // temp=S(*map);
     // CreatePoint(&temp);
-    CreatePoint(&S(*map));
-    ROW_Point(S(*map))=IDX_UNDEF;
-    COL_Point(S(*map))=IDX_UNDEF;
+    // CreatePoint(&S(*map));
+    Absis(S(*map))=IDX_UNDEF;
+    Ordinat(S(*map))=IDX_UNDEF;
 }
 void load_map(Map *map){
     char *location;
@@ -52,12 +52,13 @@ void load_map(Map *map){
                 ADV();
             }
             if(currentChar=='S'){
-                ROW_Point(S(*map))=i;
-                COL_Point(S(*map))=j;
+                Absis(S(*map))=i;
+                Ordinat(S(*map))=j;
             }
             ELMT_Map(*map,i,j)=currentChar;
             ADV();
         }
+        // printf("%c",currentChar);
     }
     ROW_Map(*map)=ii;
     COL_Map(*map)=jj;
@@ -91,16 +92,16 @@ void printMap(Map map){
     }
 }
 boolean isNear(Map map,char ch){
-    if(ELMT_Map(map,ROW_Point(S(map))-1,COL_Point(S(map)))==ch){
+    if(ELMT_Map(map,Absis(S(map))-1,Ordinat(S(map)))==ch){
         return true;
     }
-    else if(ELMT_Map(map,ROW_Point(S(map))+1,COL_Point(S(map)))==ch){
+    else if(ELMT_Map(map,Absis(S(map))+1,Ordinat(S(map)))==ch){
         return true;
     }
-    else if(ELMT_Map(map,ROW_Point(S(map)),COL_Point(S(map))-1)==ch){
+    else if(ELMT_Map(map,Absis(S(map)),Ordinat(S(map))-1)==ch){
         return true;
     }
-    else if(ELMT_Map(map,ROW_Point(S(map)),COL_Point(S(map))+1)==ch){
+    else if(ELMT_Map(map,Absis(S(map)),Ordinat(S(map))+1)==ch){
         return true;
     }
     else{
@@ -134,35 +135,35 @@ void move_map(Map *map,Word arah){
     WEST.TabWord[3]='T';
 
     if(kataSama(arah,NORTH)){
-        if(ELMT_Map(*map,ROW_Point(S(*map))-1,COL_Point(S(*map)))=='#'){
-            ELMT_Map(*map,ROW_Point(S(*map)),COL_Point(S(*map)))='#';
-            ELMT_Map(*map,ROW_Point(S(*map))-1,COL_Point(S(*map)))='S';
+        if(ELMT_Map(*map,Absis(S(*map))-1,Ordinat(S(*map)))=='#'){
+            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
+            ELMT_Map(*map,Absis(S(*map))-1,Ordinat(S(*map)))='S';
 
-            ROW_Point(S(*map))--;
+            Absis(S(*map))--;
         }
     }
     else if(kataSama(arah,SOUTH)){
-        if(ELMT_Map(*map,ROW_Point(S(*map))+1,COL_Point(S(*map)))=='#'){
-            ELMT_Map(*map,ROW_Point(S(*map)),COL_Point(S(*map)))='#';
-            ELMT_Map(*map,ROW_Point(S(*map))+1,COL_Point(S(*map)))='S';
+        if(ELMT_Map(*map,Absis(S(*map))+1,Ordinat(S(*map)))=='#'){
+            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
+            ELMT_Map(*map,Absis(S(*map))+1,Ordinat(S(*map)))='S';
 
-            ROW_Point(S(*map))++;
+            Absis(S(*map))++;
         }
     }
     else if(kataSama(arah,EAST)){
-        if(ELMT_Map(*map,ROW_Point(S(*map)),COL_Point(S(*map))+1)=='#'){
-            ELMT_Map(*map,ROW_Point(S(*map)),COL_Point(S(*map)))='#';
-            ELMT_Map(*map,ROW_Point(S(*map)),COL_Point(S(*map))+1)='S';
+        if(ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))+1)=='#'){
+            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
+            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))+1)='S';
 
-            COL_Point(S(*map))--;
+            Ordinat(S(*map))--;
         }
     }
     else if(kataSama(arah,WEST)){
-        if(ELMT_Map(*map,ROW_Point(S(*map)),COL_Point(S(*map))-1)=='#'){
-            ELMT_Map(*map,ROW_Point(S(*map)),COL_Point(S(*map)))='#';
-            ELMT_Map(*map,ROW_Point(S(*map)),COL_Point(S(*map))-1)='S';
+        if(ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))-1)=='#'){
+            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
+            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))-1)='S';
             
-            COL_Point(S(*map))++;
+            Ordinat(S(*map))++;
         }
     }
 }

@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "prioqueue.h"
-#include "../makanan/makanan.h"
+#include "../makanan/makanan.c"
+#include "../waktu/waktu.c"
 
 boolean IsEmpty (PrioQueue Q) {
     return (Head(Q) == NIL && Tail(Q) == NIL);
@@ -38,6 +39,28 @@ void MakeEmpty (PrioQueue * Q, int Max) {
 void DeAlokasi(PrioQueue * Q) {
     MaxEl(*Q) = 0;
     free((*Q).T);
+    
+}
+
+void ExpandQueue(PrioQueue * Q) {
+    int newCap = MaxEl(*Q)*2;
+    DeAlokasi(Q);
+    MakeEmpty(Q, newCap);
+}
+
+void CompressQueue(PrioQueue * Q) {
+    int newCap = MaxEl(*Q)/2;
+    DeAlokasi(Q);
+    MakeEmpty(Q, newCap);
+}
+
+void CopyQueue(PrioQueue * Q, PrioQueue * targetQ) {
+    int nelmt = NBElmt(*Q);
+    makanan temp;
+    for (int i = 0; i < nelmt; i++) {
+        Dequeue(Q, &temp);
+        Enqueue(targetQ, temp);
+    }
 }
 
 void Enqueue (PrioQueue * Q, makanan X) {
@@ -59,6 +82,13 @@ void Enqueue (PrioQueue * Q, makanan X) {
         Tail(*Q) = 0;
     }
     else {
+        if (IsFull(*Q)) {
+            MakeEmpty(&q, MaxEl(*Q)*2);
+            CopyQueue(Q, &q);
+            ExpandQueue(Q);
+            CopyQueue(&q, Q);
+            DeAlokasi(&q);
+        }
         if (Tail(*Q) == MaxEl(*Q)-1) {
             Tail(*Q) = 0;
         }
@@ -122,6 +152,15 @@ void Dequeue (PrioQueue * Q, makanan * X) {
         else {
             Head(*Q) += 1;
         }
+    }
+
+    if ((NBElmt(*Q) < MaxEl(*Q)/4) && !IsEmpty(*Q)) {
+        PrioQueue q;
+        MakeEmpty(&q, MaxEl(*Q)*2);
+        CopyQueue(Q, &q);
+        CompressQueue(Q);
+        CopyQueue(&q, Q);
+        DeAlokasi(&q);
     }
 }
 

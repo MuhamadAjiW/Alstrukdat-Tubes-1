@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "stack.h"
-#include "../mesin_kata/mesin_kata.h"
+#include "stack.c"
+#include "../mesin_kata/mesin_kata.c"
 #include "../etc/boolean.h"
 
 int main(){

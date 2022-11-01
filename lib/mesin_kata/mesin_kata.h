@@ -5,7 +5,7 @@
 #define __MESINKATA_H__
 
 #include "../etc/boolean.h"
-#include "../mesin_karakter/mesin_karakter.h"
+#include "../mesin_karakter/mesin_karakter.c"
 
 #define NMax 50
 #define BLANK ' '
@@ -98,7 +98,7 @@ void input(Word *w);
 
     */
 
-int TransformInt(Word w){
+int TransformInt(Word w);
 /*  I.S. w terdefinisi
     F.S. Word diubah menjadi int
         Jika gagal, length diubah menjadi 0
@@ -108,7 +108,7 @@ int TransformInt(Word w){
 
 
 
-}
+
 
 void displayWord(Word w);
 /* I.S. w terdefinisi
