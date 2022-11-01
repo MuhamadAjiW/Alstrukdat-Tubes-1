@@ -29,9 +29,9 @@ typedef struct {
 
 
 /* ********* Prototype ********* */
-boolean IsEmpty (PrioQueue Q);
+boolean queueIsEmpty (PrioQueue Q);
 /* Mengirim true jika Q kosong: lihat definisi di atas */
-boolean IsFull (PrioQueue Q);
+boolean queueIsFull (PrioQueue Q);
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
 int NBElmt (PrioQueue Q);

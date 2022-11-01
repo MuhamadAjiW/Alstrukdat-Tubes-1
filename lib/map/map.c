@@ -7,8 +7,8 @@ void create_map(Map *map){
     COL_Map(*map)=IDX_UNDEF;
     int i,j;
 
-    for(i=0;i<=CAPACITY;i++){
-        for(j=0;j<=CAPACITY;j++){
+    for(i=0;i<=CAPACITYMP;i++){
+        for(j=0;j<=CAPACITYMP;j++){
             ELMT_Map(*map,i,j)='*';
         }
     }
@@ -19,15 +19,15 @@ void create_map(Map *map){
     Absis(S(*map))=IDX_UNDEF;
     Ordinat(S(*map))=IDX_UNDEF;
 }
-void load_map(Map *map){
+void load_map(Map *map, char* mapconf){
     char *location;
 
-    location = (char*) malloc (CAPACITY* sizeof(char));
-    location = "../../config/petaconf.txt";
-    START(location);
+    START(mapconf);
     int i,j,ii,jj;
     i=1;
     j=1;
+    ii = 0;
+    jj = 0;
     int spasi;
     spasi=0;
     while((currentChar>='0' && currentChar<='9') || currentChar==' '){
@@ -46,6 +46,7 @@ void load_map(Map *map){
         }
         ADV();
     }
+
     for(i=1;i<=ii;i++){
         for(j=1;j<=jj;j++){
             if(currentChar=='\n'){
@@ -64,13 +65,13 @@ void load_map(Map *map){
     COL_Map(*map)=jj;
 }
 
-boolean isEmpty(Map map){
+boolean isEmptyMP(Map map){
     return (ROW_Map(map)==IDX_UNDEF && COL_Map(map)==IDX_UNDEF);
 }
-boolean isIdxValid(int i,int j){
-    return (i>IDX_MIN && i<=CAPACITY && j>IDX_MIN && j<=CAPACITY);
+boolean isIdxValidMP(int i,int j){
+    return (i>IDX_MIN && i<=CAPACITYMP && j>IDX_MIN && j<=CAPACITYMP);
 }
-boolean isIdxEff(Map map,int i,int j){
+boolean isIdxEffMP(Map map,int i,int j){
     return (i>IDX_MIN && i<=ROW_Map(map) && j>IDX_MIN && j<=COL_Map(map));
 }
 void printMap(Map map){
@@ -155,7 +156,7 @@ void move_map(Map *map,Word arah){
             ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
             ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))+1)='S';
 
-            Ordinat(S(*map))--;
+            Ordinat(S(*map))++;
         }
     }
     else if(kataSama(arah,WEST)){
@@ -163,7 +164,7 @@ void move_map(Map *map,Word arah){
             ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
             ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))-1)='S';
             
-            Ordinat(S(*map))++;
+            Ordinat(S(*map))--;
         }
     }
 }

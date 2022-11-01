@@ -67,7 +67,7 @@ void ignoreUntilEnter();
 /*F.S.  currentChar = ENTER */
 
 
-void CopyWord_I(Word *w);
+void CopyWord_I();
     /*CopyWord untuk input*/
     /*Mengakuisisi kata, menyimpan dalam w
        I.S. :  currentChar adalah karakter pertama dari kata;
@@ -86,7 +86,7 @@ void LowerCase(Word *kata);
 
 
 
-void input(Word *w);
+void input();
 /* I.S.  w sembarang 
    F.S.  w menyimpan kata pertama dari input;
          Jika currentChara adalah ENTER, maka endWord = true;
@@ -114,5 +114,7 @@ void displayWord(Word w);
 /* I.S. w terdefinisi
    F.S. Menampilkan kata w pada layar terminal
    Tidak ada karakter tambah baik di depan atau di akhir kata.*/
+
+void printASCII1();
 
 #endif

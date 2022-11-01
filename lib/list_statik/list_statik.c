@@ -25,8 +25,7 @@ void create_list_statik(list_statik *l){
 /* F.S. Membuat list kosong*/
 /* Proses: Mengisi semua elemen list dengan definisi list kosong*/
 
-void load_list_statik(list_statik *l){
-   char* location;
+void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
    int N;
    int cache;
    int mul;
@@ -66,11 +65,7 @@ void load_list_statik(list_statik *l){
    Buy.TabWord[1] = 'u';
    Buy.TabWord[2] = 'y';
 
-
-   location = (char*) malloc (CAPACITY* sizeof(char));
-   location = "../../config/makananconf.txt";
-
-   STARTWORD(location);
+   STARTWORD(makananconf);
    N = (int) (currentWord.TabWord[0]) - 48;
    SkipLines();
 
@@ -202,8 +197,7 @@ void load_list_statik(list_statik *l){
    }
 
    //baca resep
-   location = "../../config/resepconf.txt";
-   STARTWORD(location);
+   STARTWORD(resepconf);
    N = (int) (currentWord.TabWord[0]) - 48;
    SkipLines();
 
@@ -288,9 +282,6 @@ void load_list_statik(list_statik *l){
 
       SkipLines();
    }
-
-   //baca resep belom
-   free(location);
 }
 /* I.S. l terinisialisasi, file config tidak kosong */
 /* F.S. Membuat list berisikan data makanan*/

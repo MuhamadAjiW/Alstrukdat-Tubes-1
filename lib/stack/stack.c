@@ -13,12 +13,12 @@ void CreateEmpty(Stack *S) {
 /* Ciri stack kosong : TOP bernilai Nil */
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean IsEmpty(Stack S) {
+boolean stackIsEmpty(Stack S) {
     return Top(S) == Nil;
 }
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
-boolean IsFull(Stack S) {
-    return Top(S) == (MaxEl-1);
+boolean stackIsFull(Stack S) {
+    return Top(S) == (MaxElStck-1);
 }
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 

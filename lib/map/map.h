@@ -8,7 +8,7 @@
 #include "../mesin_kata/mesin_kata.c"
 
 /*  Kamus Umum */
-#define CAPACITY 100
+#define CAPACITYMP 100
 /* Kapasitas penyimpanan */
 #define IDX_MIN 0
 /* Indeks minimum list */
@@ -34,18 +34,18 @@ void create_map(Map *map);
 /* I.S. map sembarang*/
 /* F.S. map terdefinisi memuat Map kosong*/
 /* Proses: Mengisi semua elemen array dengan * */
-void load_map(Map *map);
+void load_map(Map *map, char* mapconf);
 /* I.S. map terdefinisi*/
 /* F.S. map terdefinisi memuat Map yang telah di load*/
 /* Proses: Membaca file eksternal dan mengisi array map sesuai dengan file eksternal*/
 
 // validator
-boolean isEmpty(Map map);
+boolean isEmptyMP(Map map);
 /* Mengirimkan true jika map kosong*/
-boolean isIdxValid(int i,int j);
+boolean isIdxValidMP(int i,int j);
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas List l */
 /* yaitu antara indeks yang terdefinisi utk container*/
-boolean isIdxEff(Map map,int i,int j);
+boolean isIdxEffMP(Map map,int i,int j);
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk List l */
 /* yaitu antara 0..length(l)-1 */
 void printMap(Map map);

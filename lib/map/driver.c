@@ -5,7 +5,7 @@
 int main(){
     Map m;
     create_map(&m);
-    load_map(&m);
+    load_map(&m, "../../config/petaconf.txt");
     printMap(m);
     Word w;
     w.Length=4;
@@ -13,6 +13,7 @@ int main(){
     w.TabWord[1]='A';
     w.TabWord[2]='S';
     w.TabWord[3]='T';
+    move_map(&m,w);
     move_map(&m,w);
     printMap(m);
     return 0;

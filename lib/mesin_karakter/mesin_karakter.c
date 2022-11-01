@@ -52,6 +52,7 @@ void START_I()
                  Jika currentChar = MARK maka EOP akan menyala (true) */
 
        /* Algoritma */
+       pita = stdin;
        ADV_I();
 }
 

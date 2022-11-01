@@ -4,16 +4,16 @@
 #include "../makanan/makanan.c"
 #include "../waktu/waktu.c"
 
-boolean IsEmpty (PrioQueue Q) {
+boolean queueIsEmpty (PrioQueue Q) {
     return (Head(Q) == NIL && Tail(Q) == NIL);
 }
 
-boolean IsFull (PrioQueue Q) {
+boolean queueIsFull (PrioQueue Q) {
     return (NBElmt(Q) == MaxEl(Q));
 }
 
 int NBElmt (PrioQueue Q) {
-    if (IsEmpty(Q)) {
+    if (queueIsEmpty(Q)) {
         return 0;
     }
     else if  (Head(Q) <= Tail(Q)) {
@@ -66,12 +66,12 @@ void CopyQueue(PrioQueue * Q, PrioQueue * targetQ) {
 void Enqueue (PrioQueue * Q, makanan X) {
     PrioQueue q;
 
-    if (IsEmpty(*Q)) {
+    if (queueIsEmpty(*Q)) {
         Head(*Q) = 0;
         Tail(*Q) = 0;
     }
     else {
-        if (IsFull(*Q)) {
+        if (queueIsFull(*Q)) {
             MakeEmpty(&q, MaxEl(*Q)*2);
             CopyQueue(Q, &q);
             ExpandQueue(Q);
@@ -133,7 +133,7 @@ void Dequeue (PrioQueue * Q, makanan * X) {
         }
     }
 
-    if ((NBElmt(*Q) < MaxEl(*Q)/4) && !IsEmpty(*Q)) {
+    if ((NBElmt(*Q) < MaxEl(*Q)/4) && !queueIsEmpty(*Q)) {
         PrioQueue q;
         MakeEmpty(&q, MaxEl(*Q)*2);
         CopyQueue(Q, &q);

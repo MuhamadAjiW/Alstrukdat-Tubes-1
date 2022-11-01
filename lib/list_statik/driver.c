@@ -3,7 +3,6 @@
 #include "../waktu/waktu.c"
 #include "../tree/tree.c"
 #include "../mesin_kata/mesin_kata.c"
-#include "../mesin_karakter/mesin_karakter.c"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,7 +13,7 @@ int main(){
     list_statik testlist;
     create_list_statik(&testlist);
  
-    load_list_statik(&testlist);
+    load_list_statik(&testlist, "../../config/makananconf.txt", "../../config/resepconf.txt");
     //printList(testlist);
 
     printList(testlist);
