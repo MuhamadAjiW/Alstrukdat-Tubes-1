@@ -6,6 +6,7 @@
 #include "../matriks/matriks.c"
 // #include "../mesin_karakter/mesin_karakter.c"
 #include "../mesin_kata/mesin_kata.c"
+#include "../simulator/simulator.c"
 
 /*  Kamus Umum */
 #define CAPACITYMP 100
@@ -19,7 +20,7 @@
 typedef struct 
 {
     Matrix array; /* memori tempat penyimpanan peta elemen*/
-    POINT start; /* point start('S')*/
+    Simulator sim; /* Simulator */
 }Map;
 /*Map kosong berarti Matrix berisi * sebanyak 100 x 100*/
 
@@ -27,7 +28,7 @@ typedef struct
 #define ROW_Map(m) (m).array.rowEff
 #define COL_Map(m) (m).array.colEff
 #define ELMT_Map(m,i,j) ELMT_Matrix((m).array, (i), (j))
-#define S(m) (m).start
+#define S(m) (m).sim.currentLoc
 
 // loader
 void create_map(Map *map);

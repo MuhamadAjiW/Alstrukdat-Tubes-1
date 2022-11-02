@@ -11,7 +11,7 @@ int main(){
     makanan m1, m2, m3, m4, dump;
     list_statik testlist;
     create_list_statik(&testlist);
-    load_list_statik(&testlist);
+    load_list_statik(&testlist, "../../config/makananconf.txt", "../../config/resepconf.txt");
     //header program
     MakeEmpty(&q2, 5);
 
@@ -46,13 +46,13 @@ int main(){
     createmakanan(&m1);
     printf("Other priority queue\n");
     int i = 19;
-    while (!IsFull(q2)) {
+    while (!queueIsFull(q2)) {
         Enqueue(&q2, m1);
         i += 1;
         editMakananTest(&m1, i);
     }
     PrintPrioQueue(q2);
-    if (IsFull(q2)) {
+    if (queueIsFull(q2)) {
         printf("Queue is full\n");
     }
     printf("\n");
@@ -61,7 +61,7 @@ int main(){
     Enqueue(&q2, m1);    
 
     PrintPrioQueue(q2);
-    if (!(IsFull(q2))) {
+    if (!(queueIsFull(q2))) {
         printf("Queue is not full anymore\n");
     }
 

@@ -57,11 +57,15 @@ void DeleteNode(Tree *P){
     for (int i = 0; i <= subMaxIdx(*P); i++){
         DeleteNode(&treeSub(*P, i));
     }
+    //printf("test");
     if (parent(*P) != NULL){
-        subStorage(parent(*P)) = (address*) realloc (&subStorage(parent(*P)), (subMaxIdx(parent(*P))+1)*(sizeof(Node)));
+        int a=subMaxIdx(parent(*P))+1;
+        subStorage(parent(*P)) = (address*) realloc (subStorage(parent(*P)), (a)*(sizeof(Node)));
         subMaxIdx(parent(*P))--;
     }
-    free(subStorage(*P));
+    //printf("test2");
+    //free(subStorage(*P));
     free(*P);
+    //printf("test3");
 }
 /*dealokasi tree*/
