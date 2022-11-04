@@ -18,7 +18,6 @@ int main(){
     PrintTree(a);
 
     DeleteNode(&a);
-
     //akhir program
     printf("\nCompile Success!\n");
     scanf("%d", &confirmDone);
