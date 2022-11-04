@@ -1,3 +1,17 @@
+--Simulator (farizki)
+--Mekanisme waktu (abyan)
+kamis malem
+
+-Delivery (pake priqueue) (chris)
+-Inventory (pake priqueue) (chris)
+-Stack undo-redo (make stack) (vieri)
+-Aksi bikin makanan (Murni dari main) (Awe) 
+sabtu malem
+
+-Notification (athif)
+minggu malem
+
+
 Tugas							Pembagian
 1. Command Parser					(1) Athif
 2. Inisiasi
