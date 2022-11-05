@@ -150,3 +150,54 @@ void passTime(Simulator *S, int pass){
     InfoTail(INV(*S)).expireTime=MenitToTIME(menit);
     }
 }
+
+void makeFood(Simulator *S, list_statik l, int idx, char category){
+    boolean lengkap = true;
+    int id;
+    int index;
+
+    int counter;
+    int counter2;
+
+    counter = 0;
+    while (counter <= subMaxIdx(resepELMT(l,idx)) && lengkap){
+        id = treeVal(treeSub(resepELMT(l,idx), counter));
+        if (!checkMakanan(*S, id)){
+            lengkap = false;
+        }
+        counter++;
+    }
+    if (lengkap){
+        addMakanan(S, ELMT(l, idx));
+        for(counter = 0; counter <= subMaxIdx(resepELMT(l,idx)); counter++){
+            deleteMakanan(S, treeVal(treeSub(resepELMT(l,idx), counter)));
+        }
+        printf("%s selesai dibuat dan sudah masuk ke inventory!\n", namaELMT(l, idx));
+    }
+    else{
+        printf("Gagal ");
+        if (category == 'm'){
+            printf("mencampurkan");
+        }
+        else if (category == 'c'){
+            printf("memotongkan");
+        }
+        else if (category == 'f'){
+            printf("menggoreng");
+        }
+        else if (category == 'b'){
+            printf("merebus");
+        }
+        
+        printf(" %s karena kamu tidak memiliki bahan berikut:\n", namaELMT(l, idx));
+        counter2 = 0;
+        for(counter = 0; counter <= subMaxIdx(resepELMT(l,idx)); counter++){
+            id = treeVal(treeSub(resepELMT(l,idx), counter));
+            if (!checkMakanan(*S, id)){
+                counter2++;
+                index = indexOf(l, id);
+                printf("    %d. %s\n", counter2, namaELMT(l, index));
+            }
+        }
+    }
+}

@@ -4,9 +4,11 @@
 #include "../queue/prioqueue.c"
 #include "../waktu/waktu.h"
 #include "../etc/boolean.h"
-#include "../mesin_karakter/mesin_karakter.h"
 #include "../mesin_kata/mesin_kata.h"
 #include "../point/point.h"
+#include "../mesin_kata/mesin_kata.h"
+#include "../tree/tree.h"
+#include "../list_statik/list_statik.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,5 +43,8 @@ void passTime(Simulator *s, int minute);
 // melewatkan waktu selama menit yang ditentukan
 // makanan dengan waktu penyimpanan <0 artinya sudah expired
 
+void makeFood(Simulator *S, list_statik l, int idx, char category);
+//bikin makanan
+//untuk main
 
 #endif

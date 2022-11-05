@@ -258,6 +258,12 @@ while(i<(w.Length) && valid){
         retval = -1;
     }
 }
+if (w.Length == 0)
+{
+    valid = false;
+    retval = -1;
+}
+
 return retval;
 }
 
@@ -387,6 +393,54 @@ int baseDetection(Word kata){
     catalog.TabWord[5] = 'o';
     catalog.TabWord[6] = 'g';
 
+    Word inventory;
+    inventory.Length=9;
+    inventory.TabWord[0]='i';
+    inventory.TabWord[1]='n';
+    inventory.TabWord[2]='v';
+    inventory.TabWord[3]='e';
+    inventory.TabWord[4]='n';
+    inventory.TabWord[5]='t';
+    inventory.TabWord[6]='o';
+    inventory.TabWord[7]='r';
+    inventory.TabWord[8]='y';
+
+    Word delivery;
+    delivery.Length=8;
+    delivery.TabWord[0]='d';
+    delivery.TabWord[1]='e';
+    delivery.TabWord[2]='l';
+    delivery.TabWord[3]='i';
+    delivery.TabWord[4]='v';
+    delivery.TabWord[5]='e';
+    delivery.TabWord[6]='r';
+    delivery.TabWord[7]='y';
+
+    Word undo;
+    undo.Length=4;
+    undo.TabWord[0]='u';
+    undo.TabWord[1]='n';
+    undo.TabWord[2]='d';
+    undo.TabWord[3]='o';
+
+    Word redo;
+    redo.Length=4;
+    redo.TabWord[0]='r';
+    redo.TabWord[1]='e';
+    redo.TabWord[2]='d';
+    redo.TabWord[3]='o';
+
+    Word cookbook;
+    cookbook.Length=8;
+    cookbook.TabWord[0]='c';
+    cookbook.TabWord[1]='o';
+    cookbook.TabWord[2]='o';
+    cookbook.TabWord[3]='k';
+    cookbook.TabWord[4]='b';
+    cookbook.TabWord[5]='o';
+    cookbook.TabWord[6]='o';
+    cookbook.TabWord[7]='k';
+    
     
     LowerCase(&currentWord);
 
@@ -417,6 +471,21 @@ int baseDetection(Word kata){
     }
     else if (kataSama(currentWord, catalog)){
         signal = 8;
+    }
+    else if (kataSama(currentWord, inventory)){
+        signal = 9;
+    }
+    else if (kataSama(currentWord, delivery)){
+        signal = 10;
+    }
+    else if (kataSama(currentWord, undo)){
+        signal = 11;
+    }
+    else if (kataSama(currentWord, redo)){
+        signal = 12;
+    }
+    else if (kataSama(currentWord, cookbook)){
+        signal = 13;
     }
     else if (kataSama(currentWord, exit)){
         signal = -1;

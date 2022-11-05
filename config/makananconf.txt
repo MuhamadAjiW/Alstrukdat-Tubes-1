@@ -1,4 +1,4 @@
-6
+7
 11
 Ayam Mentah
 1 0 0
@@ -29,4 +29,9 @@ Ayam Goreng
 0 0 15
 0 0 0
 Fry
+38
+Sop Ayam
+0 3 0
+0 0 0
+Boil
 .

@@ -335,7 +335,7 @@ int listLength(list_statik l) {
 /* Mengirimkan banyaknya elemen efektif List */
 /* Mengirimkan nol jika List kosong */  
 
-int indexOf(list_statik l, int idval) {
+int indexOf(list_statik l, int idval){
    int indeks = 0;
    boolean ada = false;
    while ( (indeks < listLength(l)) && (!ada) ) {
@@ -354,7 +354,7 @@ int indexOf(list_statik l, int idval) {
 // searching dengan id, kalo gaada return idx undef
 
 
-void printList(list_statik l) {
+void printList(list_statik l){
    for(int i =0; i < listLength(l); i++){
       printf("---------------------------------------\n");
       printmakanan(ELMT(l, i));
@@ -368,3 +368,81 @@ void printList(list_statik l) {
 /* F.S. Jika l tidak kosong: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika List kosong : menulis [] */
+
+void printCatalog(list_statik l){
+   printf("List Makanan\n");
+   printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
+   for(int i =0; i < listLength(l); i++){
+      printf("   %d. ", i+1);
+      printf("%s - ", namaELMT(l, i));
+      if (Hari(expireTimeELMT(l, i)) > 0){
+         printf("%d hari",Hari(expireTimeELMT(l, i)));
+      }
+      if (Jam(expireTimeELMT(l, i)) > 0){
+         if (Hari(expireTimeELMT(l, i)) > 0){
+            printf(" ");
+         }
+         printf("%d jam",Jam(expireTimeELMT(l, i)));
+      }
+      if (Menit(expireTimeELMT(l, i)) > 0){
+         if (Jam(expireTimeELMT(l, i)) > 0){
+            printf(" ");
+         }
+         printf("%d menit",Menit(expireTimeELMT(l, i)));
+      }
+      printf(" - ");
+      printf("%s - ", actionELMT(l,i));
+      if (Jam(deliverTimeELMT(l, i)) == 0 && Menit(deliverTimeELMT(l, i)) == 0){
+         printf("0");
+      }
+      else{
+         if (Hari(deliverTimeELMT(l, i)) > 0){
+            printf("%d hari",Hari(deliverTimeELMT(l, i)));
+         }
+         if (Jam(deliverTimeELMT(l, i)) > 0){
+            if (Hari(deliverTimeELMT(l, i)) > 0){
+               printf(" ");
+            }
+            printf("%d jam",Jam(deliverTimeELMT(l, i)));
+         }
+         if (Menit(deliverTimeELMT(l, i)) > 0){
+            if (Jam(deliverTimeELMT(l, i)) > 0){
+               printf(" ");
+            }
+            printf("%d menit",Menit(deliverTimeELMT(l, i)));
+         }
+      }
+      printf("\n");
+   }
+}
+
+void printCookBook(list_statik l){
+   int counter = 0;
+   int cacheCounter;
+   int cacheIdx;
+
+   printf("List Resep\n");
+   printf("(aksi yang diperlukan - bahan)\n");
+   for(int i =0; i < listLength(l); i++){
+      if (locationELMT(l, i) != 'T'){
+         counter++;
+         printf("   %d. %s\n", counter, namaELMT(l,i));
+         printf("     ");
+         cacheCounter = counter;
+         while (cacheCounter > 0){
+            printf(" ");
+            cacheCounter = cacheCounter/10;
+         }
+         printf("%s - ", actionELMT(l,i));
+
+         for (int j = 0; j <= subMaxIdx(resepELMT(l,i)); j++){
+            cacheIdx = indexOf(l, treeVal(treeSub(resepELMT(l,i), j)));
+            printf("%s", namaELMT(l, cacheIdx));
+            if (j != subMaxIdx(resepELMT(l,i))){
+               printf(" - ");
+            }
+         }
+         printf("\n");
+      }
+   }
+}
