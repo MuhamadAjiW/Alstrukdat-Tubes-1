@@ -31,11 +31,10 @@ boolean IsTIMEValid (int D, int H, int M) {
 }
 
 void CreateTimeTest (waktu * T, int DD, int HH, int MM) {
-    if (IsTIMEValid(DD, HH, MM)) {
-        Hari(*T) = DD;
-        Jam(*T) = HH;
-        Menit(*T) = MM;
-    }
+    Hari(*T) = DD;
+    Jam(*T) = HH;
+    Menit(*T) = MM;
+
 }
 
 long TIMEToMenit (waktu T) {

@@ -3,6 +3,8 @@
 #include "lib/stack/stack.c"
 #include "lib/tree/tree.c"
 #include "lib/map/map.c"
+#include "lib/queue/prioqueue.c"
+#include "lib/waktu/mekanismewaktu.c"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -121,6 +123,7 @@ int main(){
                                         }
                                         counter2--;
                                         makeFood(&BNMO, catalog, counter2, 'm');
+                                        mekanismeWaktu(&BNMO, &curTime);
                                     }
                                 }
                             }
@@ -180,6 +183,7 @@ int main(){
                                         }
                                         counter2--;
                                         makeFood(&BNMO, catalog, counter2, 'c');
+                                        mekanismeWaktu(&BNMO, &curTime);
                                     }
                                 }
                             }
@@ -239,6 +243,7 @@ int main(){
                                         }
                                         counter2--;
                                         makeFood(&BNMO, catalog, counter2, 'f');
+                                        mekanismeWaktu(&BNMO, &curTime);
                                     }
                                 }
                             }
@@ -298,6 +303,7 @@ int main(){
                                         }
                                         counter2--;
                                         makeFood(&BNMO, catalog, counter2, 'b');
+                                        mekanismeWaktu(&BNMO, &curTime);
                                     }
                                 }
                             }
@@ -374,9 +380,9 @@ int main(){
                                         }
                                         printf("\n");
                                         //fungsi buy masuk sini
-
+                                        buyMakanan(&BNMO,ELMT(catalog, counter2));
+                                        mekanismeWaktu(&BNMO, &curTime);
                                         //sementara bakalan make add inventory secara instan, tapi janlup ganti yes
-                                        addMakanan(&BNMO,ELMT(catalog, counter2));
 
                                     }
                                 }
@@ -401,6 +407,7 @@ int main(){
                         }
                         else{
                             moveDir(&m, 'w');
+                            mekanismeWaktu(&BNMO, &curTime);
                         }
                         break;
                     case 2:
@@ -411,6 +418,7 @@ int main(){
                         }
                         else{
                             moveDir(&m, 's');
+                            mekanismeWaktu(&BNMO, &curTime);
                         }
                         break;
                     case 3:
@@ -421,6 +429,7 @@ int main(){
                         }
                         else{
                             moveDir(&m, 'd');
+                            mekanismeWaktu(&BNMO, &curTime);
                         }
                         break;
                     case 4:
@@ -431,6 +440,7 @@ int main(){
                         }
                         else{
                             moveDir(&m, 'a');
+                            mekanismeWaktu(&BNMO, &curTime);
                         }
                         break;
                     
@@ -455,7 +465,11 @@ int main(){
                             else{
                                 if (inputSignal3 >= 0){
                                     printf("Menunggu untuk %d jam, %d menit\n", inputSignal2, inputSignal3);
-                                    //Masuk command wait di sini
+                                    waktu wait;
+                                    CreateTimeTest(&wait, 0,inputSignal2, inputSignal3);
+                                    long plusMinute = TIMEToMenit(wait);
+                                    passTime(&BNMO, plusMinute, &curTime);
+                                    inventoryDeliveryMechanism(&BNMO);
                                 }
                                 else{
                                     printf("Waktu tidak valid\n");
@@ -478,7 +492,7 @@ int main(){
                     PrintInventory(INV(BNMO));
                     break;
                 case 10:
-                    //delivery
+                    PrintDelivery(DLV(BNMO));
                     break;
                 case 11:
                     //undo

@@ -54,16 +54,17 @@ void CompressQueue(PrioQueue * Q) {
     MakeEmpty(Q, newCap);
 }
 
-void CopyQueue(PrioQueue * Q, PrioQueue * targetQ) {
+void CopyQueue(PrioQueue * Q, PrioQueue * targetQ, int type) {
     int nelmt = NBElmt(*Q);
     makanan temp;
     for (int i = 0; i < nelmt; i++) {
-        Dequeue(Q, &temp);
-        Enqueue(targetQ, temp);
+        Dequeue(Q, &temp, type);
+        Enqueue(targetQ, temp, type);
     }
 }
 
-void Enqueue (PrioQueue * Q, makanan X) {
+void Enqueue (PrioQueue * Q, makanan X, int type) {
+    /*Type 1 untuk Expire List, Type 2 untuk Deliver list*/
     PrioQueue q;
 
     if (queueIsEmpty(*Q)) {
@@ -73,9 +74,9 @@ void Enqueue (PrioQueue * Q, makanan X) {
     else {
         if (queueIsFull(*Q)) {
             MakeEmpty(&q, MaxEl(*Q)*2);
-            CopyQueue(Q, &q);
+            CopyQueue(Q, &q, type);
             ExpandQueue(Q);
-            CopyQueue(&q, Q);
+            CopyQueue(&q, Q, type);
             DeAlokasi(&q);
         }
         if (Tail(*Q) == MaxEl(*Q)-1) {
@@ -95,29 +96,53 @@ void Enqueue (PrioQueue * Q, makanan X) {
     else {
         j = i -1;
     }
-    while (i != Head(*Q) && TLT(Time(*Q, i), Time(*Q, j))) {
-        makanan temp = Elmt(*Q, i);
-        if (i == 0) {
-            Elmt(*Q, i) = Elmt(*Q, j);
-            Elmt(*Q, j) = temp;
-            i = j;
-        }
-        else {
-            Elmt(*Q, i) = Elmt(*Q, i-1);
-            Elmt(*Q, i-1) = temp;
-            i -= 1;
-        }
+    if (type == 1) {
+        while (i != Head(*Q) && TLT(Expire(*Q, i), Expire(*Q, j))) {
+            makanan temp = Elmt(*Q, i);
+            if (i == 0) {
+                Elmt(*Q, i) = Elmt(*Q, j);
+                Elmt(*Q, j) = temp;
+                i = j;
+            }
+            else {
+                Elmt(*Q, i) = Elmt(*Q, i-1);
+                Elmt(*Q, i-1) = temp;
+                i -= 1;
+            }
 
-        if (j == 0) {
-            j = MaxEl(*Q) - 1;
+            if (j == 0) {
+                j = MaxEl(*Q) - 1;
+            }
+            else {
+                j -= 1;
+            }
         }
-        else {
-            j -= 1;
+    }
+    if (type == 2) {
+        while (i != Head(*Q) && TLT(Deliver(*Q, i), Deliver(*Q, j))) {
+            makanan temp = Elmt(*Q, i);
+            if (i == 0) {
+                Elmt(*Q, i) = Elmt(*Q, j);
+                Elmt(*Q, j) = temp;
+                i = j;
+            }
+            else {
+                Elmt(*Q, i) = Elmt(*Q, i-1);
+                Elmt(*Q, i-1) = temp;
+                i -= 1;
+            }
+
+            if (j == 0) {
+                j = MaxEl(*Q) - 1;
+            }
+            else {
+                j -= 1;
+            }
         }
     }
 }
 
-void Dequeue (PrioQueue * Q, makanan * X) {
+void Dequeue (PrioQueue * Q, makanan * X, int type) {
 
     *X = InfoHead(*Q);
     if (NBElmt(*Q) == 1) {
@@ -135,10 +160,10 @@ void Dequeue (PrioQueue * Q, makanan * X) {
 
     if ((NBElmt(*Q) < MaxEl(*Q)/4) && !queueIsEmpty(*Q)) {
         PrioQueue q;
-        MakeEmpty(&q, MaxEl(*Q)*2);
-        CopyQueue(Q, &q);
+        MakeEmpty(&q, MaxEl(*Q));
+        CopyQueue(Q, &q, type);
         CompressQueue(Q);
-        CopyQueue(&q, Q);
+        CopyQueue(&q, Q, type);
         DeAlokasi(&q);
     }
 }
@@ -148,8 +173,7 @@ void PrintPrioQueue (PrioQueue Q) {
     int i = 0;
     int j = Head(Q);
     while (i < NBElmt(Q)) {
-        printf("%s", Name(Q, j));
-        printTime(Time(Q, j));
+        printmakanan(Elmt(Q, j));
         printf("\n");
         if (j == MaxEl(Q)-1) {
             j = 0;
@@ -168,14 +192,14 @@ void PrintInventory (PrioQueue Q){
     int j = Head(Q);
     while (i < NBElmt(Q)) {
         printf("    %s - ", Name(Q, j));
-        if (Hari(Time(Q, j)) > 0){
-            printf("%d hari", Hari(Time(Q, j)));
+        if (Hari(Expire(Q, j)) > 0){
+            printf("%d hari", Hari(Expire(Q, j)));
         }
-        else if (Jam(Time(Q, j)) > 0){
-            printf("%d jam", Jam(Time(Q, j)));
+        else if (Jam(Expire(Q, j)) > 0){
+            printf("%d jam", Jam(Expire(Q, j)));
         }
-        else if (Menit(Time(Q, j)) > 0){
-            printf("%d menit", Menit(Time(Q, j)));
+        else if (Menit(Expire(Q, j)) > 0){
+            printf("%d menit", Menit(Expire(Q, j)));
         }
 
         printf("\n");
@@ -187,4 +211,44 @@ void PrintInventory (PrioQueue Q){
         }
         i += 1;
     }
+}
+
+void PrintDelivery (PrioQueue Q){
+    printf("List Makanan di Perjalanan\n");
+    printf("(nama - waktu sisa delivery)\n");
+    int i = 0;
+    int j = Head(Q);
+    while (i < NBElmt(Q)) {
+        printf("    %s - ", Name(Q, j));
+        if (Hari(Deliver(Q, j)) > 0){
+            printf("%d hari", Hari(Deliver(Q, j)));
+        }
+        else if (Jam(Deliver(Q, j)) > 0){
+            printf("%d jam", Jam(Deliver(Q, j)));
+        }
+        else if (Menit(Deliver(Q, j)) > 0){
+            printf("%d menit", Menit(Deliver(Q, j)));
+        }
+
+        printf("\n");
+        if (j == MaxEl(Q)-1) {
+            j = 0;
+        }
+        else {
+            j += 1;
+        }
+        i += 1;
+    }
+}
+
+boolean timeIsZero(PrioQueue Q, int type) {
+    if (!queueIsEmpty(Q)) {
+        if (type == 1) {
+            return TIMEToMenit(Expire(Q, Head(Q))) <= 0;
+        }
+        if (type == 2) {
+            return TIMEToMenit(Deliver(Q, Head(Q))) == 0;
+        }
+    }
+    else return false;
 }

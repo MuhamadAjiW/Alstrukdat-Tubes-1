@@ -16,11 +16,12 @@ void createSimulator(Simulator *S){
     //lokasi default 0,0
 
     MakeEmpty(&INV(*S),10);
+    MakeEmpty(&DLV(*S),10);
 }
 
 void addMakanan(Simulator *S, makanan m){
 // menambahkan makanan ke inventory
-    Enqueue(&INV(*S),m);
+    Enqueue(&INV(*S),m, 1);
 }
 
 boolean checkMakanan(Simulator S, int idMakanan){
@@ -79,7 +80,7 @@ void deleteMakanan(Simulator *S, int idMakanan){
     makanan m,temp,temp2;
     foundIDX=findMakanan(*S,idMakanan);
     if(foundIDX==Head(INV(*S))){
-        Dequeue(&INV(*S),&m);
+        Dequeue(&INV(*S),&m, 1);
     }
     else if(foundIDX==Tail(INV(*S))){
         if(Tail(INV(*S))==0){
@@ -127,27 +128,74 @@ void deleteMakanan(Simulator *S, int idMakanan){
 
 }
 
-void passTime(Simulator *S, int pass){
+void passTime(Simulator *S, long pass, waktu *time){
 // melewatkan waktu selama menit yang ditentukan
 // makanan dengan waktu penyimpanan <0 artinya sudah expired
     addressQ idx;
+    long temp = TIMEToMenit(*time);
+    *time = MenitToTIME(temp + pass);
+
     if(!queueIsEmpty(INV(*S))){
-    int menit;
+        long menit;
 
-    idx=Head(INV(*S));
-    while(idx!=Tail(INV(*S))){
-        menit=TIMEToMenit(Elmt(INV(*S),idx).expireTime);
-        menit-=pass;
-        Elmt(INV(*S),idx).expireTime=MenitToTIME(menit);
-
-        if(idx==MaxEl(INV(*S))-1){
-            idx=0;
+        idx=Head(INV(*S));
+        while(idx!=Tail(INV(*S))){
+            menit=TIMEToMenit(Elmt(INV(*S),idx).expireTime);
+            menit-=pass;
+            Elmt(INV(*S),idx).expireTime=MenitToTIME(menit);
+            if(idx==MaxEl(INV(*S))-1){
+                idx=0;
+            }
+            else idx++;
         }
-        else idx++;
+        menit=TIMEToMenit(InfoTail(INV(*S)).expireTime);
+        menit-=pass;
+        InfoTail(INV(*S)).expireTime=MenitToTIME(menit);
     }
-    menit=TIMEToMenit(InfoTail(INV(*S)).expireTime);
-    menit-=pass;
-    InfoTail(INV(*S)).expireTime=MenitToTIME(menit);
+
+    if (!queueIsEmpty(DLV(*S))) {
+        long tMenit;
+        int nDelivery = NBElmt(DLV(*S));
+        int i = Head(DLV(*S));
+        for (int j = 0; j < nDelivery; j++) {
+            tMenit = TIMEToMenit(Deliver(DLV(*S), i));
+            if ((tMenit-pass) <= 0) {
+                long tempExp = TIMEToMenit(Expire(DLV(*S), i)) + tMenit - pass;
+                Expire(DLV(*S), i) = MenitToTIME(tempExp);
+                Deliver(DLV(*S), i) = MenitToTIME(0);
+            }
+            else {
+                Deliver(DLV(*S), i) = MenitToTIME(tMenit-pass);
+            }
+
+            if (i == MaxEl(DLV(*S))-1) {
+                i = 0;
+            }
+            else {
+                i += 1;
+            }
+        }
+    }
+}
+
+void buyMakanan(Simulator *S, makanan m) {
+    Enqueue(&DLV(*S), m, 2);
+}
+
+void moveMakanan(Simulator *S) {
+    makanan temp;
+    Dequeue(&DLV(*S), &temp, 2);
+    Enqueue(&INV(*S), temp, 1);
+}
+
+void inventoryDeliveryMechanism(Simulator *S) {
+    makanan dump, temp;
+    while(timeIsZero(DLV(*S), 2)) {
+        Dequeue(&DLV(*S), &temp, 2);
+        Enqueue(&INV(*S), temp, 1);
+    }
+    while(timeIsZero(INV(*S), 1)) {
+        Dequeue(&INV(*S), &dump, 1);
     }
 }
 

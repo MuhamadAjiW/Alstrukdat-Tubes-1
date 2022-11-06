@@ -1,7 +1,7 @@
 #ifndef simulator_H
 #define simulator_H
 
-#include "../queue/prioqueue.c"
+#include "../queue/prioqueue.h"
 #include "../waktu/waktu.h"
 #include "../etc/boolean.h"
 #include "../mesin_kata/mesin_kata.h"
@@ -18,11 +18,13 @@ typedef struct
     Word namaPengguna;
     POINT currentLoc;
     PrioQueue Inventory;
+    PrioQueue Delivery;
     
 } Simulator;
 
 #define LOC(S) (S).currentLoc
 #define INV(S) (S).Inventory
+#define DLV(S) (S).Delivery
 #define NAME(S) (S).namaPengguna
 
 void createSimulator(Simulator *S);
@@ -39,9 +41,16 @@ int findMakanan(Simulator S, int idMakanan);
 void deleteMakanan(Simulator *S, int idMakanan);
 //menghilangkan makanan di prioqueue
 
-void passTime(Simulator *s, int minute);
+void passTime(Simulator *s, long minute, waktu *time);
 // melewatkan waktu selama menit yang ditentukan
 // makanan dengan waktu penyimpanan <0 artinya sudah expired
+
+void buyMakanan(Simulator *S, makanan m);
+
+void moveMakanan(Simulator *s);
+/* memindahkan makanan dari delivery list ke inventory*/
+
+void inventoryDeliveryMechanism(Simulator *S);
 
 void makeFood(Simulator *S, list_statik l, int idx, char category);
 //bikin makanan

@@ -1,10 +1,10 @@
 #include <stdio.h>
-#include "waktu.c"
-#include "../mesin_kata/mesin_kata.c"
+#include "waktu.h"
+#include "../mesin_kata/mesin_kata.h"
 #include "..\makanan\makanan.h"
 #include <string.h>
-#include "../simulator/simulator.c"
-#include "../queue/prioqueue.c"
+#include "../simulator/simulator.h"
+#include "../queue/prioqueue.h"
 
 /* int main()
 {
@@ -76,20 +76,45 @@
         printf("\n");   
     }
 } */
-void mekanismeWaktu(Simulator * p)
+void mekanismeWaktu(Simulator * p, waktu *time)
 {
+    waktu temp;
+    int i, j;
+    nextMinute(time);
+
     PrioQueue inv = INV(*p);
-    int i = 0;
-    int j = Head(inv);
-    while (i < NBElmt(inv)) {
-        waktu temp = Time(inv, j);
-        Time(inv, j) = MenitToTIME(TIMEToMenit(temp)-1);
-        if (j == MaxEl(inv)-1) {
-            j = 0;
+    if (!queueIsEmpty(inv)) {
+        i = 0;
+        j = Head(inv);
+        while (i < NBElmt(inv)) {
+            temp = Expire(inv, j);
+            Expire(inv, j) = MenitToTIME(TIMEToMenit(temp)-1);
+            if (j == MaxEl(inv)-1) {
+                j = 0;
+            }
+            else {
+                j += 1;
+            }
+            i += 1;
         }
-        else {
-            j += 1;
-        }
-        i += 1;
     }
+
+    PrioQueue dlv = DLV(*p);
+    if (!queueIsEmpty(dlv)) {
+        i = 0;
+        j = Head(dlv);
+        while (i < NBElmt(dlv)) {
+            temp = Deliver(dlv, j);
+            Deliver(dlv, j) = MenitToTIME(TIMEToMenit(temp)-1);
+            if (j == MaxEl(dlv)-1) {
+                j = 0;
+            }
+            else {
+                j += 1;
+            }
+            i += 1;
+        }
+    }
+
+    inventoryDeliveryMechanism(p);
 }

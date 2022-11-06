@@ -25,8 +25,8 @@ typedef struct {
 #define MaxEl(Q)    (Q).MaxEl
 #define Elmt(Q,i)   (Q).T[(i)]
 #define Name(Q,i)   (Q).T[(i)].nama
-#define Time(Q,i)   (Q).T[(i)].expireTime
-
+#define Expire(Q,i)    (Q).T[(i)].expireTime
+#define Deliver(Q,i)    (Q).T[(i)].deliverTime
 
 /* ********* Prototype ********* */
 boolean queueIsEmpty (PrioQueue Q);
@@ -55,15 +55,16 @@ void ExpandQueue(PrioQueue * Q);
 
 void CompressQueue(PrioQueue * Q);
 
-void CopyQueue(PrioQueue * Q, PrioQueue * targetQ);
+void CopyQueue(PrioQueue * Q, PrioQueue * targetQ, int type);
 
 /* *** Primitif Add/Delete *** */
-void Enqueue (PrioQueue * Q, makanan X);
+void Enqueue (PrioQueue * Q, makanan X, int type);
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan time */
+/* Type 1 untuk Expire List, Type 2 untuk Deliver List*/
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
         TAIL "maju" dengan mekanisme circular buffer; */
-void Dequeue (PrioQueue * Q, makanan * X);
+void Dequeue (PrioQueue * Q, makanan * X, int type);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
@@ -75,5 +76,11 @@ void PrintPrioQueue (PrioQueue Q);
 
 void PrintInventory (PrioQueue Q);
 /*cetak dengan gaya inventory sesuai spek*/
+
+void PrintDelivery (PrioQueue Q);
+
+boolean timeIsZero(PrioQueue Q, int type);
+/*cek waktu head pada queue bernilai 0 atau tidak*/
+/* Type 1 untuk Expire List, Type 2 untuk Deliver List*/
 
 #endif
