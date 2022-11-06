@@ -60,4 +60,8 @@ void move_map(Map *map,Word arah);
 /* I.S. map terdefinisi*/
 /* F.S. Posisi S pindah sesuai arah*/
 
+
+void moveDir(Map *map,char arah);
+//Belum ada Deskripsi
+
 #endif

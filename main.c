@@ -7,6 +7,7 @@
 #include "lib/waktu/mekanismewaktu.c"
 #include <stdio.h>
 #include <stdlib.h>
+#include "lib/notif/notif.c"
 
 int main(){
     /*KAMUS*/
@@ -59,9 +60,9 @@ int main(){
                 writeHHMM(curTime);            
                 printf("\n");
 
-                printf("Notifikasi: ");
                 //print notif di sini
-                printf("\n");
+                printAllNotif(&NOTIF(BNMO));
+
                 
                 printMap(m);
                 printf("Enter Command: ");

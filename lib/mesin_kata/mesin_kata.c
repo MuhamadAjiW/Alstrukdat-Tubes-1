@@ -296,8 +296,27 @@ void ADVinput(Word *w){
     }
 }
 void printASCII1(){
-    printf("Ya welkam lah pokoknya.\n");
-    printf("(START/EXIT)\n");
+printf("\n\n\n");
+printf("==========================================\n\n");
+printf("|| _______  __    _  __   __  _______   ||\n");
+printf("|| |  _    ||  |  | ||  |_|  ||       | ||\n");
+printf("|| | |_|   ||   |_| ||       ||   _   | ||\n");
+printf("|| |       ||       ||       ||  | |  | ||\n");
+printf("|| |  _   | |  _    ||       ||  |_|  | ||\n");
+printf("|| | |_|   || | |   || ||_|| ||       | ||\n");
+printf("|| |_______||_|  |__||_|   |_||_______| ||\n\n");
+
+printf("Ketik:\n");
+
+printf("1. START untuk memulai BNMO\n");
+printf(" {\\__/}  \n");
+printf("  ( ^-^)  \n");
+printf(" // > >)   \n\n");
+
+printf("2. EXIT untuk keluar program\n");
+printf(" {\\__/})  \n");
+printf(" ('.' )  \n");
+printf(" <  <  \\   \n");
 }
 
 int initDetection(Word kata){

@@ -17,12 +17,15 @@ void createSimulator(Simulator *S){
 
     MakeEmpty(&INV(*S),10);
     MakeEmpty(&DLV(*S),10);
+
+    createListLink(&NOTIF(*S));
 }
 
 void addMakanan(Simulator *S, makanan m){
 // menambahkan makanan ke inventory
     Enqueue(&INV(*S),m, 1);
 }
+
 
 boolean checkMakanan(Simulator S, int idMakanan){
 // mengecek apakah makanan ada di inventory
@@ -70,7 +73,6 @@ int findMakanan(Simulator S, int idMakanan){
     }
 
     return foundIDX;
-
 }
 
 void deleteMakanan(Simulator *S, int idMakanan){
@@ -190,12 +192,16 @@ void moveMakanan(Simulator *S) {
 
 void inventoryDeliveryMechanism(Simulator *S) {
     makanan dump, temp;
-    while(timeIsZero(DLV(*S), 2)) {
+    while(timeIsZero(DLV(*S), 2)) {//delivery
         Dequeue(&DLV(*S), &temp, 2);
         Enqueue(&INV(*S), temp, 1);
+        //add notif
+        insertFirst(&NOTIF(*S), 'd', temp);
     }
-    while(timeIsZero(INV(*S), 1)) {
+    while(timeIsZero(INV(*S), 1)) {//expiration
         Dequeue(&INV(*S), &dump, 1);
+        //add notiff
+        insertFirst(&NOTIF(*S), 'e', dump);
     }
 }
 
@@ -248,4 +254,45 @@ void makeFood(Simulator *S, list_statik l, int idx, char category){
             }
         }
     }
+}
+
+void printNotif(Notif N){
+/*I.S. Notif terdefinisi*/
+/*F.S. Jika kasus delivery ('d'), akan menampilkan "{item} sudah diterima oleh {Username}!\n".
+        Jika kasus expired ('e'), akan menampilkan "{item} kadaluarsa \n".
+*/
+/*ALGORITMA*/
+
+
+if(KASUS(N) == 'd'){    
+    printf("%s sudah diterima oleh BNMO", ITEM(N));
+}else if(KASUS(N) == 'e'){
+    printf("%s kadaluarsa ", ITEM(N));
+}
+}
+
+void printAllNotif(List_Link *L){
+/*  I.S. Notif terdefinisi
+    F.S. Notif bisa kosong, jika kosong menampilkan Notifikasi: - 
+    Jika tidak kosong, akan ditampilkan "Notifikasi:
+                                        1. {Notif 1} ....
+                                        .................
+                                        k. {Notif k} ....""
+    Diakhir list notif akan ditampilkan 
+    Diakhir prosedur, List L akan kosong*/
+    /*KAMUS LOKAL*/
+    Notif N;
+    int i = 1;
+    /*ALGORITMA*/
+    printf("Notifikasi:");
+    if(isEmptyListLink(*L)){
+        printf(" - ");
+    }else{
+        while(!isEmptyListLink(*L)){
+            deleteFirst(L, &N);
+            printf("\n%d. ");
+            printNotif(N);
+        }
+    }
+    printf("\n");
 }
