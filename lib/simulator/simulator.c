@@ -290,7 +290,7 @@ void printAllNotif(List_Link *L){
     }else{
         while(!isEmptyListLink(*L)){
             deleteFirst(L, &N);
-            printf("\n%d. ");
+            printf("\n%d. ", i);
             printNotif(N);
         }
     }
