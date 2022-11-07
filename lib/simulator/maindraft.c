@@ -2,6 +2,7 @@
 #include "../map/map.c"
 #include "../waktu/waktu.c"
 
+
 int main(){
     Word command;
 

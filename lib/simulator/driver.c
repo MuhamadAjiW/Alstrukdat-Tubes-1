@@ -3,6 +3,9 @@
 #include "../list_statik/list_statik.c"
 #include "../tree/tree.c"
 #include "../mesin_kata/mesin_kata.c"
+#include "../queue/prioqueue.c"
+#include "../notif/notif.c"
+//#include "../waktu/waktu.c"
 
 int main(){
     Simulator S;
@@ -28,22 +31,35 @@ int main(){
     }
 
     //menunggu sebanyak 10 menit
-    passTime(&S,10);
+    waktu t;
+    passTime(&S,10,&t);
     PrintInventory(INV(S));
     printf("\n");
     PrintPrioQueue(INV(S));
     printf("\n");
-
+    
     //mencari index makanan di inventory
     int find;
     find=findMakanan(S,m.id);
     printf("%s ada di index %d\n",m.nama,find);
 
     //mengeluarkan makanan dari inventory
+    /*
     deleteMakanan(&S,m.id);
     PrintInventory(INV(S));
     printf("\n");
     PrintPrioQueue(INV(S));
+    printf("\n");
+    */
+
+    Simulator S2;
+    copySimulator(S,&S2);
+    PrintInventory(INV(S2));
+    printf("\n");
+    deleteMakanan(&S2,m.id);
+    PrintInventory(INV(S2));
+    printf("\n");
+    PrintInventory(INV(S));
     printf("\n");
 
     return 0;

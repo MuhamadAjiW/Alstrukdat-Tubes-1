@@ -191,14 +191,19 @@ void PrintInventory (PrioQueue Q){
     int i = 0;
     int j = Head(Q);
     while (i < NBElmt(Q)) {
+        boolean space=false;
         printf("    %s - ", Name(Q, j));
         if (Hari(Expire(Q, j)) > 0){
             printf("%d hari", Hari(Expire(Q, j)));
+            space=true;
         }
-        else if (Jam(Expire(Q, j)) > 0){
+        if (Jam(Expire(Q, j)) > 0){
+            if(space) printf(" ");
             printf("%d jam", Jam(Expire(Q, j)));
+            space=true;
         }
-        else if (Menit(Expire(Q, j)) > 0){
+        if (Menit(Expire(Q, j)) > 0){
+            if(space) printf(" ");
             printf("%d menit", Menit(Expire(Q, j)));
         }
 

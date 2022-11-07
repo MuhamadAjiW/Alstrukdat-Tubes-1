@@ -74,5 +74,7 @@ void printAllNotif(List_Link *L);
                                         k. {Notif k} ....
     Diakhir prosedur, List L akan kosong*/
 
+void copySimulator(Simulator Sinput, Simulator *Soutput);
+// menyalin simulator Sinput ke simulator Soutput 
 
 #endif

@@ -296,3 +296,7 @@ void printAllNotif(List_Link *L){
     }
     printf("\n");
 }
+
+void copySimulator(Simulator Sinput, Simulator *Soutput){
+    *Soutput=Sinput;
+}
