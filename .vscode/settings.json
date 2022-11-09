@@ -8,6 +8,8 @@
         "map.h": "c",
         "stdlib.h": "c",
         "stdio.h": "c",
-        "mesin_karakter.h": "c"
+        "mesin_karakter.h": "c",
+        "mesin_kata.h": "c",
+        "point.h": "c"
     }
 }

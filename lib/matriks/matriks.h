@@ -10,7 +10,7 @@ typedef int IdxType; /* Index baris, kolom */
 typedef int ElType;
 typedef struct
 {
-   char mem[1000][1000];
+   char mem[100][100];
    int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
    int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } Matrix;

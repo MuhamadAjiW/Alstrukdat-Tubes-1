@@ -1,13 +1,14 @@
 #include "lib/etc/boolean.h"
-#include "lib/list_statik/list_statik.c"
+// #include "lib/list_statik/list_statik.c"
 #include "lib/stack/stack.c"
-#include "lib/tree/tree.c"
-#include "lib/map/map.c"
-#include "lib/queue/prioqueue.c"
+// #include "lib/tree/tree.c"
+#include "lib/undoredo/stackur.c"
+// #include "lib/map/map.c"
+// #include "lib/queue/prioqueue.c"
 #include "lib/waktu/mekanismewaktu.c"
 #include <stdio.h>
 #include <stdlib.h>
-#include "lib/notif/notif.c"
+// #include "lib/notif/notif.c"
 
 int main(){
     /*KAMUS*/
@@ -19,11 +20,16 @@ int main(){
     int inputSignal;
     int inputSignal2;
     int inputSignal3;
+    int redo; // buat nandain bisa redo atau ngga
+    int proses; // buat nandain proses apa yang dilakukan
     
     Map m;
     list_statik catalog;
     waktu curTime;
     Simulator BNMO;
+
+    Stackur Undo,Redo;
+    StrukturUndo temp;
 
     /*ALGORITMA*/
     runningSignal = 0;
@@ -51,6 +57,11 @@ int main(){
             createTime(&curTime);
             createSimulator(&BNMO);
             
+            //inisialisasi stack undo dan redo
+            CreateEmptyStackur(&Undo);
+            CreateEmptyStackur(&Redo);
+            subsStrukturUR(&temp,m,curTime,BNMO,proses);
+            PushStackur(&Undo,temp);
             while (runningSignal == 1){
                 printf("BNMO di posisi: ");
                 WritePOINT(S(m));
@@ -60,7 +71,7 @@ int main(){
                 writeHHMM(curTime);            
                 printf("\n");
 
-                //print notif di sini
+                // print notif di sini
                 printAllNotif(&NOTIF(BNMO));
 
                 
@@ -133,6 +144,9 @@ int main(){
                             printf("BNMO tidak berada di area mixing!\n");
                         }
                     }
+                    subsStrukturUR(&temp, m, curTime, BNMO, proses);
+                    PushStackur(&Undo, temp);
+                    Topur(Redo)=-1; // tidak bisa redo
                     break;
                 case 2:
                     ADVWORD_I();
@@ -193,6 +207,9 @@ int main(){
                             printf("BNMO tidak berada di area memotong!\n");
                         }
                     }
+                    subsStrukturUR(&temp, m, curTime, BNMO, proses);
+                    PushStackur(&Undo, temp);
+                    Topur(Redo)=-1; // tidak bisa redo
                     break;
                 case 3:
                     ADVWORD_I();
@@ -253,6 +270,9 @@ int main(){
                             printf("BNMO tidak berada di area penggorengan!\n");
                         }
                     }
+                    subsStrukturUR(&temp, m, curTime, BNMO, proses);
+                    PushStackur(&Undo, temp);
+                    Topur(Redo)=-1; // tidak bisa redo
                     break;
                 case 4:
                     ADVWORD_I();
@@ -313,6 +333,9 @@ int main(){
                             printf("BNMO tidak berada di area merebus!\n");
                         }
                     }
+                    subsStrukturUR(&temp, m, curTime, BNMO, proses);
+                    PushStackur(&Undo, temp);
+                    Topur(Redo)=-1; // tidak bisa redo
                     break;
                 case 5:
                     ADVWORD_I();
@@ -393,6 +416,9 @@ int main(){
                             printf("BNMO tidak berada di area telepon!\n");
                         }
                     }
+                    subsStrukturUR(&temp, m, curTime, BNMO, proses);
+                    PushStackur(&Undo, temp);
+                    Topur(Redo)=-1; // tidak bisa redo
                     break;
                 case 6:
                     ADVWORD_I();
@@ -449,6 +475,9 @@ int main(){
                     printf("Arah tidak valid\n");
                         break;
                     }
+                    subsStrukturUR(&temp, m, curTime, BNMO, proses);
+                    PushStackur(&Undo, temp);
+                    Topur(Redo)=-1; // tidak bisa redo
                     break;
                 case 7:
                     ADVWORD_I();
@@ -484,6 +513,9 @@ int main(){
                     else{
                         printf("Waktu tidak valid\n");
                     }
+                    subsStrukturUR(&temp, m, curTime, BNMO, proses);
+                    PushStackur(&Undo, temp);
+                    Topur(Redo)=-1; // tidak bisa redo
                     break;
 
                 case 8:
@@ -497,9 +529,31 @@ int main(){
                     break;
                 case 11:
                     //undo
+                    /*Undo ketika stack undo berisi*/
+                    if(Topur(Undo)>0){
+                        temp=InfoTopur(Undo);
+                        PopStackur(&Undo);
+                        subsElementUR(InfoTopur(Undo), &m,&curTime,&BNMO,&proses);
+                        PushStackur(&Redo, temp);
+
+                    }
+                    else{
+                        printf("Undo tidak bisa dilakukan\n");
+                    }
                     break;
                 case 12:
                     //redo
+                    if(!IsEmptyStackur(Redo)){
+                        temp=InfoTopur(Redo);
+                        PopStackur(&Redo);
+                        subsElementUR(temp, &m,&curTime,&BNMO,&proses);
+                        PushStackur(&Undo, temp);
+
+                    }
+                    else{
+                        printf("Redo tidak bisa dilakukan\n");
+                    }
+                    break;
                     break;
                 case 13:
                     printCookBook(catalog);
@@ -513,6 +567,8 @@ int main(){
                 default:
                     break;
                 }
+                
+
             }
             break;
 

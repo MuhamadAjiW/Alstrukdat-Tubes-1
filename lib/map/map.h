@@ -7,7 +7,10 @@
 // #include "../mesin_karakter/mesin_karakter.c"
 #include "../mesin_kata/mesin_kata.c"
 #include "../simulator/simulator.c"
-
+#include "../queue/prioqueue.c"
+#include "../tree/tree.c"
+#include "../list_statik/list_statik.c"
+#include "../notif/notif.c"
 /*  Kamus Umum */
 #define CAPACITYMP 100
 /* Kapasitas penyimpanan */
