@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "waktu.h"
 #include "../mesin_kata/mesin_kata.h"
-#include "..\makanan\makanan.h"
+#include "../makanan/makanan.h"
 #include <string.h>
 #include "../simulator/simulator.h"
 #include "../queue/prioqueue.h"
@@ -75,13 +75,12 @@
         printTime(deliverTime);
         printf("\n");   
     }
-} */
+} 
 void mekanismeWaktu(Simulator * p, waktu *time)
 {
     waktu temp;
     int i, j;
     nextMinute(time);
-
     PrioQueue inv = INV(*p);
     if (!queueIsEmpty(inv)) {
         i = 0;
@@ -98,7 +97,6 @@ void mekanismeWaktu(Simulator * p, waktu *time)
             i += 1;
         }
     }
-
     PrioQueue dlv = DLV(*p);
     if (!queueIsEmpty(dlv)) {
         i = 0;
@@ -115,6 +113,5 @@ void mekanismeWaktu(Simulator * p, waktu *time)
             i += 1;
         }
     }
-
     inventoryDeliveryMechanism(p);
-}
+}*/

@@ -15,6 +15,8 @@ int main(){
     AssignBranch(&a, &b);
     AssignBranch(&a, &c);
 
+    setTreeElmt(&a, 3);
+
     PrintTree(a);
 
     DeleteNode(&a);

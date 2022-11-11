@@ -1,1 +1,1 @@
-inputSignal2
+proses

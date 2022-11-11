@@ -54,12 +54,16 @@ void CompressQueue(PrioQueue * Q) {
     MakeEmpty(Q, newCap);
 }
 
-void CopyQueue(PrioQueue * Q, PrioQueue * targetQ, int type) {
-    int nelmt = NBElmt(*Q);
+void CopyQueue(PrioQueue Q, PrioQueue * targetQ, int type) {
+    int nelmt = NBElmt(Q);
     makanan temp;
-    for (int i = 0; i < nelmt; i++) {
-        Dequeue(Q, &temp, type);
-        Enqueue(targetQ, temp, type);
+
+    while (!queueIsEmpty(*targetQ)){
+        Dequeue(targetQ, &temp, type);
+    }
+
+    for (int i = 0; i < NBElmt(Q); i++) {
+        Enqueue(targetQ, Elmt(Q,(Head(Q)+i)%MaxEl(Q)), type);
     }
 }
 
@@ -74,9 +78,9 @@ void Enqueue (PrioQueue * Q, makanan X, int type) {
     else {
         if (queueIsFull(*Q)) {
             MakeEmpty(&q, MaxEl(*Q)*2);
-            CopyQueue(Q, &q, type);
+            CopyQueue(*Q, &q, type);
             ExpandQueue(Q);
-            CopyQueue(&q, Q, type);
+            CopyQueue(q, Q, type);
             DeAlokasi(&q);
         }
         if (Tail(*Q) == MaxEl(*Q)-1) {
@@ -143,7 +147,6 @@ void Enqueue (PrioQueue * Q, makanan X, int type) {
 }
 
 void Dequeue (PrioQueue * Q, makanan * X, int type) {
-
     *X = InfoHead(*Q);
     if (NBElmt(*Q) == 1) {
         Head(*Q) = NIL;
@@ -161,9 +164,9 @@ void Dequeue (PrioQueue * Q, makanan * X, int type) {
     if ((NBElmt(*Q) < MaxEl(*Q)/4) && !queueIsEmpty(*Q)) {
         PrioQueue q;
         MakeEmpty(&q, MaxEl(*Q));
-        CopyQueue(Q, &q, type);
+        CopyQueue(*Q, &q, type);
         CompressQueue(Q);
-        CopyQueue(&q, Q, type);
+        CopyQueue(q, Q, type);
         DeAlokasi(&q);
     }
 }
@@ -252,8 +255,9 @@ boolean timeIsZero(PrioQueue Q, int type) {
             return TIMEToMenit(Expire(Q, Head(Q))) <= 0;
         }
         if (type == 2) {
-            return TIMEToMenit(Deliver(Q, Head(Q))) == 0;
+            return TIMEToMenit(Deliver(Q, Head(Q))) <= 0;
         }
     }
     else return false;
 }
+

@@ -53,8 +53,6 @@ void buyMakanan(Simulator *S, makanan m);
 void moveMakanan(Simulator *s);
 /* memindahkan makanan dari delivery list ke inventory*/
 
-void inventoryDeliveryMechanism(Simulator *S);
-
 void makeFood(Simulator *S, list_statik l, int idx, char category);
 //bikin makanan
 //untuk main

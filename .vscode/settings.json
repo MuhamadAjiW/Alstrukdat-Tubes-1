@@ -10,6 +10,9 @@
         "stdio.h": "c",
         "mesin_karakter.h": "c",
         "mesin_kata.h": "c",
-        "point.h": "c"
+        "point.h": "c",
+        "notif.h": "c",
+        "stackura.h": "c",
+        "simulator.h": "c"
     }
 }

@@ -3,6 +3,7 @@
 #include "simulator.h"
 
 
+
 void createSimulator(Simulator *S){
     NAME(*S).Length=4;
     NAME(*S).TabWord[0]='B';
@@ -15,8 +16,8 @@ void createSimulator(Simulator *S){
     Ordinat(LOC(*S))=0;
     //lokasi default 0,0
 
-    MakeEmpty(&INV(*S),10);
-    MakeEmpty(&DLV(*S),10);
+    MakeEmpty(&INV(*S),1);
+    MakeEmpty(&DLV(*S),1);
 
     createListLink(&NOTIF(*S));
 }
@@ -139,7 +140,6 @@ void passTime(Simulator *S, long pass, waktu *time){
 
     if(!queueIsEmpty(INV(*S))){
         long menit;
-
         idx=Head(INV(*S));
         while(idx!=Tail(INV(*S))){
             menit=TIMEToMenit(Elmt(INV(*S),idx).expireTime);
@@ -190,20 +190,6 @@ void moveMakanan(Simulator *S) {
     Enqueue(&INV(*S), temp, 1);
 }
 
-void inventoryDeliveryMechanism(Simulator *S) {
-    makanan dump, temp;
-    while(timeIsZero(DLV(*S), 2)) {//delivery
-        Dequeue(&DLV(*S), &temp, 2);
-        Enqueue(&INV(*S), temp, 1);
-        //add notif
-        insertFirst(&NOTIF(*S), 'd', temp);
-    }
-    while(timeIsZero(INV(*S), 1)) {//expiration
-        Dequeue(&INV(*S), &dump, 1);
-        //add notiff
-        insertFirst(&NOTIF(*S), 'e', dump);
-    }
-}
 
 void makeFood(Simulator *S, list_statik l, int idx, char category){
     boolean lengkap = true;
@@ -257,18 +243,50 @@ void makeFood(Simulator *S, list_statik l, int idx, char category){
 }
 
 void printNotif(Notif N){
-/*I.S. Notif terdefinisi*/
-/*F.S. Jika kasus delivery ('d'), akan menampilkan "{item} sudah diterima oleh {Username}!\n".
-        Jika kasus expired ('e'), akan menampilkan "{item} kadaluarsa \n".
-*/
-/*ALGORITMA*/
+    /*I.S. Notif terdefinisi*/
+    /*F.S. Jika kasus delivery ('d'), akan menampilkan "{item} sudah diterima oleh {Username}!\n".
+            Jika kasus expired ('e'), akan menampilkan "{item} kadaluarsa \n".
+    */
+    /*ALGORITMA*/
 
 
-if(KASUS(N) == 'd'){    
-    printf("%s sudah diterima oleh BNMO", ITEM(N));
-}else if(KASUS(N) == 'e'){
-    printf("%s kadaluarsa ", ITEM(N));
-}
+    if(KASUS(N) == 'd'){    
+        printf("%s sudah diterima oleh BNMO", ITEM(N));
+    }else if(KASUS(N) == 'e'){
+        printf("%s kadaluwarsa ", ITEM(N));
+    }
+    
+    else if(KASUS(N) == '1'){
+        printf("Pencampuran %s digagalkan ", ITEM(N));
+    }else if(KASUS(N) == '2'){
+        printf("Pemotongan %s digagalkan", ITEM(N));
+    }else if(KASUS(N) == '3'){
+        printf("Penggorengan %s digagalkan ", ITEM(N));
+    }else if(KASUS(N) == '4'){
+        printf("Perebusan %s digagalkan ", ITEM(N));
+    }else if(KASUS(N) == '5'){
+        printf("Pembelian %s digagalkan", ITEM(N));
+    }else if(KASUS(N) == '6'){
+        printf("%s tidak jadi sampai ", ITEM(N));
+    }else if(KASUS(N) == '7'){
+        printf("%s tidak jadi kadaluwarsa ", ITEM(N));
+    }
+    
+    else if(KASUS(N) == 'p'){
+        printf("%s kembali dicampurkan ", ITEM(N));
+    }else if(KASUS(N) == 'o'){
+        printf("%s kembali dipotongkan ", ITEM(N));
+    }else if(KASUS(N) == 'i'){
+        printf("%s kembali digorengkan ", ITEM(N));
+    }else if(KASUS(N) == 'u'){
+        printf("%s kembali direbuskan ", ITEM(N));
+    }else if(KASUS(N) == 'y'){
+        printf("%s kembali dibeli ", ITEM(N));
+    }else if(KASUS(N) == 't'){
+        printf("%s kembali sampai ", ITEM(N));
+    }else if(KASUS(N) == 'r'){
+        printf("%s kembali kadaluwarsa ", ITEM(N));
+    }
 }
 
 void printAllNotif(List_Link *L){
@@ -292,6 +310,7 @@ void printAllNotif(List_Link *L){
             deleteFirst(L, &N);
             printf("\n%d. ", i);
             printNotif(N);
+            i++;
         }
     }
     printf("\n");

@@ -47,20 +47,27 @@ void load_map(Map *map, char* mapconf){
         ADV();
     }
 
-    for(i=1;i<=ii;i++){
-        for(j=1;j<=jj;j++){
-            if(currentChar=='\n'){
+    i = 1;
+    while (i <= ii){
+        j = 1;
+        while (j <= jj){
+            if(currentChar=='\n' || currentChar =='\r'){
                 ADV();
             }
-            if(currentChar=='S'){
-                Absis(S(*map))=i;
-                Ordinat(S(*map))=j;
+            else{
+                if(currentChar=='S'){
+                    Absis(S(*map))=i;
+                    Ordinat(S(*map))=j;
+                }
+                ELMT_Map(*map,i,j)=currentChar;
+                ADV();
+                j++;
             }
-            ELMT_Map(*map,i,j)=currentChar;
-            ADV();
         }
-        // printf("%c",currentChar);
+        i++;
     }
+    
+    
     ROW_Map(*map)=ii;
     COL_Map(*map)=jj;
 }
@@ -183,6 +190,7 @@ void move_map(Map *map,Word arah){
 /* F.S. Posisi S pindah sesuai arah*/
 
 void moveDir(Map *map,char arah){
+    /*pake wasd yes*/
     if(arah == 'w'){
         if(ELMT_Map(*map,Absis(S(*map))-1,Ordinat(S(*map)))=='#'){
             ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';

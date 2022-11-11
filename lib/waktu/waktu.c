@@ -79,3 +79,13 @@ void nextMinute(waktu * T){
     *T=MenitToTIME(menit+1);
 }
 
+void nextTime(waktu * T, int givenTime){
+    long menit=TIMEToMenit(*T);
+    *T=MenitToTIME(menit+givenTime);
+}
+
+void copyTime(waktu input, waktu *output){
+    Hari(*output) = Hari(input);
+    Jam(*output) = Jam(input);
+    Menit(*output) = Menit(input);
+}

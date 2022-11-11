@@ -42,7 +42,7 @@ void IgnoreBlanks()
 
 void SkipLines()
 {
-    while (currentChar == ENTER)
+    while (currentChar == ENTER || currentChar == CARRIAGERETURN)
     {
         ADV();
     }
@@ -99,8 +99,14 @@ void CopyWord()
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
-            currentWord.TabWord[currentWord.Length++] = currentChar;
-            ADV();
+            if (currentChar != CARRIAGERETURN){
+                currentWord.TabWord[currentWord.Length] = currentChar;
+                currentWord.Length++;
+                ADV();
+            }
+            else{
+                ADV();
+            }
         }
         else
             break;

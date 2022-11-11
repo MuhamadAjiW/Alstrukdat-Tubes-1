@@ -44,4 +44,6 @@ void writeHHMM(waktu t);
 void nextMinute(waktu * T);
 // mengubah T menjadi waktu setelah 1 menit
 
+void copyTime(waktu input, waktu *output);
+
 #endif

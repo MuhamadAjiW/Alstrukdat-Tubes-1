@@ -76,4 +76,38 @@ void deleteFirst(List_Link *L, ElTypeL *N){
 }
 
 
+void insertFirst2(List_Link *L,  Notif N){
+/* I.S. L mungkin kosong */
+/* F.S. Melakukan alokasi sebuah elemen dan */
+/* menambahkan elemen pertama dengan Notif N jika alokasi berhasil. */
+/* Jika alokasi gagal: I.S.= F.S. dan menampilkan "Allocation Error"*/
+    /*KAMUS LOKAL*/
+    Address p;
+    /*ALGORITMA*/
+    p = newNode(N);
+    if(p!=NULL){
+        NEXT(p) = FIRST(*L);
+        FIRST(*L) = p;
+    }
+}
+
+void concatDel(List_Link *Lbawah, List_Link *Latas){
+    Notif temp;
+    while (!isEmptyListLink(*Lbawah))
+    {
+        insertFirst2(Latas, INFO(FIRST(*Lbawah)) );
+        deleteFirst(Lbawah, &temp);
+    }
+}
+
+void concatNotDel(List_Link Lbawah, List_Link *Latas){
+    Address p;
+    p = FIRST(Lbawah);
+    
+    while (p != NULL)
+    {
+        insertFirst2(Latas, INFO(p) );
+        p = NEXT(p);
+    }
+}
 

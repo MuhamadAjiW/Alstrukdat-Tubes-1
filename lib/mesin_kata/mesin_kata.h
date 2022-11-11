@@ -10,6 +10,7 @@
 #define NMax 50
 #define BLANK ' '
 #define ENTER '\n'
+#define CARRIAGERETURN '\r'
 
 typedef struct
 {

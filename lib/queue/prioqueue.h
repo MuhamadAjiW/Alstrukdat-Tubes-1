@@ -52,10 +52,8 @@ void DeAlokasi(PrioQueue * Q);
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
 void ExpandQueue(PrioQueue * Q);
-
 void CompressQueue(PrioQueue * Q);
-
-void CopyQueue(PrioQueue * Q, PrioQueue * targetQ, int type);
+void CopyQueue(PrioQueue Q, PrioQueue * targetQ, int type);
 
 /* *** Primitif Add/Delete *** */
 void Enqueue (PrioQueue * Q, makanan X, int type);

@@ -65,8 +65,18 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
    Buy.TabWord[1] = 'u';
    Buy.TabWord[2] = 'y';
 
+
+
    STARTWORD(makananconf);
-   N = (int) (currentWord.TabWord[0]) - 48;
+
+
+   cache = 0;
+   mul = 1;
+   for(int j = currentWord.Length-1; j >= 0; j--){
+      cache += mul*( ((int) (currentWord.TabWord[j])) - 48);
+      mul *= 10;
+   }
+   N = cache;
    SkipLines();
 
    for (int i = 0; i < N; i++){
@@ -84,7 +94,7 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
       idELMT(*l, i) = cache;
 
       SkipLines();
-
+      
       //nama
       ADVWORD();
       counter = 0;
@@ -204,10 +214,9 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
    int currentidx = 0;
    boolean ada = false;
    address p;
+   
    for (int i = 0; i < N; i++){
       currentidx = 0;
-
-
       ADVWORD();
       cache = 0;
       mul = 1;
@@ -218,11 +227,10 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
       currentidx = indexOf(*l, cache);
       setTreeElmt(&resepELMT(*l, currentidx), cache);
 
+      
       ADVWORD();
       while (currentChar != ENTER){
-         
          ADVWORD();
-
          if (currentChar != ENTER){
             cache = 0;
             mul = 1;
@@ -230,7 +238,6 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
                cache += mul*( ((int) (currentWord.TabWord[j])) - 48);
                mul *= 10;
             }
-
             counter = 0;
             ada = false;
             while ( !ada && counter < listLength(*l)){
@@ -241,7 +248,6 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
                   counter += 1;
                }
             }
-
             if (ada){
                AssignBranch(&resepELMT(*l, currentidx), &resepELMT(*l, counter));
             }
@@ -259,7 +265,6 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
          cache += mul*( ((int) (currentWord.TabWord[j])) - 48);
          mul *= 10;
       }
-
       counter = 0;
       ada = false;
       while ( !ada && counter < listLength(*l)){
@@ -270,7 +275,6 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
             counter += 1;
          }
       }
-
       if (ada){
          AssignBranch(&resepELMT(*l, currentidx), &resepELMT(*l, counter));
       }
@@ -278,6 +282,7 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
          p = CreateNode(cache);
          AssignBranch(&resepELMT(*l, currentidx), &p);
       }
+      
       
 
       SkipLines();
