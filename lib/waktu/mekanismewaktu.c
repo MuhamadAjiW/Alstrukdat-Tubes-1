@@ -33,7 +33,7 @@ void inventoryDeliveryMechanism(Simulator *S, Stack* stack) {
         //add notiff
         insertFirst(&NOTIF(*S), 'e', dump);
         if (Top(*stack) != -1){
-            insertFirst(&NotifPrev(*stack), '7', temp);
+            insertFirst(&NotifPrev(*stack), '7', dump);
         }
     }
 }

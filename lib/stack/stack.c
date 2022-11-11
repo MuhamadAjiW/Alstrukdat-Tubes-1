@@ -75,7 +75,6 @@ void PopStack(Stack *S, Simulator *s, Map *M, waktu *globalt, list_statik catalo
     */
     int idx;
     idx = ((*S).T[Top(*S)].proses);
-    int makanandibuat = 0;
     if (((*S).T[Top(*S)].proses) == -1){
         Top(*S) = -1;
     }
@@ -97,44 +96,34 @@ void PopStack(Stack *S, Simulator *s, Map *M, waktu *globalt, list_statik catalo
         }
 
         else if ((*S).T[(*S).TOP].movement == '1'){
-            makanandibuat = 1;
             insertFirst(&NOTIF(*s), '1', ELMT(catalog, idx));
         }
         else if ((*S).T[(*S).TOP].movement == '2'){
-            makanandibuat = 1;
             insertFirst(&NOTIF(*s), '2', ELMT(catalog, idx));
         }
         else if ((*S).T[(*S).TOP].movement == '3'){
-            makanandibuat = 1;
             insertFirst(&NOTIF(*s), '3', ELMT(catalog, idx));
         }
         else if ((*S).T[(*S).TOP].movement == '4'){
-            makanandibuat = 1;
             insertFirst(&NOTIF(*s), '4', ELMT(catalog, idx));
         }
         else if ((*S).T[(*S).TOP].movement == '5'){
-            makanandibuat = 1;
             insertFirst(&NOTIF(*s), '5', ELMT(catalog, idx));
         }
 
         else if ((*S).T[(*S).TOP].movement == 'p'){
-            makanandibuat = 1;
             insertFirst(&NOTIF(*s), 'p', ELMT(catalog, idx));
         }
         else if ((*S).T[(*S).TOP].movement == 'o'){
-            makanandibuat = 1;
             insertFirst(&NOTIF(*s), 'o', ELMT(catalog, idx));
         }
         else if ((*S).T[(*S).TOP].movement == 'i'){
-            makanandibuat = 1;
             insertFirst(&NOTIF(*s), 'i', ELMT(catalog, idx));
         }
         else if ((*S).T[(*S).TOP].movement == 'u'){
-            makanandibuat = 1;
             insertFirst(&NOTIF(*s), 'u', ELMT(catalog, idx));
         }
         else if ((*S).T[(*S).TOP].movement == 'y'){
-            makanandibuat = 1;
             insertFirst(&NOTIF(*s), 'y', ELMT(catalog, idx));moveDir(M, 'a');
         }
 
