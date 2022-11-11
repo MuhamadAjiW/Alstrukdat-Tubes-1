@@ -1,5 +1,7 @@
-#include <stdio.h>
 #include "point.c"
+
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(){
     int confirmDone = 0;

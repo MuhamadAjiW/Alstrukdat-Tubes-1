@@ -1,10 +1,5 @@
-//ADT List dari praktikum, list rapat kiri
-
 #include "makanan.h"
-
-
-//dependent package
-/*HARUS MAKE INI
+/*dependent packages:
 #include "../waktu/waktu.c"
 #include "../tree/tree.c"
 */

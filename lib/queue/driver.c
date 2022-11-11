@@ -1,9 +1,15 @@
-#include <stdio.h>
 #include "prioqueue.c"
-#include "../list_statik/list_statik.c"
+#include "../makanan/makanan.c"
 #include "../tree/tree.c"
-#include "../mesin_kata/mesin_kata.c"
+#include "../waktu/waktu.c"
 
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "../list_statik/list_statik.c"
+#include "../mesin_kata/mesin_kata.c"
+#include "../mesin_karakter/mesin_karakter.c"
 
 int main(){
     int confirmDone = 0;

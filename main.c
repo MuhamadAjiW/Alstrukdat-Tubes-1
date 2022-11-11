@@ -1,14 +1,21 @@
 #include "lib/etc/boolean.h"
-// #include "lib/list_statik/list_statik.c"
+#include "lib/list_statik/list_statik.c"
+#include "lib/makanan/makanan.c"
+#include "lib/map/map.c"
+#include "lib/matriks/matriks.c"
+#include "lib/mesin_karakter/mesin_karakter.c"
+#include "lib/mesin_kata/mesin_kata.c"
+#include "lib/notif/notif.c"
+#include "lib/point/point.c"
+#include "lib/queue/prioqueue.c"
+#include "lib/simulator/simulator.c"
 #include "lib/stack/stack.c"
-// #include "lib/tree/tree.c"
-#include "lib/undoredo/stackura.c"
-// #include "lib/map/map.c"
-// #include "lib/queue/prioqueue.c"
+#include "lib/tree/tree.c"
+#include "lib/waktu/waktu.c"
 #include "lib/waktu/mekanismewaktu.c"
+
 #include <stdio.h>
 #include <stdlib.h>
-// #include "lib/notif/notif.c"
 
 int main(){
     /*KAMUS*/
@@ -38,7 +45,7 @@ int main(){
     waktu cacheTime;
     Simulator BNMO;
 
-    Stackur Undo,Redo;
+    Stack Undo,Redo;
     StrukturUndo temp;
 
     /*ALGORITMA*/
@@ -70,8 +77,8 @@ int main(){
             
             //inisialisasi stack undo dan redo
             createListLink(&notifPasser);
-            CreateEmptyStackur(&Undo);
-            CreateEmptyStackur(&Redo);
+            CreateEmptyStack(&Undo);
+            CreateEmptyStack(&Redo);
             while (runningSignal == 1){
                 printf("BNMO di posisi: ");
                 WritePOINT(S(m));
@@ -144,7 +151,7 @@ int main(){
                                             counter2++;
                                         }
                                         counter2--;
-                                        PushStackur(&Undo, BNMO, curTime, '1', counter2);
+                                        PushStack(&Undo, BNMO, curTime, '1', counter2);
                                         
                                         makeFood(&BNMO, catalog, counter2, 'm');
                                         passTime(&BNMO, mixTime, &curTime);
@@ -157,7 +164,7 @@ int main(){
                             printf("BNMO tidak berada di area mixing!\n");
                         }
                     }
-                    Topur(Redo)=-1; // tidak bisa redo
+                    Top(Redo)=-1; // tidak bisa redo
                     break;
                 case 2:
                     ADVWORD_I();
@@ -208,7 +215,7 @@ int main(){
                                             counter2++;
                                         }
                                         counter2--;
-                                        PushStackur(&Undo, BNMO, curTime, '2', counter2);
+                                        PushStack(&Undo, BNMO, curTime, '2', counter2);
 
                                         makeFood(&BNMO, catalog, counter2, 'c');
                                         passTime(&BNMO, chopTime, &curTime);
@@ -222,7 +229,7 @@ int main(){
                         }
                     }
 
-                    Topur(Redo)=-1; // tidak bisa redo
+                    Top(Redo)=-1; // tidak bisa redo
                     break;
                 case 3:
                     ADVWORD_I();
@@ -273,7 +280,7 @@ int main(){
                                             counter2++;
                                         }
                                         counter2--;
-                                        PushStackur(&Undo, BNMO, curTime, '3', counter2);
+                                        PushStack(&Undo, BNMO, curTime, '3', counter2);
 
                                         makeFood(&BNMO, catalog, counter2, 'f');
                                         passTime(&BNMO, fryTime, &curTime);
@@ -286,7 +293,7 @@ int main(){
                             printf("BNMO tidak berada di area penggorengan!\n");
                         }
                     }
-                    Topur(Redo)=-1; // tidak bisa redo
+                    Top(Redo)=-1; // tidak bisa redo
                     break;
                 case 4:
                     ADVWORD_I();
@@ -337,7 +344,7 @@ int main(){
                                             counter2++;
                                         }
                                         counter2--;
-                                        PushStackur(&Undo, BNMO, curTime, '4', counter2);
+                                        PushStack(&Undo, BNMO, curTime, '4', counter2);
 
                                         makeFood(&BNMO, catalog, counter2, 'b');
                                         passTime(&BNMO, boilTime, &curTime);
@@ -350,7 +357,7 @@ int main(){
                             printf("BNMO tidak berada di area merebus!\n");
                         }
                     }
-                    Topur(Redo)=-1; // tidak bisa redo
+                    Top(Redo)=-1; // tidak bisa redo
                     break;
                 case 5:
                     ADVWORD_I();
@@ -419,7 +426,7 @@ int main(){
                                         }
                                         printf("\n");
                                         //fungsi buy masuk sini
-                                        PushStackur(&Undo, BNMO, curTime, '5', counter2);
+                                        PushStack(&Undo, BNMO, curTime, '5', counter2);
 
                                         buyMakanan(&BNMO,ELMT(catalog, counter2));
                                         passTime(&BNMO, 1, &curTime);
@@ -432,7 +439,7 @@ int main(){
                             printf("BNMO tidak berada di area telepon!\n");
                         }
                     }
-                    Topur(Redo)=-1; // tidak bisa redo
+                    Top(Redo)=-1; // tidak bisa redo
                     break;
                 case 6:
                     ADVWORD_I();
@@ -447,7 +454,7 @@ int main(){
                             ignoreUntilEnter();
                         }
                         else{
-                            PushStackur(&Undo, BNMO, curTime, 'w', 0);
+                            PushStack(&Undo, BNMO, curTime, 'w', 0);
                             moveDir(&m, 'w');
                             passTime(&BNMO, 1, &curTime);
                             inventoryDeliveryMechanism(&BNMO, &Undo);
@@ -460,7 +467,7 @@ int main(){
                             ignoreUntilEnter();
                         }
                         else{
-                            PushStackur(&Undo, BNMO, curTime, 's', 0);
+                            PushStack(&Undo, BNMO, curTime, 's', 0);
                             moveDir(&m, 's');
                             passTime(&BNMO, 1, &curTime);
                             inventoryDeliveryMechanism(&BNMO, &Undo);
@@ -473,7 +480,7 @@ int main(){
                             ignoreUntilEnter();
                         }
                         else{
-                            PushStackur(&Undo, BNMO, curTime, 'd', 0);
+                            PushStack(&Undo, BNMO, curTime, 'd', 0);
                             moveDir(&m, 'd');
                             passTime(&BNMO, 1, &curTime);
                             inventoryDeliveryMechanism(&BNMO, &Undo);
@@ -486,7 +493,7 @@ int main(){
                             ignoreUntilEnter();
                         }
                         else{
-                            PushStackur(&Undo, BNMO, curTime, 'a', 0);
+                            PushStack(&Undo, BNMO, curTime, 'a', 0);
                             moveDir(&m, 'a');
                             passTime(&BNMO, 1, &curTime);
                             inventoryDeliveryMechanism(&BNMO, &Undo);
@@ -497,7 +504,7 @@ int main(){
                     printf("Arah tidak valid\n");
                         break;
                     }
-                    Topur(Redo) = -1; // tidak bisa redo
+                    Top(Redo) = -1; // tidak bisa redo
                     break;
                 case 7:
                     ADVWORD_I();
@@ -518,15 +525,15 @@ int main(){
                                         printf("Waktu tidak valid\n");
                                     }
                                     else{
-                                        PushStackur(&Undo, BNMO, curTime, '6', 0);
+                                        PushStack(&Undo, BNMO, curTime, '6', 0);
 
                                         printf("Menunggu untuk %d jam, %d menit\n", inputSignal2, inputSignal3);
-                                        CreateTimeTest(&wait, 0,inputSignal2, inputSignal3);
+                                        CreateTimeDirect(&wait, 0,inputSignal2, inputSignal3);
                                         long plusMinute = TIMEToMenit(wait);
                                         passTime(&BNMO, plusMinute, &curTime);
                                         inventoryDeliveryMechanism(&BNMO, &Undo);
 
-                                        Topur(Redo)=-1; // tidak bisa redo
+                                        Top(Redo)=-1; // tidak bisa redo
                                     }
                                 }
                                 else{
@@ -556,51 +563,51 @@ int main(){
                 case 11:
                     //undo
                     /*Undo ketika stack undo berisi*/
-                    if (Topur(Undo)>=0){
-                        if(((Undo).T[Topur(Undo)].proses) != -1){
+                    if (Top(Undo)>=0){
+                        if(((Undo).T[Top(Undo)].proses) != -1){
                             if ((Undo).T[(Undo).TOP].movement == 'w'){
-                                PushStackur(&Redo, BNMO, curTime, 's', (Undo).T[(Undo).TOP].proses);
+                                PushStack(&Redo, BNMO, curTime, 's', (Undo).T[(Undo).TOP].proses);
                             }
                             else if ((Undo).T[(Undo).TOP].movement == 's'){
-                                PushStackur(&Redo, BNMO, curTime, 'w', (Undo).T[(Undo).TOP].proses);
+                                PushStack(&Redo, BNMO, curTime, 'w', (Undo).T[(Undo).TOP].proses);
                             }
                             else if ((Undo).T[(Undo).TOP].movement == 'd'){
-                                PushStackur(&Redo, BNMO, curTime, 'a', (Undo).T[(Undo).TOP].proses);
+                                PushStack(&Redo, BNMO, curTime, 'a', (Undo).T[(Undo).TOP].proses);
                             }
                             else if ((Undo).T[(Undo).TOP].movement == 'a'){
-                                PushStackur(&Redo, BNMO, curTime, 'd', (Undo).T[(Undo).TOP].proses);
+                                PushStack(&Redo, BNMO, curTime, 'd', (Undo).T[(Undo).TOP].proses);
                             }
 
                             else if ((Undo).T[(Undo).TOP].movement == '1'){
-                                PushStackur(&Redo, BNMO, curTime, 'p', (Undo).T[(Undo).TOP].proses);
+                                PushStack(&Redo, BNMO, curTime, 'p', (Undo).T[(Undo).TOP].proses);
                             }
                             else if ((Undo).T[(Undo).TOP].movement == '2'){
-                                PushStackur(&Redo, BNMO, curTime, 'o', (Undo).T[(Undo).TOP].proses);
+                                PushStack(&Redo, BNMO, curTime, 'o', (Undo).T[(Undo).TOP].proses);
                             }
                             else if ((Undo).T[(Undo).TOP].movement == '3'){
-                                PushStackur(&Redo, BNMO, curTime, 'i', (Undo).T[(Undo).TOP].proses);
+                                PushStack(&Redo, BNMO, curTime, 'i', (Undo).T[(Undo).TOP].proses);
                             }
                             else if ((Undo).T[(Undo).TOP].movement == '4'){
-                                PushStackur(&Redo, BNMO, curTime, 'u', (Undo).T[(Undo).TOP].proses);
+                                PushStack(&Redo, BNMO, curTime, 'u', (Undo).T[(Undo).TOP].proses);
                             }
                             else if ((Undo).T[(Undo).TOP].movement == '5'){
-                                PushStackur(&Redo, BNMO, curTime, 'y', (Undo).T[(Undo).TOP].proses);
+                                PushStack(&Redo, BNMO, curTime, 'y', (Undo).T[(Undo).TOP].proses);
                             }
                             else if ((Undo).T[(Undo).TOP].movement == '6'){
-                                PushStackur(&Redo, BNMO, curTime, 't', (Undo).T[(Undo).TOP].proses);
+                                PushStack(&Redo, BNMO, curTime, 't', (Undo).T[(Undo).TOP].proses);
                             }
 
                             else{
-                                PushStackur(&Redo, BNMO, curTime, (Undo).T[(Undo).TOP].movement, (Undo).T[(Undo).TOP].proses);
+                                PushStack(&Redo, BNMO, curTime, (Undo).T[(Undo).TOP].movement, (Undo).T[(Undo).TOP].proses);
                             }
                             concatNotDel(NotifPrev(Undo), &notifPasser);
                             concatDel(&notifPasser, &NotifPrev(Redo));
                             convertUR(&NotifPrev(Redo), 1);
-                            PopStackur(&Undo, &BNMO, &m, &curTime, catalog);
+                            PopStack(&Undo, &BNMO, &m, &curTime, catalog);
                         }
                         else{
                             printf("Undo tidak bisa dilakukan\n");
-                            PopStackur(&Undo, &BNMO, &m, &curTime, catalog);
+                            PopStack(&Undo, &BNMO, &m, &curTime, catalog);
                         }
                     }
                     else{
@@ -609,51 +616,51 @@ int main(){
                     break;
                 case 12:
                     //redo
-                    if (Topur(Redo)>=0){
-                        if(((Redo).T[Topur(Redo)].proses) != -1){
+                    if (Top(Redo)>=0){
+                        if(((Redo).T[Top(Redo)].proses) != -1){
                             if ((Redo).T[(Redo).TOP].movement == 'w'){
-                                PushStackur(&Undo, BNMO, curTime, 's', (Redo).T[(Redo).TOP].proses);
+                                PushStack(&Undo, BNMO, curTime, 's', (Redo).T[(Redo).TOP].proses);
                             }
                             else if ((Redo).T[(Redo).TOP].movement == 's'){
-                                PushStackur(&Undo, BNMO, curTime, 'w', (Redo).T[(Redo).TOP].proses);
+                                PushStack(&Undo, BNMO, curTime, 'w', (Redo).T[(Redo).TOP].proses);
                             }
                             else if ((Redo).T[(Redo).TOP].movement == 'd'){
-                                PushStackur(&Undo, BNMO, curTime, 'a', (Redo).T[(Redo).TOP].proses);
+                                PushStack(&Undo, BNMO, curTime, 'a', (Redo).T[(Redo).TOP].proses);
                             }
                             else if ((Redo).T[(Redo).TOP].movement == 'a'){
-                                PushStackur(&Undo, BNMO, curTime, 'd', (Redo).T[(Redo).TOP].proses);
+                                PushStack(&Undo, BNMO, curTime, 'd', (Redo).T[(Redo).TOP].proses);
                             }
 
                             else if ((Redo).T[(Redo).TOP].movement == 'p'){
-                                PushStackur(&Undo, BNMO, curTime, '1', (Redo).T[(Redo).TOP].proses);
+                                PushStack(&Undo, BNMO, curTime, '1', (Redo).T[(Redo).TOP].proses);
                             }
                             else if ((Redo).T[(Redo).TOP].movement == 'o'){
-                                PushStackur(&Undo, BNMO, curTime, '2', (Redo).T[(Redo).TOP].proses);
+                                PushStack(&Undo, BNMO, curTime, '2', (Redo).T[(Redo).TOP].proses);
                             }
                             else if ((Redo).T[(Redo).TOP].movement == 'i'){
-                                PushStackur(&Undo, BNMO, curTime, '3', (Redo).T[(Redo).TOP].proses);
+                                PushStack(&Undo, BNMO, curTime, '3', (Redo).T[(Redo).TOP].proses);
                             }
                             else if ((Redo).T[(Redo).TOP].movement == 'u'){
-                                PushStackur(&Undo, BNMO, curTime, '4', (Redo).T[(Redo).TOP].proses);
+                                PushStack(&Undo, BNMO, curTime, '4', (Redo).T[(Redo).TOP].proses);
                             }
                             else if ((Redo).T[(Redo).TOP].movement == 'y'){
-                                PushStackur(&Undo, BNMO, curTime, '5', (Redo).T[(Redo).TOP].proses);
+                                PushStack(&Undo, BNMO, curTime, '5', (Redo).T[(Redo).TOP].proses);
                             }
                             else if ((Redo).T[(Redo).TOP].movement == 't'){
-                                PushStackur(&Undo, BNMO, curTime, '6', (Redo).T[(Redo).TOP].proses);
+                                PushStack(&Undo, BNMO, curTime, '6', (Redo).T[(Redo).TOP].proses);
                             }
 
                             else{
-                                PushStackur(&Undo, BNMO, curTime, (Redo).T[(Redo).TOP].movement, (Redo).T[(Redo).TOP].proses);
+                                PushStack(&Undo, BNMO, curTime, (Redo).T[(Redo).TOP].movement, (Redo).T[(Redo).TOP].proses);
                             }
                             concatNotDel(NotifPrev(Redo), &notifPasser);
                             concatDel(&notifPasser, &NotifPrev(Undo));
                             convertUR(&NotifPrev(Undo), 2);
-                            PopStackur(&Redo, &BNMO, &m, &curTime, catalog);
+                            PopStack(&Redo, &BNMO, &m, &curTime, catalog);
                         }
                         else{
                             printf("Redo tidak bisa dilakukan\n");
-                            PopStackur(&Redo, &BNMO, &m, &curTime, catalog);
+                            PopStack(&Redo, &BNMO, &m, &curTime, catalog);
                         }
                     }
                     else{

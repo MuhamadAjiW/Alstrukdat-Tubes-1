@@ -2,9 +2,6 @@
 #define matriks_H
 
 #include "../etc/boolean.h"
-// #include "../point/point.c"
-// #include "../mesin_kata/mesin_kata.c"
-
 
 typedef int IdxType; /* Index baris, kolom */
 typedef int ElType;

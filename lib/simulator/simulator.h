@@ -31,6 +31,7 @@ typedef struct
 #define NOTIF(S) (S).Notifikasi
 
 void createSimulator(Simulator *S);
+//inisialisasi
 
 void addMakanan(Simulator *S, makanan m);
 // menambahkan makanan ke inventory
@@ -44,18 +45,14 @@ int findMakanan(Simulator S, int idMakanan);
 void deleteMakanan(Simulator *S, int idMakanan);
 //menghilangkan makanan di prioqueue
 
-void passTime(Simulator *s, long minute, waktu *time);
-// melewatkan waktu selama menit yang ditentukan
-// makanan dengan waktu penyimpanan <0 artinya sudah expired
-
 void buyMakanan(Simulator *S, makanan m);
+//menambahkan makanan ke delivery
 
 void moveMakanan(Simulator *s);
-/* memindahkan makanan dari delivery list ke inventory*/
+//memindahkan makanan dari delivery list ke inventory
 
 void makeFood(Simulator *S, list_statik l, int idx, char category);
-//bikin makanan
-//untuk main
+//bikin makanan untuk main
 
 void printNotif(Notif N);
 /*I.S. Notif terdefinisi*/
@@ -71,8 +68,5 @@ void printAllNotif(List_Link *L);
                                         .................
                                         k. {Notif k} ....
     Diakhir prosedur, List L akan kosong*/
-
-void copySimulator(Simulator Sinput, Simulator *Soutput);
-// menyalin simulator Sinput ke simulator Soutput 
 
 #endif

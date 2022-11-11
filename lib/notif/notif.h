@@ -6,7 +6,6 @@
 #include "../makanan/makanan.h"
 /*Notifikasi Menggunakan List Linked*/
 
-
 typedef struct { 
 	char kasus; 
 	char item[PANJANGNAMA]; 

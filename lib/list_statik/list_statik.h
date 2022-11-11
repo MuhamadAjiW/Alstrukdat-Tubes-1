@@ -11,7 +11,6 @@
 #include "../tree/tree.h"
 #include "../mesin_kata/mesin_kata.h"
 #include "../mesin_karakter/mesin_karakter.h"
-//boolean, waktu ada di makanan
 
 /*  Kamus Umum */
 #define CAPACITY 50

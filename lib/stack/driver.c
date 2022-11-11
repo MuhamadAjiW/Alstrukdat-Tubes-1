@@ -1,34 +1,25 @@
-#include <stdio.h>
 #include "stack.c"
+#include "../waktu/waktu.c"
+#include "../queue/prioqueue.c"
+#include "../notif/notif.c"
+#include "../makanan/makanan.c"
+#include "../tree/tree.c"
+#include "../map/map.c"
 #include "../mesin_kata/mesin_kata.c"
-#include "../etc/boolean.h"
+#include "../mesin_karakter/mesin_karakter.c"
+
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(){
-    int confirmDone = 0;
-    Stack s;
-    Word popped;
-    //header program
-
-    CreateEmpty(&s);
-
-    //test dengan test.txt, boleh diedit isinya
-    STARTWORD("test.txt");
-    while (!endWord) {
-        printCurrentKata();
-        printf("\n");
-        Push(&s, currentWord);
-        ADVWORD();
-    }
-
-    //print isi stack
-    while (!IsEmpty(s)) {
-        Pop(&s, &popped);
-        printf("%s", popped.TabWord);
-    }
-    printf("\n");
-
-    //akhir program
-    printf("Done!");
-    scanf("%d", &confirmDone);
+    Stack S;
+    StrukturUndo X;
+    Simulator S1;
+    Map M;
+    waktu W;
+    int proses;
+    
+    printf("aman");
+    
     return 0;
 }

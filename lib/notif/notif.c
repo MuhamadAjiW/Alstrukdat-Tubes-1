@@ -1,6 +1,9 @@
-#include "stdlib.h"
-#include <stdio.h>
 #include "notif.h"
+/*dependent packages:
+None
+*/
+#include <stdlib.h>
+#include <stdio.h>
 
 
 /*********************************************/
@@ -76,7 +79,7 @@ void deleteFirst(List_Link *L, ElTypeL *N){
 }
 
 
-void insertFirst2(List_Link *L,  Notif N){
+void insertFirstNotif(List_Link *L,  Notif N){
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan Notif N jika alokasi berhasil. */
@@ -95,7 +98,7 @@ void concatDel(List_Link *Lbawah, List_Link *Latas){
     Notif temp;
     while (!isEmptyListLink(*Lbawah))
     {
-        insertFirst2(Latas, INFO(FIRST(*Lbawah)) );
+        insertFirstNotif(Latas, INFO(FIRST(*Lbawah)) );
         deleteFirst(Lbawah, &temp);
     }
 }
@@ -106,7 +109,7 @@ void concatNotDel(List_Link Lbawah, List_Link *Latas){
     
     while (p != NULL)
     {
-        insertFirst2(Latas, INFO(p) );
+        insertFirstNotif(Latas, INFO(p) );
         p = NEXT(p);
     }
 }

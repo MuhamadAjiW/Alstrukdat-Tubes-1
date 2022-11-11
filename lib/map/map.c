@@ -1,4 +1,8 @@
 #include "map.h"
+/*dependent packages:
+#include "../mesin_karakter/mesin_karakter.c"
+#include "../mesin_kata/mesin_kata.c"
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,10 +16,6 @@ void create_map(Map *map){
             ELMT_Map(*map,i,j)='*';
         }
     }
-    // POINT temp;
-    // temp=S(*map);
-    // CreatePoint(&temp);
-    // CreatePoint(&S(*map));
     Absis(S(*map))=IDX_UNDEF;
     Ordinat(S(*map))=IDX_UNDEF;
 }
@@ -66,8 +66,6 @@ void load_map(Map *map, char* mapconf){
         }
         i++;
     }
-    
-    
     ROW_Map(*map)=ii;
     COL_Map(*map)=jj;
 }
@@ -75,12 +73,15 @@ void load_map(Map *map, char* mapconf){
 boolean isEmptyMP(Map map){
     return (ROW_Map(map)==IDX_UNDEF && COL_Map(map)==IDX_UNDEF);
 }
+
 boolean isIdxValidMP(int i,int j){
     return (i>IDX_MIN && i<=CAPACITYMP && j>IDX_MIN && j<=CAPACITYMP);
 }
+
 boolean isIdxEffMP(Map map,int i,int j){
     return (i>IDX_MIN && i<=ROW_Map(map) && j>IDX_MIN && j<=COL_Map(map));
 }
+
 void printMap(Map map){
     int i,j;
 
@@ -99,6 +100,7 @@ void printMap(Map map){
         printf("\n");
     }
 }
+
 boolean isNear(Map map,char ch){
 
     if (Absis(S(map)) != 0){
@@ -127,67 +129,6 @@ boolean isNear(Map map,char ch){
     
     return false;
 }
-
-void move_map(Map *map,Word arah){
-    Word NORTH,SOUTH,EAST,WEST;
-    NORTH.Length=5;
-    NORTH.TabWord[0]='N';
-    NORTH.TabWord[1]='O';
-    NORTH.TabWord[2]='R';
-    NORTH.TabWord[3]='T';
-    NORTH.TabWord[4]='H';
-    SOUTH.Length=5;
-    SOUTH.TabWord[0]='S';
-    SOUTH.TabWord[1]='O';
-    SOUTH.TabWord[2]='U';
-    SOUTH.TabWord[3]='T';
-    SOUTH.TabWord[4]='H';
-    EAST.Length=4;
-    EAST.TabWord[0]='E';
-    EAST.TabWord[1]='A';
-    EAST.TabWord[2]='S';
-    EAST.TabWord[3]='T';
-    WEST.Length=4;
-    WEST.TabWord[0]='W';
-    WEST.TabWord[1]='E';
-    WEST.TabWord[2]='S';
-    WEST.TabWord[3]='T';
-
-    if(kataSama(arah,NORTH)){
-        if(ELMT_Map(*map,Absis(S(*map))-1,Ordinat(S(*map)))=='#'){
-            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
-            ELMT_Map(*map,Absis(S(*map))-1,Ordinat(S(*map)))='S';
-
-            Absis(S(*map))--;
-        }
-    }
-    else if(kataSama(arah,SOUTH)){
-        if(ELMT_Map(*map,Absis(S(*map))+1,Ordinat(S(*map)))=='#'){
-            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
-            ELMT_Map(*map,Absis(S(*map))+1,Ordinat(S(*map)))='S';
-
-            Absis(S(*map))++;
-        }
-    }
-    else if(kataSama(arah,EAST)){
-        if(ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))+1)=='#'){
-            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
-            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))+1)='S';
-
-            Ordinat(S(*map))++;
-        }
-    }
-    else if(kataSama(arah,WEST)){
-        if(ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))-1)=='#'){
-            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map)))='#';
-            ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))-1)='S';
-            
-            Ordinat(S(*map))--;
-        }
-    }
-}
-/* I.S. map terdefinisi*/
-/* F.S. Posisi S pindah sesuai arah*/
 
 void moveDir(Map *map,char arah){
     /*pake wasd yes*/

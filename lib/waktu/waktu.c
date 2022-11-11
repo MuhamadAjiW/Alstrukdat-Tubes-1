@@ -1,7 +1,7 @@
-/* Definisi type boolean */
-
-#include "../etc/boolean.h"
 #include "waktu.h"
+/*dependent packages:
+None
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -22,6 +22,7 @@ void printTime(waktu t){
 //format 0 0 0, tanpa enter
 
 boolean IsTIMEValid (int D, int H, int M) {
+//dipake di createtime
     if (D >= 0 && H >= 0 && H <= 23 && M >= 0 && M <= 59) {
         return true;
     }
@@ -30,7 +31,8 @@ boolean IsTIMEValid (int D, int H, int M) {
     }
 }
 
-void CreateTimeTest (waktu * T, int DD, int HH, int MM) {
+void CreateTimeDirect (waktu * T, int DD, int HH, int MM) {
+//membuat time dengan input manual
     Hari(*T) = DD;
     Jam(*T) = HH;
     Menit(*T) = MM;
@@ -38,20 +40,23 @@ void CreateTimeTest (waktu * T, int DD, int HH, int MM) {
 }
 
 long TIMEToMenit (waktu T) {
+//dipake di TLT & TGT
     return (24*60*Hari(T) + 60*Jam(T) + Menit(T));
 }
 
 waktu MenitToTIME (long N) {
+//mengubah nilai dari menit kembali ke time
     waktu time;
     int N1, hr, min;
     N1 = N / (24*60);
     hr = (N % (24*60)) / 60;
     min = (N % (24*60)) % 60;
-    CreateTimeTest(&time, N1, hr, min);
+    CreateTimeDirect(&time, N1, hr, min);
     return time;
 } 
 
 boolean TLT (waktu T1, waktu T2) {
+/* Mengirimkan true jika T1<T2, false jika tidak */
     if (TIMEToMenit(T1) < TIMEToMenit(T2)) {
         return true;
     }
@@ -61,6 +66,7 @@ boolean TLT (waktu T1, waktu T2) {
 }
 
 boolean TGT (waktu T1, waktu T2){
+/* Mengirimkan true jika T1>T2, false jika tidak */
     if (TIMEToMenit(T1) > TIMEToMenit(T2)) {
         return true;
     }
@@ -70,21 +76,25 @@ boolean TGT (waktu T1, waktu T2){
 }
 
 void writeHHMM(waktu t){
+//Menuliskan waktu dalam format HH.MM
     printf("%d.", Jam(t));
     printf("%d", Menit(t));
 }
 
 void nextMinute(waktu * T){
+// mengubah T menjadi waktu setelah 1 menit
     long menit=TIMEToMenit(*T);
     *T=MenitToTIME(menit+1);
 }
 
-void nextTime(waktu * T, int givenTime){
+void nextTime(waktu * T, int givenMinute){
+// mengubah T menjadi waktu setelah (givenMinute) menit
     long menit=TIMEToMenit(*T);
-    *T=MenitToTIME(menit+givenTime);
+    *T=MenitToTIME(menit+givenMinute);
 }
 
 void copyTime(waktu input, waktu *output){
+// menyalin waktu di tempat lain
     Hari(*output) = Hari(input);
     Jam(*output) = Jam(input);
     Menit(*output) = Menit(input);

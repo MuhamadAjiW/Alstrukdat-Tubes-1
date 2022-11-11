@@ -1,8 +1,11 @@
+#include "prioqueue.h"
+/*dependent packages:
+#include "../makanan/makanan.c"
+#include "../tree/tree.c"
+#include "../waktu/waktu.c"
+*/
 #include <stdio.h>
 #include <stdlib.h>
-#include "prioqueue.h"
-#include "../makanan/makanan.c"
-#include "../waktu/waktu.c"
 
 boolean queueIsEmpty (PrioQueue Q) {
     return (Head(Q) == NIL && Tail(Q) == NIL);

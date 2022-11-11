@@ -1,6 +1,9 @@
+#include "map.c"
+#include "../mesin_karakter/mesin_karakter.c"
+#include "../mesin_kata/mesin_kata.c"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "map.c"
 
 int main(){
     Map m;
@@ -9,14 +12,6 @@ int main(){
     printMap(m);
     Word w;
     w.Length=4;
-    w.TabWord[0]='E';
-    w.TabWord[1]='A';
-    w.TabWord[2]='S';
-    w.TabWord[3]='T';
-    move_map(&m,w);
-    move_map(&m,w);
-    printMap(m);
-    move_map(&m,w);
     printMap(m);
     return 0;
 

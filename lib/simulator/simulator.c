@@ -1,10 +1,19 @@
+#include "simulator.h"
+/*dependent packages:
+#include "../waktu/waktu.c"
+#include "../notif/notif.c"
+#include "../queue/prioqueue.c"
+#include "../list_statik/list_statik.c"
+#include "../makanan/makanan.c"
+#include "../tree/tree.c"
+#include "../mesin_kata/mesin_kata.c"
+#include "../mesin_karakter/mesin_karakter.c"
+*/
 #include <stdio.h>
 #include <stdlib.h>
-#include "simulator.h"
-
-
 
 void createSimulator(Simulator *S){
+//inisialisasi
     NAME(*S).Length=4;
     NAME(*S).TabWord[0]='B';
     NAME(*S).TabWord[1]='N';
@@ -50,6 +59,7 @@ boolean checkMakanan(Simulator S, int idMakanan){
 }
 
 int findMakanan(Simulator S, int idMakanan){
+//mencari index makanan di inventory
     addressQ idx;
     addressQ foundIDX;
     boolean found;
@@ -131,67 +141,20 @@ void deleteMakanan(Simulator *S, int idMakanan){
 
 }
 
-void passTime(Simulator *S, long pass, waktu *time){
-// melewatkan waktu selama menit yang ditentukan
-// makanan dengan waktu penyimpanan <0 artinya sudah expired
-    addressQ idx;
-    long temp = TIMEToMenit(*time);
-    *time = MenitToTIME(temp + pass);
-
-    if(!queueIsEmpty(INV(*S))){
-        long menit;
-        idx=Head(INV(*S));
-        while(idx!=Tail(INV(*S))){
-            menit=TIMEToMenit(Elmt(INV(*S),idx).expireTime);
-            menit-=pass;
-            Elmt(INV(*S),idx).expireTime=MenitToTIME(menit);
-            if(idx==MaxEl(INV(*S))-1){
-                idx=0;
-            }
-            else idx++;
-        }
-        menit=TIMEToMenit(InfoTail(INV(*S)).expireTime);
-        menit-=pass;
-        InfoTail(INV(*S)).expireTime=MenitToTIME(menit);
-    }
-
-    if (!queueIsEmpty(DLV(*S))) {
-        long tMenit;
-        int nDelivery = NBElmt(DLV(*S));
-        int i = Head(DLV(*S));
-        for (int j = 0; j < nDelivery; j++) {
-            tMenit = TIMEToMenit(Deliver(DLV(*S), i));
-            if ((tMenit-pass) <= 0) {
-                long tempExp = TIMEToMenit(Expire(DLV(*S), i)) + tMenit - pass;
-                Expire(DLV(*S), i) = MenitToTIME(tempExp);
-                Deliver(DLV(*S), i) = MenitToTIME(0);
-            }
-            else {
-                Deliver(DLV(*S), i) = MenitToTIME(tMenit-pass);
-            }
-
-            if (i == MaxEl(DLV(*S))-1) {
-                i = 0;
-            }
-            else {
-                i += 1;
-            }
-        }
-    }
-}
-
 void buyMakanan(Simulator *S, makanan m) {
+//menambahkan makanan ke delivery
     Enqueue(&DLV(*S), m, 2);
 }
 
 void moveMakanan(Simulator *S) {
+//memindahkan makanan dari delivery list ke inventory
     makanan temp;
     Dequeue(&DLV(*S), &temp, 2);
     Enqueue(&INV(*S), temp, 1);
 }
 
-
 void makeFood(Simulator *S, list_statik l, int idx, char category){
+//bikin makanan untuk main
     boolean lengkap = true;
     int id;
     int index;
@@ -314,8 +277,4 @@ void printAllNotif(List_Link *L){
         }
     }
     printf("\n");
-}
-
-void copySimulator(Simulator Sinput, Simulator *Soutput){
-    *Soutput=Sinput;
 }

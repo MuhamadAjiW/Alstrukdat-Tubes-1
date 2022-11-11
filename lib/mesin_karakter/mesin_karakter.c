@@ -2,6 +2,9 @@
 /* Implementasi Mesin Karakter */
 
 #include "mesin_karakter.h"
+/*dependent packages:
+None
+*/
 #include <stdio.h>
 
 char currentChar;

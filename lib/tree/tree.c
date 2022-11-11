@@ -1,9 +1,9 @@
-
-
+#include "tree.h"
+/*dependent packages:
+None
+*/
 #include <stdio.h>
 #include <stdlib.h>
-#include "tree.h"
-
 
 address CreateNode(infotype val){
     address p = (address) malloc (sizeof(Node));

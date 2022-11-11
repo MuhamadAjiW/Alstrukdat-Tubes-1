@@ -1,5 +1,8 @@
-#include <stdio.h>
 #include "mesin_kata.h"
+/*dependent packages:
+#include "../mesin_karakter/mesin_karakter.c"
+*/
+#include <stdio.h>
 
 boolean endWord;
 Word currentWord;

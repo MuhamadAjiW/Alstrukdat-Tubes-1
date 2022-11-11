@@ -1,5 +1,3 @@
-/* Definisi type boolean */
-
 #ifndef _waktu_h
 #define _waktu_h
 
@@ -24,13 +22,14 @@ void printTime(waktu t);
 boolean IsTIMEValid (int D, int H, int M);
 //dipake di createtime
 
-void CreateTimeTest (waktu * T, int DD, int HH, int MM);
-//buat test aja
+void CreateTimeDirect(waktu * T, int DD, int HH, int MM);
+//membuat time dengan input manual
 
 long TIMEToMenit (waktu T);
 //dipake di TLT & TGT
 
 waktu MenitToTIME (long N); 
+//mengubah nilai dari menit kembali ke time
 
 //buat sort makanan
 boolean TLT (waktu T1, waktu T2);
@@ -44,6 +43,10 @@ void writeHHMM(waktu t);
 void nextMinute(waktu * T);
 // mengubah T menjadi waktu setelah 1 menit
 
+void nextTime(waktu * T, int givenMinute);
+// mengubah T menjadi waktu setelah (givenMinute) menit
+
 void copyTime(waktu input, waktu *output);
+// menyalin waktu di tempat lain
 
 #endif

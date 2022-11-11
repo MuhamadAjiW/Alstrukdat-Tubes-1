@@ -13,6 +13,8 @@
         "point.h": "c",
         "notif.h": "c",
         "stackura.h": "c",
-        "simulator.h": "c"
+        "simulator.h": "c",
+        "matriks.h": "c",
+        "waktu.h": "c"
     }
 }

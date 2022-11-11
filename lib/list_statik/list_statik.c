@@ -1,10 +1,5 @@
-//ADT List dari praktikum, list rapat kiri
-
-//header
 #include "list_statik.h"
-
-//dependent package
-/*HARUS MAKE INI
+/*dependent packages:
 #include "../makanan/makanan.c"
 #include "../waktu/waktu.c"
 #include "../tree/tree.c"

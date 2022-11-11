@@ -1,60 +1,77 @@
-/* File : stack.h */
-/* deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
-/* TOP adalah alamat elemen puncak */
-/* Implementasi dalam bahasa C dengan alokasi statik */
-#ifndef stackt_H
-#define stackt_H
+#ifndef Stack_H
+#define Stack_H
 
-#include "../etc/boolean.h"
-#include "../mesin_kata/mesin_kata.h"
+#include "../map/map.h"
+#include "../notif/notif.h"
+
+#define undoCap 20
+
+typedef struct 
+{
+    waktu W; //isi waktu saat push
+    char movement; // berisi kode, kamus tertera di bawah
+    PrioQueue invPrev; //isi state inventory saat push
+    PrioQueue dlvPrev; //isi state delivery saat push
+    List_Link notifPrev; //isi notif yang perlu keluar waktu undo/redo
+    int proses; // berisi kode, -1 jika mark, index makanan jika dilakukan aksi pembuatan makanan
+}StrukturUndo;
+
+typedef struct
+{
+    StrukturUndo T[undoCap];
+    int TOP; // top bernilai -1 jika stack kosong
+} Stack;
 
 #define Nil -1
-#define MaxElStck 100
-/* Nil adalah stack dengan elemen kosong . */
-
-
-typedef int addressStck;   /* indeks tabel */
-
-/* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
-/* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
-typedef struct { 
-  Word T[MaxElStck]; /* tabel penyimpan elemen */
-  addressStck TOP;  /* alamat TOP: elemen puncak */
-} Stack;
-/* Definisi stack S kosong : S.TOP = Nil */
-/* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxElStck-1] */
-/* Jika S adalah Stack maka akses elemen : */
-   /* S.T[(S.TOP)] untuk mengakses elemen TOP */
-   /* S.TOP adalah alamat elemen TOP */
-
-/* Definisi akses dengan Selektor : Set dan Get */
 #define Top(S) (S).TOP
-#define TopWord(S) (S).T[(S).TOP]
+#define InfoTop(S) (S).T[(S).TOP]
+#define WaktuTop(S) (S).T[(S).TOP].W
+#define MovementTop(S) (S).T[(S).TOP].movement
+#define NotifPrev(S) (S).T[(S).TOP].notifPrev
+#define ProsesTop(S) (S).T[(S).TOP].proses
 
-/* ************ Prototype ************ */
-/* *** Konstruktor/Kreator *** */
-void CreateEmpty(Stack *S);
-/* I.S. sembarang; */
-/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxElStck */
-/* jadi indeksnya antara 0.. MaxElStck */
-/* Ciri stack kosong : TOP bernilai Nil */
+//Stack berbentuk statis sirkuler, jika kosong top adalah nil
+//Pengecekan kosong tidaknya slot dilakukan dengan mengecek proses bernilai nil atau tidak
 
-/* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean stackIsEmpty(Stack S);
-/* Mengirim true jika Stack kosong: lihat definisi di atas */
-boolean stackIsFull(Stack S);
-/* Mengirim true jika tabel penampung nilai elemen stack penuh */
+void CreateEmptyStack(Stack *S);
+//inisiasi
 
-/* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push(Stack * S, Word X);
-/* Menambahkan X sebagai elemen Stack S. */
-/* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
-/* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
+boolean IsEmptyStack(Stack S);
+//true jika top adalah nil
 
-/* ************ Menghapus sebuah elemen Stack ************ */
-void Pop(Stack * S, Word* X);
-/* Menghapus X dari Stack S. */
-/* I.S. S  tidak mungkin kosong */
-/* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
+void PushStack(Stack *S, Simulator s, waktu globalt, char mov, int proses);
+//mendorong state yang ingin disimpan ke stack
+
+void PopStack(Stack *S, Simulator *s, Map *M, waktu *globalt, list_statik catalog);
+//mengambil state yang ingin diambil stack
+
+void convertUR(List_Link *Target, int Type);
+//convert notif ke undo atau sebaliknya. type 1 undo ke redo, 2 redo ke undo
+
+    /*
+    KAMUS movement
+    w = move atas
+    a = move kiri
+    s = move bawah
+    d = move kanan
+
+    1 = mix undo
+    2 = chop undo
+    3 = fry undo
+    4 = boil undo
+    5 = buy undo
+    6 = wait undo
+
+    z = mix redo
+    x = chop redo
+    c = boil redo
+    v = buy redo
+    b = fry redo
+    n = wait redo
+
+    KAMUS mode
+    0 = undo
+    1 = redo
+    */
 
 #endif

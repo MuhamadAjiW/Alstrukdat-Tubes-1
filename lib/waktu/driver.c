@@ -1,5 +1,19 @@
 #include "waktu.c"
+#include "mekanismewaktu.c"
+
+#include "../simulator/simulator.c"
+#include "../stack/stack.c"
+#include "../queue/prioqueue.c"
+#include "../notif/notif.c"
+#include "../map/map.c"
+#include "../list_statik/list_statik.c"
+#include "../makanan/makanan.c"
+#include "../tree/tree.c"
+#include "../mesin_kata/mesin_kata.c"
+#include "../mesin_karakter/mesin_karakter.c"
+
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(){
     int confirmDone = 0;
@@ -10,7 +24,7 @@ int main(){
     printf("\n");
 
     waktu t2;
-    CreateTimeTest(&t2,15,13,2);
+    CreateTimeDirect(&t2,15,13,2);
     printTime(t2);
     printf("\n");
 

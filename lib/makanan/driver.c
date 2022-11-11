@@ -1,6 +1,10 @@
 #include "makanan.c"
+#include "../waktu/waktu.c"
+#include "../tree/tree.c"
+
 #include <stdio.h>
 #include <stdlib.h>
+
 
 int main(){
     int confirmDone = 0;

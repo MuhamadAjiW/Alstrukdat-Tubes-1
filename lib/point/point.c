@@ -1,5 +1,8 @@
-#include <stdio.h>
 #include "point.h"
+/*dependent packages:
+None
+*/
+#include <stdio.h>
        
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */
 /* *** Konstruktor membentuk POINT *** */
