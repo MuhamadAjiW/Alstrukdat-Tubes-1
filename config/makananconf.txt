@@ -1,44 +1,296 @@
-7
-11
+49
+1
 Ayam Mentah
 1 0 0
 0 0 15
 Buy
 0
-21
-Ayam Potong
-0 2 0
-0 0 0
-Chop
-5
-10
+2
 Tepung
 0 1 0
 0 0 30
 Buy
 0
-15
+3
+Nasi
+0 2 0
+0 0 40
+Buy
+0
+4
+Telur
+0 1 0
+0 0 15
+Buy
+0
+5
+Daging Sapi
+0 2 0
+0 0 15
+Buy
+0
+6
+Bawang
+1 0 0
+0 0 30
+Buy
+0
+7
+Tomat
+1 0 0
+0 0 30
+Buy
+0
+8
+Kentang
+2 0 0
+0 1 0
+Buy
+0
+9
+Mentega
+0 3 0
+0 1 0
+Buy
+0
+30
 Minyak Goreng
 0 1 30
 0 1 0
 Buy
 0
-31
+40
+Air mineral
+1 0 0
+0 0 15
+Buy
+0
+11
+Ayam Potong
+0 2 0
+0 0 0
+Chop
+5
+12
+Roti Lembaran
+0 5 0
+0 0 0
+Chop
+5
+13
+Mie Mentah
+0 1 0
+0 0 0
+Chop
+5
+14
+Daging Giling
+0 1 30
+0 0 0
+Chop
+5
+15
+Daging Potong
+0 1 30
+0 0 0
+Chop
+5
+16
+Bawang Potong
+0 4 0
+0 0 0
+Chop
+10
+17
+Tomat Potong
+0 4 0
+0 0 0
+Chop
+10
+18
+Kentang Potong
+0 3 0
+0 0 0
+Chop
+5
+21
 Ayam Tepung
 0 0 30
 0 0 0
 Mix
 5
-37
+22
+Roti
+0 5 0
+0 0 0
+Mix
+60
+23
+Adonan Mie
+0 1 0
+0 0 0
+Mix
+30
+24
+Sandwich Ayam
+0 1 0
+0 0 0
+Mix
+20
+25
+Sandwich Telur
+0 1 0
+0 0 0
+Mix
+20
+26
+Sandwich Komplit
+0 1 0
+0 0 0
+Mix
+25
+27
+Burger
+0 0 30
+0 0 0
+Mix
+30
+28
+Mashed Potato
+0 0 30
+0 0 0
+Mix
+25
+31
 Ayam Goreng
-0 0 15
+0 2 0
 0 0 0
 Fry
 10
+32
+Nasi Goreng
+0 3 0
+0 0 0
+Fry
+15
+33
+Telur Mata Sapi
+0 1 0
+0 0 0
+Fry
+5
+34
+Mie Goreng
+0 2 0
+0 0 0
+Fry
+15
+35
+Daging Burger
+0 4 0
+0 0 0
+Fry
+20
+36
+Daging Steak
+0 4 0
+0 0 0
+Fry
+15
+37
+Kentang Goreng
+0 1 0
+0 0 0
+Fry
+20
 38
+Telur Orak-Arik
+0 1 0
+0 0 0
+Fry
+5
+41
 Sop Ayam
 0 3 0
 0 0 0
 Boil
 45
+42
+Telur Rebus
+0 4 0
+0 0 0
+Boil
+10
+43
+Mie Rebus
+0 1 0
+0 0 0
+Boil
+10
+44
+Sop Daging
+0 3 0
+0 0 0
+Boil
+45
+45
+Sop Bakso
+0 3 0
+0 0 0
+Boil
+45
+46
+Bubur Ayam
+0 0 30
+0 0 0
+Boil
+45
+47
+Sup Kentang
+0 4 0
+0 0 0
+Boil
+45
+51
+Panas Spesial
+0 1 0
+0 0 0
+Mix
+10
+52
+Paket Burger
+0 1 0
+0 0 0
+Mix
+10
+53
+Paket Sandwich Ayam
+0 1 0
+0 0 0
+Mix
+10
+54
+Paket Sandwich Telur
+0 1 0
+0 0 0
+Mix
+10
+55
+Paket Sandwich Komplit
+0 1 0
+0 0 0
+Mix
+10
+56
+Paket Nasgor Spesial
+0 1 0
+0 0 0
+Mix
+5
+57
+Paket Steak
+0 1 0
+0 0 0
+Mix
+10
 .

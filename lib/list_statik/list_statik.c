@@ -76,7 +76,6 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
 
    for (int i = 0; i < N; i++){
       counter = 0;
-      
 
       //id
       ADVWORD();
@@ -89,7 +88,7 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
       idELMT(*l, i) = cache;
 
       SkipLines();
-      
+
       //nama
       ADVWORD();
       counter = 0;
@@ -110,7 +109,7 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
       }
       namaELMT(*l, i)[counter] = '\0';
 
-      SkipLines();
+      SkipLines();      
 
       //expiretime
       ADVWORD();
@@ -215,7 +214,13 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
 
    //baca resep
    STARTWORD(resepconf);
-   N = (int) (currentWord.TabWord[0]) - 48;
+   cache = 0;
+   mul = 1;
+   for(int j = currentWord.Length-1; j >= 0; j--){
+      cache += mul*( ((int) (currentWord.TabWord[j])) - 48);
+      mul *= 10;
+   }
+   N = cache;
    SkipLines();
 
    int currentidx = 0;
