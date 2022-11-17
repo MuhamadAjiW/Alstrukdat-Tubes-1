@@ -45,7 +45,6 @@ typedef struct {
 #define namaELMT(l, i) nama(ELMT(l, i))
 #define expireTimeELMT(l, i) expireTime(ELMT(l, i))
 #define deliverTimeELMT(l, i) deliverTime(ELMT(l, i))
-#define cookMinuteELMT(l, i) cookMinute(ELMT(l, i))
 #define locationELMT(l, i) location(ELMT(l, i))
 #define actionELMT(l, i) action(ELMT(l, i))
 #define resepELMT(l, i) resep(ELMT(l, i))

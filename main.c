@@ -30,6 +30,12 @@ int main(){
     int redo; // buat nandain bisa redo atau ngga
     int proses; // buat nandain proses apa yang dilakukan
 
+    int FryTime = 5;
+    int ChopTime = 4;
+    int mixTime = 3;
+    int BoilTime = 15;
+    int BuyTime = 1;
+
     Map m;
     list_statik catalog;
     List_Link notifPasser;
@@ -146,7 +152,7 @@ int main(){
                                         PushStack(&Undo, BNMO, curTime, '1', counter2);
                                         
                                         makeFood(&BNMO, catalog, counter2, 'm');
-                                        passTime(&BNMO, cookMinuteELMT(catalog, counter2), &curTime);
+                                        passTime(&BNMO, mixTime, &curTime);
                                         inventoryDeliveryMechanism(&BNMO, &Undo);;
                                     }
                                 }
@@ -210,7 +216,7 @@ int main(){
                                         PushStack(&Undo, BNMO, curTime, '2', counter2);
 
                                         makeFood(&BNMO, catalog, counter2, 'c');
-                                        passTime(&BNMO, cookMinuteELMT(catalog, counter2), &curTime);
+                                        passTime(&BNMO, ChopTime, &curTime);
                                         inventoryDeliveryMechanism(&BNMO, &Undo);
                                     }
                                 }
@@ -275,7 +281,7 @@ int main(){
                                         PushStack(&Undo, BNMO, curTime, '3', counter2);
 
                                         makeFood(&BNMO, catalog, counter2, 'f');
-                                        passTime(&BNMO, cookMinuteELMT(catalog, counter2), &curTime);
+                                        passTime(&BNMO, FryTime, &curTime);
                                         inventoryDeliveryMechanism(&BNMO, &Undo);;
                                     }
                                 }
@@ -339,7 +345,7 @@ int main(){
                                         PushStack(&Undo, BNMO, curTime, '4', counter2);
 
                                         makeFood(&BNMO, catalog, counter2, 'b');
-                                        passTime(&BNMO, cookMinuteELMT(catalog, counter2), &curTime);
+                                        passTime(&BNMO, BoilTime, &curTime);
                                         inventoryDeliveryMechanism(&BNMO, &Undo);
                                     }
                                 }
@@ -421,7 +427,7 @@ int main(){
                                         PushStack(&Undo, BNMO, curTime, '5', counter2);
 
                                         buyMakanan(&BNMO,ELMT(catalog, counter2));
-                                        passTime(&BNMO, 1, &curTime);
+                                        passTime(&BNMO, BuyTime, &curTime);
                                         inventoryDeliveryMechanism(&BNMO, &Undo);
                                     }
                                 }

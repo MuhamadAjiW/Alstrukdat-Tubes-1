@@ -11,7 +11,6 @@ void createmakanan(makanan *a){
    nama(*a)[0] = '\0';
    createTime(&expireTime(*a));
    createTime(&deliverTime(*a));
-   cookMinute(*a) = 0;
    action(*a)[0] = '\0';
    location(*a) = '\0';
    createResep(&resep(*a));
@@ -27,7 +26,6 @@ void printmakanan(makanan a){
    printf("waktu pengantaran = ");
    printTime(deliverTime(a));
    printf("\n");
-   printf("waktu pembuatan = %d menit\n", a.cookMinute);
    printf("aksi untuk mendapatkan = %s (lokasi: %c)\n", action(a), location(a));
    printf("data resep = ");
    if (treeVal(resep(a)) == -1){

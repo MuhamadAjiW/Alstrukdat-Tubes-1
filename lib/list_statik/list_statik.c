@@ -198,18 +198,6 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
       actionELMT(*l, i)[currentWord.Length] = '\0';
 
       SkipLines();
-
-      //cookminute
-      ADVWORD();
-      cache = 0;
-      mul = 1;
-      for(int j = currentWord.Length-1; j >= 0; j--){
-         cache += mul*( ((int) (currentWord.TabWord[j])) - 48);
-         mul *= 10;
-      }
-      cookMinuteELMT(*l, i) = cache;
-
-      SkipLines();
    }
 
    //baca resep
@@ -388,7 +376,7 @@ void printList(list_statik l){
 
 void printCatalog(list_statik l){
    printf("List Makanan\n");
-   printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time/cook time)\n");
+   printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
    for(int i =0; i < listLength(l); i++){
       printf("   %d. ", i+1);
       printf("%s - ", namaELMT(l, i));
@@ -409,8 +397,9 @@ void printCatalog(list_statik l){
       }
       printf(" - ");
       printf("%s - ", actionELMT(l,i));
-      if (cookMinuteELMT(l, i) > 0){
-         printf("%d menit", cookMinuteELMT(l, i));
+
+      if (locationELMT(l,i) != 'T'){
+         printf("0");
       }
       else{
          if (Hari(deliverTimeELMT(l, i)) > 0){
