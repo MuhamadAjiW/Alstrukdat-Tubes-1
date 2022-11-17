@@ -21,7 +21,21 @@ int main(){
     create_list_statik(&testlist);
     load_list_statik(&testlist, "../../config/makananconf.txt", "../../config/resepconf.txt");
 
-    addMakanan(&S,ELMT(testlist, 0));
+    int idx = indexOf(testlist, 56);
+    printf("%d\n", countElemen(ELMT(testlist, idx), 30, testlist));
+    addMakanan(&S, ELMT(testlist, idx));
+    addMakanan(&S, ELMT(testlist, idx));
+    addMakanan(&S, ELMT(testlist, idx));
+    addMakanan(&S, ELMT(testlist, idx));
+    printf("%d\n", countInventory(S, 56));
+    
+    unload_list_statik(&testlist);
+
+    return 0;
+}
+
+/*
+addMakanan(&S,ELMT(testlist, 0));
     addMakanan(&S,ELMT(testlist, 1));
     addMakanan(&S,ELMT(testlist, 2));
 
@@ -57,5 +71,4 @@ int main(){
     PrintPrioQueue(INV(S));
     printf("\n");
 
-    return 0;
-}
+*/

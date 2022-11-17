@@ -282,7 +282,7 @@ void rekomendasiMakanan(list_statik catalog, Simulator BNMO){
 
     for (int i = 0; i < listLength(catalog); i++){
         if (!(locationELMT(catalog, i) == 'T')){
-            if (lengkapBahan(ELMT(catalog, i), BNMO, catalog)){
+            if (lengkapBahan(ELMT(catalog, i), BNMO, catalog, ELMT(catalog, i))){
                 if (counter == 0){
                     printf("Makanan yang dapat dibuat adalah: \n");
                 }
@@ -296,26 +296,76 @@ void rekomendasiMakanan(list_statik catalog, Simulator BNMO){
     }
 }
 
-boolean lengkapBahan(makanan makanan, Simulator BNMO, list_statik catalog){
-    if (treeVal(resep(makanan)) == -1){
-        if (checkMakanan(BNMO, id(makanan))){
-            return true;
+boolean lengkapBahan(makanan makann, Simulator BNMO, list_statik catalog, makanan parentMakanan){
+    if (treeVal(resep(makann)) == -1){
+        if (checkMakanan(BNMO, id(makann))){
+            if (countElemen(parentMakanan, id(makann), catalog) <= countInventory(BNMO, id(makann))){
+                return true;
+            }
+            else return false;
         }
+        
         else return false;
     }
     else{
-        boolean lengkap = 1;
+        boolean lengkap = true;
         int idx;
-        for (int i = 0; i <= subMaxIdx(resep(makanan)); i++)
+        for (int i = 0; i <= subMaxIdx(resep(makann)); i++)
         {
-            idx = indexOf(catalog, treeVal(treeSub(resep(makanan), i)));
-            if (checkMakanan(BNMO, treeVal(treeSub(resep(makanan), i)) )){
-                lengkap = lengkap && 1;
+            idx = indexOf(catalog, treeVal(treeSub(resep(makann), i)));
+            if (checkMakanan(BNMO, treeVal(treeSub(resep(makann), i)) )){
+                if (countElemen(parentMakanan, treeVal(treeSub(resep(makann), i)), catalog) <= countInventory(BNMO, treeVal(treeSub(resep(makann), i)))){
+                    lengkap = lengkap && 1;
+                }
+                else{
+                    lengkap = lengkap && lengkapBahan(ELMT(catalog, idx), BNMO, catalog, parentMakanan);
+                }
             }
             else{
-                lengkap = lengkap && lengkapBahan(ELMT(catalog, idx), BNMO, catalog);
+                lengkap = lengkap && lengkapBahan(ELMT(catalog, idx), BNMO, catalog, parentMakanan);
             }
         }
         return lengkap;
     }
+}
+
+int countElemen(makanan makanan, int idsub, list_statik catalog){
+    if (id(makanan) == idsub){
+        return 1;
+    }
+    else if (treeVal(resep(makanan)) == -1){
+        return 0;
+    }
+    else{
+        int counter = 0;
+        int idx = 0;
+        for (int i = 0; i <= subMaxIdx(resep(makanan)); i++)
+        {
+            idx = indexOf(catalog, treeVal(treeSub(resep(makanan), i)));
+            counter += countElemen(ELMT(catalog, idx), idsub, catalog);
+        }
+        return counter;
+    }
+}
+
+int countInventory(Simulator S, int idMakanan){
+    // mengecek jumlah makanan ada di inventory
+    addressQ idx;
+    int counter;
+
+    if(queueIsEmpty(INV(S)))
+        counter = 0;
+    else{
+    idx=Head(INV(S));
+    counter=0;
+    while(idx!=Tail(INV(S))){
+        if(Elmt(INV(S),idx).id==idMakanan)counter++;
+        if(idx==MaxEl(INV(S))-1){
+            idx=0;
+        }
+        else idx++;
+    }
+    if(InfoTail(INV(S)).id==idMakanan)counter++;
+    }
+    return counter;
 }

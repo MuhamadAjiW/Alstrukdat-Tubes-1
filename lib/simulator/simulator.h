@@ -68,7 +68,11 @@ void printAllNotif(List_Link *L);
     Diakhir prosedur, List L akan kosong*/
 
 void rekomendasiMakanan(list_statik catalog, Simulator BNMO);
-
-boolean lengkapBahan(makanan makanan, Simulator BNMO, list_statik catalog);
-
+// mengecek makanan proses mana aja yang bisa dibuat dari bahan yang dimiliki
+boolean lengkapBahan(makanan makann, Simulator BNMO, list_statik catalog, makanan parentMakanan);
+// mengecek bahan (dari root) lengkap ga buat dibuat
+int countElemen(makanan makanan, int idsub, list_statik catalog);
+// mengecek jumlah sebuah makanan yang perlu buat bikin suatu makanan
+int countInventory(Simulator S, int idMakanan);
+// mengecek jumlah makanan ada di inventory
 #endif
