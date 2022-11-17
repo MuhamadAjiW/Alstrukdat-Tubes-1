@@ -206,10 +206,8 @@ void makeFood(Simulator *S, list_statik l, int idx, char category){
 }
 
 void printNotif(Notif N){
-    /*I.S. Notif terdefinisi*/
-    /*F.S. Jika kasus delivery ('d'), akan menampilkan "{item} sudah diterima oleh {Username}!\n".
-            Jika kasus expired ('e'), akan menampilkan "{item} kadaluarsa \n".
-    */
+/*  I.S. Notif terdefinisi
+    F.S. Menampilkan notif berdasarkan kasusnya tanpa newline*/
     /*ALGORITMA*/
 
 
