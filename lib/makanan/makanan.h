@@ -21,6 +21,7 @@ typedef struct{
    char nama[PANJANGNAMA];
    waktu expireTime;
    waktu deliverTime;
+   int cookMinute;
    char action[PANJANGACTION];
    char location;
    recipe resep;
@@ -33,6 +34,7 @@ typedef struct{
 #define nama(tipedata) (tipedata).nama
 #define expireTime(tipedata) (tipedata).expireTime
 #define deliverTime(tipedata) (tipedata).deliverTime
+#define cookMinute(tipedata) (tipedata).cookMinute
 #define action(tipedata) (tipedata).action
 #define location(tipedata) (tipedata).location
 #define resep(tipedata) (tipedata).resep

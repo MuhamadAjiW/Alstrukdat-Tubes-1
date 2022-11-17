@@ -15,6 +15,7 @@
         "stackura.h": "c",
         "simulator.h": "c",
         "matriks.h": "c",
-        "waktu.h": "c"
+        "waktu.h": "c",
+        "tree.h": "c"
     }
 }

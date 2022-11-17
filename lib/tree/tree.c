@@ -69,3 +69,12 @@ void DeleteNode(Tree *P){
     //printf("test3");
 }
 /*dealokasi tree*/
+
+Tree copyTree(Tree P){
+    address newp = CreateNode(treeVal(P));
+    for (int i = 0; i <= subMaxIdx(P); i++){
+        address branch = copyTree(treeSub(P, i));
+        AssignBranch(&newp, &branch);
+    }
+    return newp;
+}

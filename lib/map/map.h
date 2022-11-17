@@ -60,7 +60,7 @@ void move_map(Map *map,Word arah);
 /* F.S. Posisi S pindah sesuai arah*/
 
 
-void moveDir(Map *map,char arah);
+boolean moveDir(Map *map,char arah);
 //Belum ada Deskripsi
 
 #endif

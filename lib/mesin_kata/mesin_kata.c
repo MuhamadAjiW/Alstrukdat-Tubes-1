@@ -468,6 +468,20 @@ int baseDetection(Word kata){
     cookbook.TabWord[5]='o';
     cookbook.TabWord[6]='o';
     cookbook.TabWord[7]='k';
+
+    Word rekomendasi;
+    rekomendasi.Length=11;
+    rekomendasi.TabWord[0]='r';
+    rekomendasi.TabWord[1]='e';
+    rekomendasi.TabWord[2]='k';
+    rekomendasi.TabWord[3]='o';
+    rekomendasi.TabWord[4]='m';
+    rekomendasi.TabWord[5]='e';
+    rekomendasi.TabWord[6]='n';
+    rekomendasi.TabWord[7]='d';
+    rekomendasi.TabWord[8]='a';
+    rekomendasi.TabWord[9]='s';
+    rekomendasi.TabWord[10]='i';
     
     
     LowerCase(&currentWord);
@@ -514,6 +528,9 @@ int baseDetection(Word kata){
     }
     else if (kataSama(currentWord, cookbook)){
         signal = 13;
+    }
+    else if (kataSama(currentWord, rekomendasi)){
+        signal = 14;
     }
     else if (kataSama(currentWord, exit)){
         signal = -1;

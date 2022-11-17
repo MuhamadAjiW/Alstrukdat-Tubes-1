@@ -278,3 +278,46 @@ void printAllNotif(List_Link *L){
     }
     printf("\n");
 }
+
+void rekomendasiMakanan(list_statik catalog, Simulator BNMO){
+    int counter = 0;
+
+    for (int i = 0; i < listLength(catalog); i++){
+        if (!(locationELMT(catalog, i) == 'T')){
+            if (lengkapBahan(ELMT(catalog, i), BNMO, catalog)){
+                if (counter == 0){
+                    printf("Makanan yang dapat dibuat adalah: \n");
+                }
+                counter++;
+                printf("    %d. %s\n", counter, namaELMT(catalog, i));
+            }
+        }
+    }
+    if (counter == 0){
+        printf("Tidak ada makanan yang dapat dibuat\n");
+    }
+}
+
+boolean lengkapBahan(makanan makanan, Simulator BNMO, list_statik catalog){
+    if (treeVal(resep(makanan)) == -1){
+        if (checkMakanan(BNMO, id(makanan))){
+            return true;
+        }
+        else return false;
+    }
+    else{
+        boolean lengkap = 1;
+        int idx;
+        for (int i = 0; i <= subMaxIdx(resep(makanan)); i++)
+        {
+            idx = indexOf(catalog, treeVal(treeSub(resep(makanan), i)));
+            if (checkMakanan(BNMO, treeVal(treeSub(resep(makanan), i)) )){
+                lengkap = lengkap && 1;
+            }
+            else{
+                lengkap = lengkap && lengkapBahan(ELMT(catalog, idx), BNMO, catalog);
+            }
+        }
+        return lengkap;
+    }
+}

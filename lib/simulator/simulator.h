@@ -69,4 +69,8 @@ void printAllNotif(List_Link *L);
                                         k. {Notif k} ....
     Diakhir prosedur, List L akan kosong*/
 
+void rekomendasiMakanan(list_statik catalog, Simulator BNMO);
+
+boolean lengkapBahan(makanan makanan, Simulator BNMO, list_statik catalog);
+
 #endif

@@ -39,4 +39,6 @@ void PrintTree(Tree T);
 void DeleteNode(Tree *P);
 /*dealokasi tree*/
 
+Tree copyTree(Tree P);
+
 #endif

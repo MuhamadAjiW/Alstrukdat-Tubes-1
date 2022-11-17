@@ -9,19 +9,22 @@ int main(){
     address a = CreateNode(1);
     address b = CreateNode(2);
     address c = CreateNode(3);
-    address d = CreateNode(4);
-
-
-    printf("Pass\n");
+    address d = CreateNode(4);    
     
     AssignBranch(&a, &b);
-    AssignBranch(&a, &c);
+    AssignBranch(&b, &c);
 
     setTreeElmt(&a, 3);
 
     PrintTree(a);
+    printf("\n\n");
+
+    d = copyTree(a);
+    PrintTree(d);
+    printf("\nPass\n");
 
     DeleteNode(&a);
+    DeleteNode(&d);
     //akhir program
     printf("\nCompile Success!\n");
     scanf("%d", &confirmDone);

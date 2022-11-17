@@ -11,7 +11,14 @@
 int main(){
     int confirmDone = 0;
     //header program
+    list_statik l;
 
+    create_list_statik(&l);
+    printf("\nhere!\n");
+    load_list_statik(&l, "../../config/makananconf.txt", "../../config/resepconf.txt");
+    printList(l);
+    unload_list_statik(&l);
+    
     //akhir program
     printf("\ncompile success!\n");
     

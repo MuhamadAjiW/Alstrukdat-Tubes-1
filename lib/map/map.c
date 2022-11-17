@@ -130,7 +130,7 @@ boolean isNear(Map map,char ch){
     return false;
 }
 
-void moveDir(Map *map,char arah){
+boolean moveDir(Map *map,char arah){
     /*pake wasd yes*/
     if(arah == 'w'){
         if(ELMT_Map(*map,Absis(S(*map))-1,Ordinat(S(*map)))=='#'){
@@ -138,6 +138,10 @@ void moveDir(Map *map,char arah){
             ELMT_Map(*map,Absis(S(*map))-1,Ordinat(S(*map)))='S';
 
             Absis(S(*map))--;
+            return true;
+        }
+        else{
+            return false;
         }
     }
     else if(arah == 's'){
@@ -146,6 +150,10 @@ void moveDir(Map *map,char arah){
             ELMT_Map(*map,Absis(S(*map))+1,Ordinat(S(*map)))='S';
 
             Absis(S(*map))++;
+            return true;
+        }
+        else{
+            return false;
         }
     }
     else if(arah == 'd'){
@@ -154,6 +162,10 @@ void moveDir(Map *map,char arah){
             ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))+1)='S';
 
             Ordinat(S(*map))++;
+            return true;
+        }
+        else{
+            return false;
         }
     }
     else if(arah == 'a'){
@@ -162,6 +174,11 @@ void moveDir(Map *map,char arah){
             ELMT_Map(*map,Absis(S(*map)),Ordinat(S(*map))-1)='S';
             
             Ordinat(S(*map))--;
+            return true;
+        }
+        else{
+            return false;
         }
     }
+    return false;
 }

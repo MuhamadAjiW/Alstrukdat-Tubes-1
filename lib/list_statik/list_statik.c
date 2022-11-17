@@ -172,8 +172,8 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
 
       SkipLines();
 
+
       //aksi
-      
       ADVWORD();
       for(int j = 0; j < currentWord.Length; j++){
          actionELMT(*l, i)[j] = currentWord.TabWord[j];
@@ -197,6 +197,18 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
       }
 
       actionELMT(*l, i)[currentWord.Length] = '\0';
+
+      SkipLines();
+
+      //cookminute
+      ADVWORD();
+      cache = 0;
+      mul = 1;
+      for(int j = currentWord.Length-1; j >= 0; j--){
+         cache += mul*( ((int) (currentWord.TabWord[j])) - 48);
+         mul *= 10;
+      }
+      cookMinuteELMT(*l, i) = cache;
 
       SkipLines();
    }
@@ -244,7 +256,9 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
                }
             }
             if (ada){
-               AssignBranch(&resepELMT(*l, currentidx), &resepELMT(*l, counter));
+               address copier;
+               copier = copyTree(resepELMT(*l, counter));
+               AssignBranch(&resepELMT(*l, currentidx), &copier);
             }
             else{
                p = CreateNode(cache);
@@ -277,8 +291,6 @@ void load_list_statik(list_statik *l, char* makananconf, char* resepconf){
          p = CreateNode(cache);
          AssignBranch(&resepELMT(*l, currentidx), &p);
       }
-      
-      
 
       SkipLines();
    }
@@ -371,7 +383,7 @@ void printList(list_statik l){
 
 void printCatalog(list_statik l){
    printf("List Makanan\n");
-   printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
+   printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time/cook time)\n");
    for(int i =0; i < listLength(l); i++){
       printf("   %d. ", i+1);
       printf("%s - ", namaELMT(l, i));
@@ -392,8 +404,8 @@ void printCatalog(list_statik l){
       }
       printf(" - ");
       printf("%s - ", actionELMT(l,i));
-      if (Jam(deliverTimeELMT(l, i)) == 0 && Menit(deliverTimeELMT(l, i)) == 0){
-         printf("0");
+      if (cookMinuteELMT(l, i) > 0){
+         printf("%d menit", cookMinuteELMT(l, i));
       }
       else{
          if (Hari(deliverTimeELMT(l, i)) > 0){
@@ -446,3 +458,5 @@ void printCookBook(list_statik l){
       }
    }
 }
+
+
