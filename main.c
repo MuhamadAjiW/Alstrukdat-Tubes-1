@@ -74,12 +74,26 @@ int main(){
             createTime(&cacheTime);
             createSimulator(&BNMO);
             
+
             //inisialisasi stack undo dan redo
             createListLink(&notifPasser);
             CreateEmptyStack(&Undo);
             CreateEmptyStack(&Redo);
+
+            // Mendapatkan nama pengguna
+            currentWord.Length=0;
+            printf("Masukkan nama BNMO Anda: ");
+            input();
+            while(currentWord.Length==0){
+                printf("Nama tidak boleh kosong!\n");
+                printf("Masukkan nama BNMO Anda: ");
+                input();
+            }
+            NAME(BNMO)=currentWord;
+
             while (runningSignal == 1){
-                printf("BNMO di posisi: ");
+                displayWord(NAME(BNMO));
+                printf(" di posisi: ");
                 WritePOINT(S(m));
                 printf("\n");
 
